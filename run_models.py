@@ -5,6 +5,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 import torch.utils.data
 
+import pandas as pd
+
 from torch.optim import Optimizer
 from torch.optim.lr_scheduler import LambdaLR
 
@@ -788,12 +790,17 @@ if __name__ == '__main__':
         training_losses = []
         training_bers = []
         valid_bers = []
+        slf_attn = []
         valid_bitwise_bers= []
         valid_tgt_bers = []
         valid_blers = []
         valid_tgt_blers = []
         valid_steps = []
+        slf_attn_list = []
+        slf_attn_list_no_noise = []
         
+
+        ## I should use this later to load my own validation data
         test_data_path = './data/polar/test/test_N{0}_K{1}.p'.format(args.N, args.K)
         try:
             test_dict = torch.load(test_data_path)
@@ -822,6 +829,7 @@ if __name__ == '__main__':
             nn.Conv1d(64,1,kernel,padding=padding,dilation=1),
             )
         layersint.to(device)
+        ####################################################### Training loop ######################################################
         try:
             for i_step in range(args.num_steps):  ## Each episode is like a sample now until memory size is reached.
                 randperm = torch.randperm(args.batch_size)
@@ -858,7 +866,10 @@ if __name__ == '__main__':
                 if args.model == 'conv' or args.model == 'bigConv' or args.model == 'multConv':
                     model_out,decoded_vhat,out_mask,logits,int_layer = xformer(corrupted_codewords,mask,gt,device)
                 else:
-                    model_out,decoded_vhat,out_mask,logits = xformer(corrupted_codewords,mask,gt,device)
+                    model_out,decoded_vhat,out_mask,logits,_ = xformer(corrupted_codewords,mask,gt,device)
+                    # print(slf_attn_list)
+                    # for attn_tensor in slf_attn:
+                    #     print("Self-attention shape:", attn_tensor[0].shape)  # Assuming each element in the list is a tensor
 
                 batch_size = gt.size(0)
                 max_len = gt.size(1)
@@ -916,15 +927,26 @@ if __name__ == '__main__':
 
                 training_losses.append(round(loss.item(),5))
                 training_bers.append(round(ber, 5))
-		
+
+
+
+		        ####################### The validtion loop #######################
                 if i_step % args.print_freq == 0:
                     xformer.eval()
                     with torch.no_grad():
                         corrupted_codewords_valid = polar.channel(polar_code, valid_snr)
-                        decoded_no_noise,_ = xformer.decode(polar_code,info_inds,mask,device)
-                        decoded_bits,out_mask = xformer.decode(corrupted_codewords_valid,info_inds,mask,device)
+                        decoded_no_noise,_,slf_attn_no_noise = xformer.decode(polar_code,info_inds,mask,device)
+                        decoded_bits,out_mask,slf_attn = xformer.decode(corrupted_codewords_valid,info_inds,mask,device)
+                        # print("Type of attn:", type(slf_attn_list[0]))
+                        # print("Shape of attn:", slf_attn_list[0].shape)
+
+                        slf_attn_no_noise_avg = torch.mean(slf_attn_no_noise[0], dim=0)
+                        slf_attn_avg = torch.mean(slf_attn[0], dim=0)
+
                         decoded_Xformer_msg_bits = decoded_bits[:, info_inds]
                         decoded_Xformer_msg_bits_no_noise = decoded_no_noise[:, info_inds]
+
+
                         if args.model == 'denoiser':
                             ber_Xformer = errors_ber(gt_valid[:,info_inds], decoded_Xformer_msg_bits, mask = out_mask[:,info_inds]).item()
                         else:
@@ -953,9 +975,14 @@ if __name__ == '__main__':
                             bitwise_ber_Xformer_tgt = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
                             bler_Xformer_tgt = errors_bler(msg_bits, decoded_Xformer_msg_bits).item()
                     #print(bitwise_ber_Xformer_tgt)
+                    
+                    # slf_attn[0] is batch_size*num_head*N*N
+                    slf_attn_list_no_noise.append(slf_attn_no_noise_avg)
+                    slf_attn_list.append(slf_attn_avg)
                     valid_bers.append(round(ber_Xformer, 5))
                     valid_blers.append(round(bler_Xformer, 5))
                     valid_tgt_blers.append(round(bler_Xformer_tgt, 5))
+
                     if args.K < args.target_K:
                         valid_tgt_bers.append(round(ber_Xformer_tgt, 5))
                     else:
@@ -969,6 +996,21 @@ if __name__ == '__main__':
                     except:
                         print('[%d/%d] At %d dB, Loss: %.7f, Train BER (%d dB) : %.7f, Valid BER: %.7f, Tgt BER: %.7f, Noiseless BER %.7f, Valid BLER : %.7f'
                                     % (i_step, args.num_steps,  valid_snr, loss,train_snr,ber, ber_Xformer,ber_Xformer,ber_Xformer_noiseless,bler_Xformer))
+                        
+
+                    ########################### validation on the predefined validation data ###############################
+                    
+                    # loaded_msg_bits = torch.load(results_save_path + '/validation_msg_bits.pth')
+                    # loaded_batch_size = loaded_msg_bits.size(0)
+                    # loaded_gt = torch.ones(loaded_batch_size, args.N, device = device)
+                    # loaded_gt[:, info_inds] = loaded_msg_bits
+                    # loaded_gt_valid = loaded_gt.clone()
+                    # if args.code == 'polar':
+                    #     loaded_polar_code = polar.encode_plotkin(loaded_msg_bits,custom_info_positions = info_inds)
+                    #     loaded_corrupted_codewords = polar.channel(loaded_polar_code, train_snr)#args.dec_train_snr)
+                    #     l_model_out,l_decoded_vhat,l_out_mask,l_logits,l_slf_attn_list = xformer(loaded_corrupted_codewords,mask,gt,device)
+
+
                 if i_step == 10:
                     print("Time for one step is {0:.4f} minutes".format((time.time() - start_time)/60))
 
@@ -1038,6 +1080,24 @@ if __name__ == '__main__':
                     
                 write.writerow(valid_blers)
                 write.writerow(valid_tgt_blers)
+
+
+            attn_file_path_no_noise = results_save_path + '/attention_validation_no_noise.pth'
+            attn_file_path = results_save_path + '/attention_validation.pth'
+            
+            # df.to_csv(csv_file_path,index=False) #save to file
+
+            # Convert the PyTorch tensor to a NumPy array
+            #numpy_array = slf_attn_list[0].cpu().detach().numpy()
+
+            torch.save(slf_attn_list_no_noise, attn_file_path_no_noise)
+            torch.save(slf_attn_list, attn_file_path)
+            
+
+
+            # Save the NumPy array to a file
+            #np.save(csv_file_path, numpy_array)
+
                 
             print('Complete')
 
@@ -1090,20 +1150,23 @@ if __name__ == '__main__':
                 write.writerow(training_losses)
                 write.writerow(training_bers)
                 
-            with open(os.path.join(results_save_path, 'values_validation.csv'), 'w') as f:
+            # with open(os.path.join(results_save_path, 'values_validation.csv'), 'w') as f:
 
-                # using csv.writer method from CSV package
-                write = csv.writer(f)
+            #     # using csv.writer method from CSV package
+            #     write = csv.writer(f)
 
-                write.writerow(valid_steps)
-                write.writerow(valid_bers)
-                write.writerow(valid_tgt_bers)
+            #     write.writerow(valid_steps)
+            #     write.writerow(valid_bers)
+            #     write.writerow(valid_tgt_bers)
                 
-                for i in range(target_K):
-                    write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers])
+            #     for i in range(target_K):
+            #         write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers])
     else:
         print("TESTING :")
-        
+
+
+
+        ### We don't need this block. it basically compares different decoding schemes.
         if args.plot_progressive:
             k = args.K
             plt.figure(figsize = (20,10))

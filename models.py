@@ -31,7 +31,7 @@ from collections import namedtuple
 import sys
 import csv
 
-MODEL = 'gpt'
+MODEL = 'encoder'
 
 def get_pad_mask(seq, pad_idx):
     return (seq != pad_idx).unsqueeze(-2)
@@ -55,6 +55,7 @@ class ScaledDotProductAttention(nn.Module):
     def forward(self, q, k, v, mask=None,causal=False):
 
         attn = torch.matmul(q / self.temperature, k.transpose(2, 3))
+        
         if mask is not None:
             if MODEL == 'gpt':
                 attn = attn.masked_fill(mask == 0, -1e9)
@@ -64,6 +65,8 @@ class ScaledDotProductAttention(nn.Module):
 
         attn = self.dropout(F.softmax(attn, dim=-1))
         output = torch.matmul(attn, v)
+        # print("Type of attn:", type(attn))
+        # print("Shape of attn:", attn.shape)
         return output, attn
 
 class ScalarMult(nn.Module):
@@ -233,7 +236,7 @@ class XFormerEncoder(nn.Module):
             for _ in range(config.n_layers)])
         self.layer_norm = nn.LayerNorm(config.embed_dim, eps=1e-6)
 
-    def forward(self,noisy_enc,src_mask,device,return_attns=False):
+    def forward(self,noisy_enc,src_mask,device,return_attns=True):
         position_indices = torch.arange(1,self.block_len+1, device=device)
         pos_enc = self.pos_emb(position_indices)
         enc_output = noisy_enc*pos_enc   #<---- addition instead of multiplication?
@@ -312,7 +315,7 @@ class XFormerGPT(nn.Module):
         self.layer_norm_cross = nn.LayerNorm(config.embed_dim, eps=1e-6)
 
 
-    def forward(self,trg_seq,trg_mask,device,return_attns=False,return_layer=None):
+    def forward(self,trg_seq,trg_mask,device,return_attns=True,return_layer=None):
         #position_indices = torch.arange(1,self.block_len+1, device=device)
         #pos_enc = self.pos_emb(position_indices)
         dec_slf_attn_list, dec_enc_attn_list = [], []
@@ -330,7 +333,7 @@ class XFormerGPT(nn.Module):
                     intermediate_layer_out = dec_output
             layer += 1
         if return_attns:
-            return dec_output, dec_slf_attn_list
+            return dec_output,dec_slf_attn_list
         if return_layer is not None:
             return dec_output, intermediate_layer_out
         return dec_output # [b_size,block_len,embed_dim]
@@ -382,7 +385,7 @@ class XFormerEndToEndGPT(nn.Module):
         if return_layer is not None:
             output,intermediate_layer_out = self.Decoder(trg_seq,trg_mask,device,return_layer=return_layer)
         else:
-            output = self.Decoder(trg_seq,trg_mask,device)
+            output,slf_attn = self.Decoder(trg_seq,trg_mask,device)
         logits = self.Lin_Decoder(output)
 
         decoded_msg_bits = logits.sign()
@@ -393,7 +396,7 @@ class XFormerEndToEndGPT(nn.Module):
         if return_layer is not None:
             return output,decoded_msg_bits,out_mask,logits,intermediate_layer_out
 
-        return output,decoded_msg_bits,out_mask,logits # [b_size,block_len,2]
+        return output,decoded_msg_bits,out_mask,logits,slf_attn # [b_size,block_len,2]
 
     def decode(self,noisy_enc,info_positions,mask,device):
         start_emb = self.start_embed_layer(noisy_enc)
@@ -404,7 +407,7 @@ class XFormerEndToEndGPT(nn.Module):
         for i in range(noisy_enc.size(1)):
             if i in info_positions:
                 mask_i = inp_mask[:,i,:].unsqueeze(1)
-                output = self.Decoder(inp_seq,mask_i,device)
+                output,slf_attn = self.Decoder(inp_seq,mask_i,device)
                 output = self.Lin_Decoder(output)
                 next_bit = output[:,i].sign()
             else:
@@ -420,7 +423,7 @@ class XFormerEndToEndGPT(nn.Module):
                     inp_seq[:,i+1] = embed_next_bit
 
         out_mask = mask
-        return output_bits,out_mask
+        return output_bits,out_mask,slf_attn
         
 class StartEmbedder(nn.Module):
     def __init__(self,inp_dim,hidden_dim,num_layers):
@@ -672,18 +675,18 @@ class XFormerEndToEndEncoder(nn.Module):
         #noisy_enc : [b_size, block_len]
         output = torch.ones(self.embed_dim,device=device)*noisy_enc.unsqueeze(-1)
         #noisy_enc : [b_size,block_len,embed_dim]
-        output = self.Encoder(output,mask,device)
+        output, slf_attn_list = self.Encoder(output,mask,device)
         logits = self.Lin_Decoder(output)
         decoded_msg_bits = logits.sign()
         output = torch.sigmoid(logits)
         output = torch.cat((1-output,output),-1)
         out_mask = mask
-        return output,decoded_msg_bits,out_mask,logits # [b_size,block_len,2]
+        return output,decoded_msg_bits,out_mask,logits,slf_attn_list # [b_size,block_len,2]
 
     def decode(self,noisy_enc,info_positions,mask,device,trg_seq=None):
-        _,decoded_msg_bits,out_mask,_ = self.forward(noisy_enc,mask,trg_seq,device)
+        _,decoded_msg_bits,out_mask,_ , slf_attn_list= self.forward(noisy_enc,mask,trg_seq,device)
         #decoded_msg_bits = (decoded_msg_bits==1).long()
-        return decoded_msg_bits,out_mask
+        return decoded_msg_bits,out_mask,slf_attn_list
 
 
 
