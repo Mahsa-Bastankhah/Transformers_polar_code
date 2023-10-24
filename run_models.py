@@ -337,7 +337,7 @@ def testXformer(net, polar, snr_range, Test_Data_Generator,device,Test_Data_Mask
             ber_SC = errors_ber(msg_bits.cpu(), decoded_SC_msg_bits.sign().cpu()).item()
             bler_SC = errors_bler(msg_bits.cpu(), decoded_SC_msg_bits.sign().cpu()).item()            
 
-            decoded_bits,out_mask = net.decode(noisy_code,polar.info_positions, mask,device)
+            decoded_bits,out_mask,_ = net.decode(noisy_code,polar.info_positions, mask,device)
             decoded_Xformer_msg_bits = decoded_bits[:, polar.info_positions].sign()
 
             ber_Xformer = errors_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).item()
@@ -397,7 +397,7 @@ def test_RNN_and_Dumer_batch(net, pac, msg_bits, corrupted_codewords, snr, run_d
     else:
         mask = Test_Data_Mask
 
-    decoded_bits,out_mask = net.decode(corrupted_codewords,info_inds, mask,device)
+    decoded_bits,out_mask,_ = net.decode(corrupted_codewords,info_inds, mask,device)
     decoded_Xformer_msg_bits = decoded_bits[:, info_inds].sign()
 
     ber_Xformer = errors_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, info_inds]).item()
@@ -791,6 +791,7 @@ if __name__ == '__main__':
         training_bers = []
         valid_bers = []
         slf_attn = []
+        valid_bitwise_bers_no_noise = []
         valid_bitwise_bers= []
         valid_tgt_bers = []
         valid_blers = []
@@ -829,6 +830,11 @@ if __name__ == '__main__':
             nn.Conv1d(64,1,kernel,padding=padding,dilation=1),
             )
         layersint.to(device)
+        
+        # Define variables for early stopping
+        counter = 0
+        patience = 3
+        best_validation_ber = 1
         ####################################################### Training loop ######################################################
         try:
             for i_step in range(args.num_steps):  ## Each episode is like a sample now until memory size is reached.
@@ -927,6 +933,7 @@ if __name__ == '__main__':
 
                 training_losses.append(round(loss.item(),5))
                 training_bers.append(round(ber, 5))
+                
 
 
 
@@ -966,12 +973,13 @@ if __name__ == '__main__':
                             elif args.code == 'pac':
                                 polar_code = polarTarget.pac_encode(msg_bits, scheme = args.rate_profile)
                                 corrupted_codewords = polarTarget.channel(polar_code, valid_snr)#args.dec_train_snr)
-                            decoded_bits,out_mask = xformer.decode(corrupted_codewords,target_info_inds,mask,device)
+                            decoded_bits,out_mask,_ = xformer.decode(corrupted_codewords,target_info_inds,mask,device)
                             decoded_Xformer_msg_bits = decoded_bits[:, target_info_inds]
                             ber_Xformer_tgt = errors_ber(msg_bits, decoded_Xformer_msg_bits, mask = out_mask[:,target_info_inds]).item()
                             bler_Xformer_tgt = errors_bler(msg_bits, decoded_Xformer_msg_bits).item()
                             bitwise_ber_Xformer_tgt = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
                         else:
+                            bitwise_ber_Xformer_tgt_no_noise = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits_no_noise, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
                             bitwise_ber_Xformer_tgt = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
                             bler_Xformer_tgt = errors_bler(msg_bits, decoded_Xformer_msg_bits).item()
                     #print(bitwise_ber_Xformer_tgt)
@@ -989,6 +997,7 @@ if __name__ == '__main__':
                         valid_tgt_bers.append(round(ber_Xformer, 5))
                     valid_steps.append(i_step)
                     valid_bitwise_bers.append(bitwise_ber_Xformer_tgt)
+                    valid_bitwise_bers_no_noise.append(bitwise_ber_Xformer_tgt_no_noise)
                     xformer.train()
                     try:
                         print('[%d/%d] At %d dB, Loss: %.7f, Train BER (%d dB) : %.7f, Valid BER: %.7f, Tgt BER: %.7f, Noiseless BER %.7f, Valid BLER : %.7f'
@@ -1055,6 +1064,18 @@ if __name__ == '__main__':
                     plt.yscale('log')
                     plt.savefig(results_save_path +'/training_bers_log.png')
                     plt.close()
+                    # early stoopping condition
+                    if round(ber_Xformer, 5) < best_validation_ber:
+                        best_validation_ber = round(ber_Xformer, 5)
+                        counter = 0  # Reset the patience counter
+        
+                    else:
+                        counter += 1  # Increment the patience counter
+    
+                    # Check for early stopping
+                    if counter >= patience:
+                        print(f"Early stopping after {i_step} steps.")
+                        break
 
 
             with open(os.path.join(results_save_path, 'values_training.csv'), 'w') as f:
@@ -1077,6 +1098,8 @@ if __name__ == '__main__':
                 
                 for i in range(target_K):
                     write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers])
+                for i in range(target_K):
+                    write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise])
                     
                 write.writerow(valid_blers)
                 write.writerow(valid_tgt_blers)

@@ -1,0 +1,53 @@
+
+name: myenv  # Replace with your environment name
+
+channels:
+
+  - defaults
+
+  - pytorch  # Add channels as needed
+
+
+
+dependencies:
+
+  - python=3.8  # Specify your desired Python version
+
+  - argparse
+
+  - parser
+
+  - torch
+
+  - torchvision
+
+  - torchsummary  # Assuming you use torchsummary
+
+  - torchtext  # If you use torchtext
+
+  - torchvision  # If you use torchvision
+
+  - pandas
+
+  - matplotlib
+
+  - jupyter
+
+  - scikit-learn
+
+  - ipykernel
+
+  - numpy
+
+  - pickle
+
+  - math
+
+  - tqdm
+
+  - collections
+
+  - sys
+
+  - csv
+

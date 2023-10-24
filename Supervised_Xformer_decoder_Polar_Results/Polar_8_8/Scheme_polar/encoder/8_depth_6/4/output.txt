@@ -1,0 +1,47 @@
+Info positions : [0 1 2 3 4 5 6 7]
+Target Info positions : [0 1 2 3 4 5 6 7]
+Frozen positions : []
+Code : polar 
+Type of training : c2n
+Rate Profile : polar
+Validation SNR : -2.0
+Training Model for 8,8 anew
+Number of parameters : 75853
+Did not find standard validation data
+Need to save for: 5000
+[0/10000] At -2 dB, Loss: 1.2181511, Train BER (-2 dB) : 0.5198822, Valid BER: 0.4821930, Tgt BER: 0.4821930, Noiseless BER 0.4929810, Valid BLER : 0.9970703
+Time for one step is 0.0047 minutes
+[300/10000] At -2 dB, Loss: 0.8871959, Train BER (-2 dB) : 0.4041748, Valid BER: 0.3992004, Tgt BER: 0.3992004, Noiseless BER 0.2201843, Valid BLER : 0.9729004
+[600/10000] At -2 dB, Loss: 0.8846793, Train BER (-2 dB) : 0.3884430, Valid BER: 0.3803558, Tgt BER: 0.3803558, Noiseless BER 0.0600281, Valid BLER : 0.9204102
+[900/10000] At -2 dB, Loss: 0.8763859, Train BER (-2 dB) : 0.3812256, Valid BER: 0.3811188, Tgt BER: 0.3811188, Noiseless BER 0.0625458, Valid BLER : 0.9167480
+[1200/10000] At -2 dB, Loss: 0.8698754, Train BER (-2 dB) : 0.3780060, Valid BER: 0.3852692, Tgt BER: 0.3852692, Noiseless BER 0.0622864, Valid BLER : 0.9179688
+[1500/10000] At -2 dB, Loss: 0.8851657, Train BER (-2 dB) : 0.3910980, Valid BER: 0.3813782, Tgt BER: 0.3813782, Noiseless BER 0.0623627, Valid BLER : 0.9099121
+[1800/10000] At -2 dB, Loss: 0.8767226, Train BER (-2 dB) : 0.3826294, Valid BER: 0.3773804, Tgt BER: 0.3773804, Noiseless BER 0.0616150, Valid BLER : 0.9121094
+[2100/10000] At -2 dB, Loss: 0.8777534, Train BER (-2 dB) : 0.3877869, Valid BER: 0.3833618, Tgt BER: 0.3833618, Noiseless BER 0.0652008, Valid BLER : 0.9130859
+[2400/10000] At -2 dB, Loss: 0.8736011, Train BER (-2 dB) : 0.3831787, Valid BER: 0.3821869, Tgt BER: 0.3821869, Noiseless BER 0.0636749, Valid BLER : 0.9169922
+[2700/10000] At -2 dB, Loss: 0.8802866, Train BER (-2 dB) : 0.3857574, Valid BER: 0.3880615, Tgt BER: 0.3880615, Noiseless BER 0.0618744, Valid BLER : 0.9178467
+[3000/10000] At -2 dB, Loss: 0.8710054, Train BER (-2 dB) : 0.3820343, Valid BER: 0.3825684, Tgt BER: 0.3825684, Noiseless BER 0.0619354, Valid BLER : 0.9111328
+[3300/10000] At -2 dB, Loss: 0.8768340, Train BER (-2 dB) : 0.3819733, Valid BER: 0.3865662, Tgt BER: 0.3865662, Noiseless BER 0.0608368, Valid BLER : 0.9149170
+[3600/10000] At -2 dB, Loss: 0.8812093, Train BER (-2 dB) : 0.3865814, Valid BER: 0.3896637, Tgt BER: 0.3896637, Noiseless BER 0.0629425, Valid BLER : 0.9169922
+[3900/10000] At -2 dB, Loss: 0.8789674, Train BER (-2 dB) : 0.3833008, Valid BER: 0.3829498, Tgt BER: 0.3829498, Noiseless BER 0.0624695, Valid BLER : 0.9117432
+[4200/10000] At -2 dB, Loss: 0.8775845, Train BER (-2 dB) : 0.3847351, Valid BER: 0.3790436, Tgt BER: 0.3790436, Noiseless BER 0.0627441, Valid BLER : 0.9107666
+[4500/10000] At -2 dB, Loss: 0.8733991, Train BER (-2 dB) : 0.3820343, Valid BER: 0.3810272, Tgt BER: 0.3810272, Noiseless BER 0.0608368, Valid BLER : 0.9099121
+[4800/10000] At -2 dB, Loss: 0.8754401, Train BER (-2 dB) : 0.3852692, Valid BER: 0.3819733, Tgt BER: 0.3819733, Noiseless BER 0.0628357, Valid BLER : 0.9118652
+[5100/10000] At -2 dB, Loss: 0.8781017, Train BER (-2 dB) : 0.3840790, Valid BER: 0.3854828, Tgt BER: 0.3854828, Noiseless BER 0.0618896, Valid BLER : 0.9139404
+[5400/10000] At -2 dB, Loss: 0.8746964, Train BER (-2 dB) : 0.3827515, Valid BER: 0.3822021, Tgt BER: 0.3822021, Noiseless BER 0.0630798, Valid BLER : 0.9189453
+[5700/10000] At -2 dB, Loss: 0.8729442, Train BER (-2 dB) : 0.3806305, Valid BER: 0.3802490, Tgt BER: 0.3802490, Noiseless BER 0.0647583, Valid BLER : 0.9114990
+[6000/10000] At -2 dB, Loss: 0.8767323, Train BER (-2 dB) : 0.3846588, Valid BER: 0.3789215, Tgt BER: 0.3789215, Noiseless BER 0.0638733, Valid BLER : 0.9113770
+[6300/10000] At -2 dB, Loss: 0.8792744, Train BER (-2 dB) : 0.3865967, Valid BER: 0.3817749, Tgt BER: 0.3817749, Noiseless BER 0.0624695, Valid BLER : 0.9129639
+[6600/10000] At -2 dB, Loss: 0.8766523, Train BER (-2 dB) : 0.3838043, Valid BER: 0.3835297, Tgt BER: 0.3835297, Noiseless BER 0.0631714, Valid BLER : 0.9208984
+[6900/10000] At -2 dB, Loss: 0.8785431, Train BER (-2 dB) : 0.3896179, Valid BER: 0.3883667, Tgt BER: 0.3883667, Noiseless BER 0.0619049, Valid BLER : 0.9132080
+[7200/10000] At -2 dB, Loss: 0.8782657, Train BER (-2 dB) : 0.3862000, Valid BER: 0.3803711, Tgt BER: 0.3803711, Noiseless BER 0.0630646, Valid BLER : 0.9178467
+[7500/10000] At -2 dB, Loss: 0.8792905, Train BER (-2 dB) : 0.3881226, Valid BER: 0.3872528, Tgt BER: 0.3872528, Noiseless BER 0.0626984, Valid BLER : 0.9173584
+[7800/10000] At -2 dB, Loss: 0.8748501, Train BER (-2 dB) : 0.3857880, Valid BER: 0.3829193, Tgt BER: 0.3829193, Noiseless BER 0.0621796, Valid BLER : 0.9105225
+[8100/10000] At -2 dB, Loss: 0.8744270, Train BER (-2 dB) : 0.3834381, Valid BER: 0.3854980, Tgt BER: 0.3854980, Noiseless BER 0.0617218, Valid BLER : 0.9171143
+[8400/10000] At -2 dB, Loss: 0.8726210, Train BER (-2 dB) : 0.3804474, Valid BER: 0.3849030, Tgt BER: 0.3849030, Noiseless BER 0.0632477, Valid BLER : 0.9125977
+[8700/10000] At -2 dB, Loss: 0.8813124, Train BER (-2 dB) : 0.3850555, Valid BER: 0.3794861, Tgt BER: 0.3794861, Noiseless BER 0.0623016, Valid BLER : 0.9112549
+[9000/10000] At -2 dB, Loss: 0.8741727, Train BER (-2 dB) : 0.3827057, Valid BER: 0.3838806, Tgt BER: 0.3838806, Noiseless BER 0.0630646, Valid BLER : 0.9127197
+[9300/10000] At -2 dB, Loss: 0.8754088, Train BER (-2 dB) : 0.3861542, Valid BER: 0.3858032, Tgt BER: 0.3858032, Noiseless BER 0.0612946, Valid BLER : 0.9191895
+[9600/10000] At -2 dB, Loss: 0.8731464, Train BER (-2 dB) : 0.3811646, Valid BER: 0.3853149, Tgt BER: 0.3853149, Noiseless BER 0.0627594, Valid BLER : 0.9129639
+[9900/10000] At -2 dB, Loss: 0.8717236, Train BER (-2 dB) : 0.3791962, Valid BER: 0.3835144, Tgt BER: 0.3835144, Noiseless BER 0.0616608, Valid BLER : 0.9110107
+Complete

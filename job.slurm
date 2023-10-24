@@ -14,7 +14,12 @@
 
 module purge
 module load anaconda3/2023.3
-conda activate ml-env
+source activate mlenv
+
+mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/8_depth_6/4
+touch ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/8_depth_6/4/output.txt
+mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/8_depth_6/4
+touch ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/8_depth_6/4/output.txt
  
-python -u run_models.py --model encode --N 8 --max_len 8 --K 8 --dec_train_snr 4 --embed_dim 32 --num_steps 10000 --batch_size 10000 --lr 1e-3 --mult 1 --num_restarts 1 --print_freq 500 --code polar --rate_profile polar --validation_snr 4 --target_K 8 --run 2 >> output8-8.txt
-python -u run_models.py --model encode --N 4 --max_len 4 --K 4 --dec_train_snr 4 --embed_dim 32 --num_steps 10000 --batch_size 10000 --lr 1e-3 --mult 1 --num_restarts 1 --print_freq 500 --code polar --rate_profile polar --validation_snr 4 --target_K 4 --run 1 >> output4-4.txt
+python -u run_models.py --model encoder --N 8 --max_len 8 --K 8 --dec_train_snr -2 --validation_snr -2 --embed_dim 32 --num_steps 10000 --batch_size 8192  --print_freq 300 --code polar --rate_profile polar  --target_K 8 --run 4 > ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/8_depth_6/4/output.txt
+python -u run_models.py --model encoder --N 4 --max_len 4 --K 4 --dec_train_snr -2 --validation_snr -2  --embed_dim 32 --num_steps 10000 --batch_size 8192  --print_freq 300 --code polar --rate_profile polar --target_K 4 --run 4 > ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/8_depth_6/4/output.txt
