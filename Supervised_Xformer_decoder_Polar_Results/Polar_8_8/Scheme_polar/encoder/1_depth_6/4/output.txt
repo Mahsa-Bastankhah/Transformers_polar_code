@@ -1,0 +1,81 @@
+Info positions : [0 1 2 3 4 5 6 7]
+Target Info positions : [0 1 2 3 4 5 6 7]
+Frozen positions : []
+Code : polar 
+Type of training : c2n
+Rate Profile : polar
+Validation SNR : 6.0
+Training Model for 8,8 anew
+Number of parameters : 75853
+Did not find standard validation data
+Need to save for: 5000
+torch.Size([8192, 1, 8, 8])
+[0/10000] At 6 dB, Loss: 2.0092344, Train BER (6 dB) : 0.4436340, Valid BER: 0.4432983, Tgt BER: 0.4432983, Noiseless BER 0.4404449, Valid BLER : 0.9484863
+Time for one step is 0.0020 minutes
+torch.Size([8192, 1, 8, 8])
+[300/10000] At 6 dB, Loss: 0.3579008, Train BER (6 dB) : 0.1268005, Valid BER: 0.1138763, Tgt BER: 0.1138763, Noiseless BER 0.0604095, Valid BLER : 0.5664062
+torch.Size([8192, 1, 8, 8])
+[600/10000] At 6 dB, Loss: 0.3303290, Train BER (6 dB) : 0.1168060, Valid BER: 0.1076660, Tgt BER: 0.1076660, Noiseless BER 0.0524597, Valid BLER : 0.5111084
+torch.Size([8192, 1, 8, 8])
+[900/10000] At 6 dB, Loss: 0.2968090, Train BER (6 dB) : 0.0955811, Valid BER: 0.0861053, Tgt BER: 0.0861053, Noiseless BER 0.0261078, Valid BLER : 0.3312988
+torch.Size([8192, 1, 8, 8])
+[1200/10000] At 6 dB, Loss: 0.2691416, Train BER (6 dB) : 0.0753937, Valid BER: 0.0750580, Tgt BER: 0.0750580, Noiseless BER 0.0000000, Valid BLER : 0.1737061
+torch.Size([8192, 1, 8, 8])
+[1500/10000] At 6 dB, Loss: 0.2631600, Train BER (6 dB) : 0.0728760, Valid BER: 0.0719910, Tgt BER: 0.0719910, Noiseless BER 0.0000000, Valid BLER : 0.1760254
+torch.Size([8192, 1, 8, 8])
+[1800/10000] At 6 dB, Loss: 0.2725907, Train BER (6 dB) : 0.0757446, Valid BER: 0.0721588, Tgt BER: 0.0721588, Noiseless BER 0.0000000, Valid BLER : 0.1732178
+torch.Size([8192, 1, 8, 8])
+[2100/10000] At 6 dB, Loss: 0.2680999, Train BER (6 dB) : 0.0741730, Valid BER: 0.0723724, Tgt BER: 0.0723724, Noiseless BER 0.0000000, Valid BLER : 0.1691895
+torch.Size([8192, 1, 8, 8])
+[2400/10000] At 6 dB, Loss: 0.2724543, Train BER (6 dB) : 0.0754395, Valid BER: 0.0727386, Tgt BER: 0.0727386, Noiseless BER 0.0000000, Valid BLER : 0.1722412
+torch.Size([8192, 1, 8, 8])
+[2700/10000] At 6 dB, Loss: 0.2575169, Train BER (6 dB) : 0.0711060, Valid BER: 0.0689850, Tgt BER: 0.0689850, Noiseless BER 0.0000000, Valid BLER : 0.1656494
+torch.Size([8192, 1, 8, 8])
+[3000/10000] At 6 dB, Loss: 0.2715092, Train BER (6 dB) : 0.0750427, Valid BER: 0.0707855, Tgt BER: 0.0707855, Noiseless BER 0.0000000, Valid BLER : 0.1708984
+torch.Size([8192, 1, 8, 8])
+[3300/10000] At 6 dB, Loss: 0.2549416, Train BER (6 dB) : 0.0700378, Valid BER: 0.0717926, Tgt BER: 0.0717926, Noiseless BER 0.0000000, Valid BLER : 0.1711426
+torch.Size([8192, 1, 8, 8])
+[3600/10000] At 6 dB, Loss: 0.2532471, Train BER (6 dB) : 0.0696411, Valid BER: 0.0713196, Tgt BER: 0.0713196, Noiseless BER 0.0000000, Valid BLER : 0.1740723
+torch.Size([8192, 1, 8, 8])
+[3900/10000] At 6 dB, Loss: 0.2634386, Train BER (6 dB) : 0.0726013, Valid BER: 0.0731049, Tgt BER: 0.0731049, Noiseless BER 0.0000000, Valid BLER : 0.1743164
+torch.Size([8192, 1, 8, 8])
+[4200/10000] At 6 dB, Loss: 0.2506885, Train BER (6 dB) : 0.0688019, Valid BER: 0.0700378, Tgt BER: 0.0700378, Noiseless BER 0.0000000, Valid BLER : 0.1636963
+torch.Size([8192, 1, 8, 8])
+[4500/10000] At 6 dB, Loss: 0.2518642, Train BER (6 dB) : 0.0693512, Valid BER: 0.0722961, Tgt BER: 0.0722961, Noiseless BER 0.0000000, Valid BLER : 0.1708984
+torch.Size([8192, 1, 8, 8])
+[4800/10000] At 6 dB, Loss: 0.2598733, Train BER (6 dB) : 0.0715637, Valid BER: 0.0702515, Tgt BER: 0.0702515, Noiseless BER 0.0000000, Valid BLER : 0.1623535
+torch.Size([8192, 1, 8, 8])
+[5100/10000] At 6 dB, Loss: 0.2542995, Train BER (6 dB) : 0.0700073, Valid BER: 0.0700378, Tgt BER: 0.0700378, Noiseless BER 0.0000000, Valid BLER : 0.1661377
+torch.Size([8192, 1, 8, 8])
+[5400/10000] At 6 dB, Loss: 0.2650673, Train BER (6 dB) : 0.0732574, Valid BER: 0.0699310, Tgt BER: 0.0699310, Noiseless BER 0.0000000, Valid BLER : 0.1680908
+torch.Size([8192, 1, 8, 8])
+[5700/10000] At 6 dB, Loss: 0.2563190, Train BER (6 dB) : 0.0705566, Valid BER: 0.0694275, Tgt BER: 0.0694275, Noiseless BER 0.0000000, Valid BLER : 0.1678467
+torch.Size([8192, 1, 8, 8])
+[6000/10000] At 6 dB, Loss: 0.2614054, Train BER (6 dB) : 0.0720520, Valid BER: 0.0695496, Tgt BER: 0.0695496, Noiseless BER 0.0000000, Valid BLER : 0.1697998
+torch.Size([8192, 1, 8, 8])
+[6300/10000] At 6 dB, Loss: 0.2500475, Train BER (6 dB) : 0.0687561, Valid BER: 0.0693054, Tgt BER: 0.0693054, Noiseless BER 0.0000000, Valid BLER : 0.1629639
+torch.Size([8192, 1, 8, 8])
+[6600/10000] At 6 dB, Loss: 0.2567462, Train BER (6 dB) : 0.0708008, Valid BER: 0.0728912, Tgt BER: 0.0728912, Noiseless BER 0.0000000, Valid BLER : 0.1719971
+torch.Size([8192, 1, 8, 8])
+[6900/10000] At 6 dB, Loss: 0.2585819, Train BER (6 dB) : 0.0709991, Valid BER: 0.0711517, Tgt BER: 0.0711517, Noiseless BER 0.0000000, Valid BLER : 0.1707764
+torch.Size([8192, 1, 8, 8])
+[7200/10000] At 6 dB, Loss: 0.2687272, Train BER (6 dB) : 0.0742340, Valid BER: 0.0740814, Tgt BER: 0.0740814, Noiseless BER 0.0000000, Valid BLER : 0.1763916
+torch.Size([8192, 1, 8, 8])
+[7500/10000] At 6 dB, Loss: 0.2593421, Train BER (6 dB) : 0.0714264, Valid BER: 0.0702667, Tgt BER: 0.0702667, Noiseless BER 0.0000000, Valid BLER : 0.1674805
+torch.Size([8192, 1, 8, 8])
+[7800/10000] At 6 dB, Loss: 0.2525010, Train BER (6 dB) : 0.0692139, Valid BER: 0.0724945, Tgt BER: 0.0724945, Noiseless BER 0.0000000, Valid BLER : 0.1708984
+torch.Size([8192, 1, 8, 8])
+[8100/10000] At 6 dB, Loss: 0.2542235, Train BER (6 dB) : 0.0699615, Valid BER: 0.0712280, Tgt BER: 0.0712280, Noiseless BER 0.0000000, Valid BLER : 0.1716309
+torch.Size([8192, 1, 8, 8])
+[8400/10000] At 6 dB, Loss: 0.2606077, Train BER (6 dB) : 0.0716553, Valid BER: 0.0747223, Tgt BER: 0.0747223, Noiseless BER 0.0000000, Valid BLER : 0.1771240
+torch.Size([8192, 1, 8, 8])
+[8700/10000] At 6 dB, Loss: 0.2641772, Train BER (6 dB) : 0.0729980, Valid BER: 0.0769958, Tgt BER: 0.0769958, Noiseless BER 0.0000000, Valid BLER : 0.1806641
+torch.Size([8192, 1, 8, 8])
+[9000/10000] At 6 dB, Loss: 0.2707112, Train BER (6 dB) : 0.0749207, Valid BER: 0.0688782, Tgt BER: 0.0688782, Noiseless BER 0.0000000, Valid BLER : 0.1699219
+torch.Size([8192, 1, 8, 8])
+[9300/10000] At 6 dB, Loss: 0.2645183, Train BER (6 dB) : 0.0731049, Valid BER: 0.0713806, Tgt BER: 0.0713806, Noiseless BER 0.0000000, Valid BLER : 0.1697998
+torch.Size([8192, 1, 8, 8])
+[9600/10000] At 6 dB, Loss: 0.2599949, Train BER (6 dB) : 0.0715332, Valid BER: 0.0756989, Tgt BER: 0.0756989, Noiseless BER 0.0000000, Valid BLER : 0.1765137
+torch.Size([8192, 1, 8, 8])
+[9900/10000] At 6 dB, Loss: 0.2780870, Train BER (6 dB) : 0.0772247, Valid BER: 0.0727844, Tgt BER: 0.0727844, Noiseless BER 0.0000000, Valid BLER : 0.1706543
+Complete

@@ -343,13 +343,14 @@ def testXformer(net, polar, snr_range, Test_Data_Generator,device,Test_Data_Mask
             ber_Xformer = errors_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).item()
             if snr_ind==bitwise_snr_idx:
                 ber_bitwise_Xformer = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).squeeze()
-                bers_bitwise_Xformer_test += ber_bitwise_Xformer/num_test_batches
+                bers_bitwise_Xformer_test += beFr_bitwise_Xformer/num_test_batches
                 print(ber_bitwise_Xformer)
             bler_Xformer = errors_bler(msg_bits, decoded_Xformer_msg_bits.sign()).item()
             if run_ML:
                 b_noisy = noisy_code.unsqueeze(1).repeat(1, 2**args.K, 1)
                 diff = (b_noisy - b_codebook).pow(2).sum(dim=2)
                 idx = diff.argmin(dim=1)
+                idx = idx.to(all_message_bits.device)
                 decoded = all_message_bits[idx, :]
                 decoded_bitwiseMAP_msg_bits = polar.bitwise_MAP(noisy_code,device,snr)
 
@@ -710,9 +711,15 @@ if __name__ == '__main__':
     print("Target Info positions : {}".format(target_info_inds))
     print("Frozen positions : {}".format(frozen_inds))
     print("Code : {0} ".format(args.code))
-    print("Type of training : {0}".format(args.curriculum))
+    #print("Type of training : {0}".format(args.curriculum))
     print("Rate Profile : {0}".format(args.rate_profile))
     print("Validation SNR : {0}".format(args.validation_snr))
+    print("Number of heads : {0}".format(args.n_head))
+    print("Number of layers: {0}".format(args.n_layers))
+    print("Positional encoding : static")
+    print("Layers : compelete")
+    print("Print frequency: {0}".format(args.print_freq))
+    print("Num of steps: {0}".format(args.num_steps))
 
     #___________________Model Definition___________________________________________________#
     
@@ -833,7 +840,7 @@ if __name__ == '__main__':
         
         # Define variables for early stopping
         counter = 0
-        patience = 3
+        patience = 2
         best_validation_ber = 1
         ####################################################### Training loop ######################################################
         try:
@@ -947,8 +954,21 @@ if __name__ == '__main__':
                         # print("Type of attn:", type(slf_attn_list[0]))
                         # print("Shape of attn:", slf_attn_list[0].shape)
 
-                        slf_attn_no_noise_avg = torch.mean(slf_attn_no_noise[0], dim=0)
-                        slf_attn_avg = torch.mean(slf_attn[0], dim=0)
+
+                        print(slf_attn_no_noise[0].shape)
+                        slf_attn_no_noise_avg = []
+                        slf_attn_avg= []
+                        for tensor in slf_attn_no_noise:
+                            # Calculate the mean along the batchsize dimension (dim=0)
+                            mean_tensor = torch.mean(tensor, dim=0, keepdim=False)
+                            slf_attn_no_noise_avg.append(mean_tensor)
+                        for tensor in slf_attn:
+                            # Calculate the mean along the batchsize dimension (dim=0)
+                            mean_tensor = torch.mean(tensor, dim=0, keepdim=False)
+                            slf_attn_avg.append(mean_tensor)
+
+                        #slf_attn_no_noise_avg = torch.mean(slf_attn_no_noise[0], dim=0)
+                        #slf_attn_avg = torch.mean(slf_attn[0], dim=0)
 
                         decoded_Xformer_msg_bits = decoded_bits[:, info_inds]
                         decoded_Xformer_msg_bits_no_noise = decoded_no_noise[:, info_inds]

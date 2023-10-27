@@ -221,7 +221,7 @@ class PositionalEncoding(nn.Module):
         return torch.FloatTensor(sinusoid_table).unsqueeze(0)
 
     def forward(self, x):
-        return x + self.pos_table[:, :x.size(1)].clone().detach()
+        return x * self.pos_table[:, :x.size(1)].clone().detach()
 
 class XFormerEncoder(nn.Module):
     def __init__(self, config, layer_idx=None):
@@ -239,8 +239,9 @@ class XFormerEncoder(nn.Module):
     def forward(self,noisy_enc,src_mask,device,return_attns=True):
         position_indices = torch.arange(1,self.block_len+1, device=device)
         pos_enc = self.pos_emb(position_indices)
-        enc_output = noisy_enc*pos_enc   #<---- addition instead of multiplication?
-        enc_output = self.position_enc(enc_output)
+        #enc_output = noisy_enc*pos_enc   #<---- addition instead of multiplication?
+        #enc_output = self.position_enc(enc_output)
+        enc_output = self.position_enc(noisy_enc)
 
         enc_output = self.dropout(enc_output)
         enc_output = self.layer_norm(enc_output)
