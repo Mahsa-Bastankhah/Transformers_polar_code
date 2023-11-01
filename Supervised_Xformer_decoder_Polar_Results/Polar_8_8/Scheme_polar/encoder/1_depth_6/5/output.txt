@@ -8,6 +8,7 @@ Number of heads : 1
 Number of layers: 6
 Positional encoding : static
 Layers : compelete
+Print frequency: 100
 Training Model for 8,8 anew
 Number of parameters : 75853
 Did not find standard validation data
