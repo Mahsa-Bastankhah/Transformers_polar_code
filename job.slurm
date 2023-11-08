@@ -7,21 +7,31 @@
 #SBATCH --gres=gpu:1             # number of gpus per node
 #SBATCH --time=12:00:00          # total run time limit (HH:MM:SS)
 #SBATCH --partition=mig
+#SBATCH --mail-type=fail        # send email when job fails
+#SBATCH --mail-user=mb6458@princeton.edu
 
 module purge
 module load anaconda3/2023.3
 source activate mlenv
 
-run=8
-n_head=1
-n_layers=1
+run=2
+n_head=8
+n_layers=6
 num_steps=10000
 print_freq=100
+N=16
+K=8
 
-mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}
-touch ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/1_depth_${n_layers}/${run}
-touch ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/1_depth_${n_layers}/${run}/output.txt
- 
-python -u run_models.py --model encoder --N 8 --max_len 8 --K 8 --dec_train_snr 5.5 --validation_snr 5.5 --n_head ${n_head} --n_layers ${n_layers} --embed_dim 32 --num_steps ${num_steps} --batch_size 8192  --print_freq ${print_freq} --code polar --rate_profile polar  --target_K 8 --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-python -u run_models.py --model encoder --N 4 --max_len 4 --K 4 --dec_train_snr 5.5 --validation_snr 5.5 --n_head ${n_head} --n_layers ${n_layers} --embed_dim 32 --num_steps ${num_steps} --batch_size 8192  --print_freq ${print_freq} --code polar --rate_profile polar  --target_K 4 --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+#mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}
+#touch ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+# mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}
+# touch ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}
+touch ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+#python -u run_models.py --model encoder --N 8 --max_len 8 --K 8 --dec_train_snr 5.5 --validation_snr 5.5 --n_head ${n_head} --n_layers ${n_layers} --embed_dim 32 --num_steps ${num_steps} --batch_size 8192  --print_freq ${print_freq} --code polar --rate_profile polar  --target_K 8 --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_8_8/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+#python -u run_models.py --model encoder --N 4 --max_len 4 --K 4 --dec_train_snr 5.5 --validation_snr 5.5 --n_head ${n_head} --n_layers ${n_layers} --embed_dim 32 --num_steps ${num_steps} --batch_size 8192  --print_freq ${print_freq} --code polar --rate_profile polar  --target_K 4 --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_4_4/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+python -u run_models.py --model encoder --N ${N} --K ${K} --max_len ${N} --dec_train_snr 1.2 --validation_snr 1.2 --n_head ${n_head} --n_layers ${n_layers} --num_steps ${num_steps} --batch_size 8192  --print_freq ${print_freq} --code polar --rate_profile polar  --target_K ${K} --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+
+
+# (16,8), (8,4) >> SNR = 1.2
+# (8,8) , (4,4) >> SNR = 5.5

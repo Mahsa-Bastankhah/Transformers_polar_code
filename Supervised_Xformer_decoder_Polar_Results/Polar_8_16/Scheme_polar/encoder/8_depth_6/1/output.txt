@@ -1,0 +1,18 @@
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+Rate Profile : polar
+Validation SNR : 100.0
+Number of heads : 8
+Number of layers: 6
+Positional encoding : static
+Layers : compelete
+Print frequency: 10
+Num of steps: 10
+Training Model for 8,16 anew
+Number of parameters : 299661
+Did not find standard validation data
+Need to save for: 5000
+[0/10] At 100 dB, Loss: 1.6222115, Train BER (100 dB) : 0.5274658, Valid BER: 0.4362946, Tgt BER: 0.4362946, Noiseless BER 0.4362946, Valid BLER : 0.8768311
+Complete

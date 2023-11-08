@@ -154,6 +154,7 @@ class PositionwiseFeedForward(nn.Module):
         residual = x
 
         x = self.w_2(F.gelu(self.w_1(x))) #F.gelu
+        #x = self.w_2(self.w_1(x)) #F.gelu
         x = self.dropout(x)
         #x = self.scalar(x)
         x += residual

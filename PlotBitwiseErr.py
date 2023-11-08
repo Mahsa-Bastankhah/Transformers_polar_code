@@ -2,7 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 import argparse
 import numpy as np
-rng = 20
+
 parser = argparse.ArgumentParser(description='Your script description here')
 
 
@@ -16,11 +16,13 @@ parser.add_argument('print_freq', type=int, help='Value for print_freq')
 
 
 
+
 # Define optional arguments
 parser.add_argument('--n_head', type=int, default=1,help='Value for n_head')
 parser.add_argument('--n_layers', type=int, default=6, help='Value for n_layers')
 parser.add_argument('--model', type=str, default='encoder', help='Value for model')
 parser.add_argument('--rate_profile', type=str, default='polar', help='Value for rate_profile')
+parser.add_argument('--rng', type=int,default=20, help='number of steps maximum')
 
 # Parse the command-line arguments
 args = parser.parse_args()
@@ -35,6 +37,7 @@ n_head = args.n_head
 n_layers = args.n_layers
 model = args.model
 rate_profile = args.rate_profile
+rng = args.rng
 
 model = "encoder"
 rate_profile = "polar"
