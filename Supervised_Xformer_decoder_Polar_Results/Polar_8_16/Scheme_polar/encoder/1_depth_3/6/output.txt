@@ -1,0 +1,412 @@
+Train with 10 db test with 3 db
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 8192
+Validation SNR : 3.0
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 10000
+64
+Training Model for 8,16 anew
+Number of parameters : 150471
+Did not find standard validation data
+Need to save for: 1000
+[0/10000] At 3 dB, Loss: 1.0851901, Train BER (10 dB) : 0.5010834, Valid BER: 0.4566040, Tgt BER: 0.4566040, Noiseless BER 0.4512024, Valid BLER : 0.9293213
+Time for one step is 0.0011 minutes
+[100/10000] At 3 dB, Loss: 0.4210140, Train BER (10 dB) : 0.1810303, Valid BER: 0.2614288, Tgt BER: 0.2614288, Noiseless BER 0.1764832, Valid BLER : 0.8823242
+[200/10000] At 3 dB, Loss: 0.2769129, Train BER (10 dB) : 0.1028748, Valid BER: 0.2042694, Tgt BER: 0.2042694, Noiseless BER 0.0699158, Valid BLER : 0.7011719
+[300/10000] At 3 dB, Loss: 0.1770447, Train BER (10 dB) : 0.0656891, Valid BER: 0.1930695, Tgt BER: 0.1930695, Noiseless BER 0.0305176, Valid BLER : 0.5999756
+[400/10000] At 3 dB, Loss: 0.0829931, Train BER (10 dB) : 0.0242615, Valid BER: 0.1760406, Tgt BER: 0.1760406, Noiseless BER 0.0000000, Valid BLER : 0.4857178
+[500/10000] At 3 dB, Loss: 0.0467655, Train BER (10 dB) : 0.0126038, Valid BER: 0.1761780, Tgt BER: 0.1761780, Noiseless BER 0.0000000, Valid BLER : 0.4879150
+[600/10000] At 3 dB, Loss: 0.0350159, Train BER (10 dB) : 0.0094147, Valid BER: 0.1729584, Tgt BER: 0.1729584, Noiseless BER 0.0000000, Valid BLER : 0.4786377
+[700/10000] At 3 dB, Loss: 0.0264356, Train BER (10 dB) : 0.0074921, Valid BER: 0.1701508, Tgt BER: 0.1701508, Noiseless BER 0.0000000, Valid BLER : 0.4761963
+[800/10000] At 3 dB, Loss: 0.0215997, Train BER (10 dB) : 0.0059204, Valid BER: 0.1743622, Tgt BER: 0.1743622, Noiseless BER 0.0000000, Valid BLER : 0.4835205
+[900/10000] At 3 dB, Loss: 0.0241368, Train BER (10 dB) : 0.0065002, Valid BER: 0.1747284, Tgt BER: 0.1747284, Noiseless BER 0.0000000, Valid BLER : 0.4835205
+[1000/10000] At 3 dB, Loss: 0.0197166, Train BER (10 dB) : 0.0051422, Valid BER: 0.1774139, Tgt BER: 0.1774139, Noiseless BER 0.0000000, Valid BLER : 0.4829102
+[1100/10000] At 3 dB, Loss: 0.0199172, Train BER (10 dB) : 0.0052490, Valid BER: 0.1729736, Tgt BER: 0.1729736, Noiseless BER 0.0000000, Valid BLER : 0.4796143
+[1200/10000] At 3 dB, Loss: 0.0171630, Train BER (10 dB) : 0.0043640, Valid BER: 0.1817017, Tgt BER: 0.1817017, Noiseless BER 0.0000000, Valid BLER : 0.4901123
+[1300/10000] At 3 dB, Loss: 0.0152658, Train BER (10 dB) : 0.0041656, Valid BER: 0.1781158, Tgt BER: 0.1781158, Noiseless BER 0.0000000, Valid BLER : 0.4898682
+[1400/10000] At 3 dB, Loss: 0.0145799, Train BER (10 dB) : 0.0036774, Valid BER: 0.1792755, Tgt BER: 0.1792755, Noiseless BER 0.0000000, Valid BLER : 0.4874268
+[1500/10000] At 3 dB, Loss: 0.0131476, Train BER (10 dB) : 0.0033722, Valid BER: 0.1752777, Tgt BER: 0.1752777, Noiseless BER 0.0000000, Valid BLER : 0.4853516
+[1600/10000] At 3 dB, Loss: 0.0151465, Train BER (10 dB) : 0.0037689, Valid BER: 0.1707611, Tgt BER: 0.1707611, Noiseless BER 0.0000000, Valid BLER : 0.4805908
+[1700/10000] At 3 dB, Loss: 0.0153514, Train BER (10 dB) : 0.0039215, Valid BER: 0.1781464, Tgt BER: 0.1781464, Noiseless BER 0.0000000, Valid BLER : 0.4875488
+[1800/10000] At 3 dB, Loss: 0.0138475, Train BER (10 dB) : 0.0034332, Valid BER: 0.1743011, Tgt BER: 0.1743011, Noiseless BER 0.0000000, Valid BLER : 0.4821777
+[1900/10000] At 3 dB, Loss: 0.0130635, Train BER (10 dB) : 0.0032501, Valid BER: 0.1762085, Tgt BER: 0.1762085, Noiseless BER 0.0000000, Valid BLER : 0.4781494
+[2000/10000] At 3 dB, Loss: 0.0133051, Train BER (10 dB) : 0.0033875, Valid BER: 0.1808167, Tgt BER: 0.1808167, Noiseless BER 0.0000000, Valid BLER : 0.4866943
+[2100/10000] At 3 dB, Loss: 0.0122702, Train BER (10 dB) : 0.0031738, Valid BER: 0.1777191, Tgt BER: 0.1777191, Noiseless BER 0.0000000, Valid BLER : 0.4848633
+[2200/10000] At 3 dB, Loss: 0.0126631, Train BER (10 dB) : 0.0032349, Valid BER: 0.1750183, Tgt BER: 0.1750183, Noiseless BER 0.0000000, Valid BLER : 0.4807129
+[2300/10000] At 3 dB, Loss: 0.0130961, Train BER (10 dB) : 0.0032959, Valid BER: 0.1773834, Tgt BER: 0.1773834, Noiseless BER 0.0000000, Valid BLER : 0.4882812
+[2400/10000] At 3 dB, Loss: 0.0135663, Train BER (10 dB) : 0.0035400, Valid BER: 0.1754608, Tgt BER: 0.1754608, Noiseless BER 0.0000000, Valid BLER : 0.4774170
+[2500/10000] At 3 dB, Loss: 0.0130431, Train BER (10 dB) : 0.0032501, Valid BER: 0.1808777, Tgt BER: 0.1808777, Noiseless BER 0.0000000, Valid BLER : 0.4880371
+[2600/10000] At 3 dB, Loss: 0.0130260, Train BER (10 dB) : 0.0032654, Valid BER: 0.1757202, Tgt BER: 0.1757202, Noiseless BER 0.0000000, Valid BLER : 0.4838867
+[2700/10000] At 3 dB, Loss: 0.0128760, Train BER (10 dB) : 0.0031891, Valid BER: 0.1767578, Tgt BER: 0.1767578, Noiseless BER 0.0000000, Valid BLER : 0.4882812
+[2800/10000] At 3 dB, Loss: 0.0111329, Train BER (10 dB) : 0.0027161, Valid BER: 0.1724243, Tgt BER: 0.1724243, Noiseless BER 0.0000000, Valid BLER : 0.4793701
+[2900/10000] At 3 dB, Loss: 0.0104610, Train BER (10 dB) : 0.0026093, Valid BER: 0.1792603, Tgt BER: 0.1792603, Noiseless BER 0.0000000, Valid BLER : 0.4931641
+[3000/10000] At 3 dB, Loss: 0.0130394, Train BER (10 dB) : 0.0032501, Valid BER: 0.1743469, Tgt BER: 0.1743469, Noiseless BER 0.0000000, Valid BLER : 0.4742432
+[3100/10000] At 3 dB, Loss: 0.0110997, Train BER (10 dB) : 0.0027618, Valid BER: 0.1742401, Tgt BER: 0.1742401, Noiseless BER 0.0000000, Valid BLER : 0.4692383
+[3200/10000] At 3 dB, Loss: 0.0114764, Train BER (10 dB) : 0.0028687, Valid BER: 0.1761169, Tgt BER: 0.1761169, Noiseless BER 0.0000000, Valid BLER : 0.4797363
+[3300/10000] At 3 dB, Loss: 0.0092785, Train BER (10 dB) : 0.0023651, Valid BER: 0.1775208, Tgt BER: 0.1775208, Noiseless BER 0.0000000, Valid BLER : 0.4835205
+[3400/10000] At 3 dB, Loss: 0.0130611, Train BER (10 dB) : 0.0032654, Valid BER: 0.1806641, Tgt BER: 0.1806641, Noiseless BER 0.0000000, Valid BLER : 0.4853516
+[3500/10000] At 3 dB, Loss: 0.0111827, Train BER (10 dB) : 0.0028076, Valid BER: 0.1738434, Tgt BER: 0.1738434, Noiseless BER 0.0000000, Valid BLER : 0.4786377
+[3600/10000] At 3 dB, Loss: 0.0096895, Train BER (10 dB) : 0.0024719, Valid BER: 0.1743317, Tgt BER: 0.1743317, Noiseless BER 0.0000000, Valid BLER : 0.4821777
+[3700/10000] At 3 dB, Loss: 0.0121217, Train BER (10 dB) : 0.0029602, Valid BER: 0.1752472, Tgt BER: 0.1752472, Noiseless BER 0.0000000, Valid BLER : 0.4849854
+[3800/10000] At 3 dB, Loss: 0.0100016, Train BER (10 dB) : 0.0024261, Valid BER: 0.1778259, Tgt BER: 0.1778259, Noiseless BER 0.0000000, Valid BLER : 0.4812012
+[3900/10000] At 3 dB, Loss: 0.0077331, Train BER (10 dB) : 0.0018768, Valid BER: 0.1739044, Tgt BER: 0.1739044, Noiseless BER 0.0000000, Valid BLER : 0.4808350
+[4000/10000] At 3 dB, Loss: 0.0087849, Train BER (10 dB) : 0.0021057, Valid BER: 0.1673126, Tgt BER: 0.1673126, Noiseless BER 0.0000000, Valid BLER : 0.4680176
+[4100/10000] At 3 dB, Loss: 0.0084067, Train BER (10 dB) : 0.0020752, Valid BER: 0.1755829, Tgt BER: 0.1755829, Noiseless BER 0.0000000, Valid BLER : 0.4822998
+[4200/10000] At 3 dB, Loss: 0.0081550, Train BER (10 dB) : 0.0019684, Valid BER: 0.1730499, Tgt BER: 0.1730499, Noiseless BER 0.0000000, Valid BLER : 0.4805908
+[4300/10000] At 3 dB, Loss: 0.0090859, Train BER (10 dB) : 0.0022278, Valid BER: 0.1766205, Tgt BER: 0.1766205, Noiseless BER 0.0000000, Valid BLER : 0.4826660
+[4400/10000] At 3 dB, Loss: 0.0086769, Train BER (10 dB) : 0.0021210, Valid BER: 0.1782684, Tgt BER: 0.1782684, Noiseless BER 0.0000000, Valid BLER : 0.4841309
+[4500/10000] At 3 dB, Loss: 0.0082742, Train BER (10 dB) : 0.0020142, Valid BER: 0.1721954, Tgt BER: 0.1721954, Noiseless BER 0.0000000, Valid BLER : 0.4780273
+[4600/10000] At 3 dB, Loss: 0.0086577, Train BER (10 dB) : 0.0021057, Valid BER: 0.1737976, Tgt BER: 0.1737976, Noiseless BER 0.0000000, Valid BLER : 0.4739990
+[4700/10000] At 3 dB, Loss: 0.0077341, Train BER (10 dB) : 0.0018463, Valid BER: 0.1762543, Tgt BER: 0.1762543, Noiseless BER 0.0000000, Valid BLER : 0.4830322
+[4800/10000] At 3 dB, Loss: 0.0100132, Train BER (10 dB) : 0.0024261, Valid BER: 0.1738586, Tgt BER: 0.1738586, Noiseless BER 0.0000000, Valid BLER : 0.4805908
+[4900/10000] At 3 dB, Loss: 0.0095950, Train BER (10 dB) : 0.0022888, Valid BER: 0.1774750, Tgt BER: 0.1774750, Noiseless BER 0.0000000, Valid BLER : 0.4858398
+[5000/10000] At 3 dB, Loss: 0.0087347, Train BER (10 dB) : 0.0021057, Valid BER: 0.1775360, Tgt BER: 0.1775360, Noiseless BER 0.0000000, Valid BLER : 0.4854736
+[5100/10000] At 3 dB, Loss: 0.0099145, Train BER (10 dB) : 0.0024261, Valid BER: 0.1719208, Tgt BER: 0.1719208, Noiseless BER 0.0000000, Valid BLER : 0.4725342
+[5200/10000] At 3 dB, Loss: 0.0119381, Train BER (10 dB) : 0.0028839, Valid BER: 0.1753693, Tgt BER: 0.1753693, Noiseless BER 0.0000000, Valid BLER : 0.4868164
+[5300/10000] At 3 dB, Loss: 0.0062079, Train BER (10 dB) : 0.0014954, Valid BER: 0.1756287, Tgt BER: 0.1756287, Noiseless BER 0.0000000, Valid BLER : 0.4857178
+[5400/10000] At 3 dB, Loss: 0.0103782, Train BER (10 dB) : 0.0026093, Valid BER: 0.1742401, Tgt BER: 0.1742401, Noiseless BER 0.0000000, Valid BLER : 0.4814453
+[5500/10000] At 3 dB, Loss: 0.0108320, Train BER (10 dB) : 0.0026550, Valid BER: 0.1754303, Tgt BER: 0.1754303, Noiseless BER 0.0000000, Valid BLER : 0.4804688
+[5600/10000] At 3 dB, Loss: 0.0124841, Train BER (10 dB) : 0.0030823, Valid BER: 0.1773376, Tgt BER: 0.1773376, Noiseless BER 0.0000000, Valid BLER : 0.4881592
+[5700/10000] At 3 dB, Loss: 0.0116880, Train BER (10 dB) : 0.0028992, Valid BER: 0.1718750, Tgt BER: 0.1718750, Noiseless BER 0.0000000, Valid BLER : 0.4803467
+[5800/10000] At 3 dB, Loss: 0.0067935, Train BER (10 dB) : 0.0016479, Valid BER: 0.1754608, Tgt BER: 0.1754608, Noiseless BER 0.0000000, Valid BLER : 0.4824219
+[5900/10000] At 3 dB, Loss: 0.0071911, Train BER (10 dB) : 0.0017700, Valid BER: 0.1736145, Tgt BER: 0.1736145, Noiseless BER 0.0000000, Valid BLER : 0.4749756
+[6000/10000] At 3 dB, Loss: 0.0097689, Train BER (10 dB) : 0.0023804, Valid BER: 0.1821747, Tgt BER: 0.1821747, Noiseless BER 0.0000000, Valid BLER : 0.4903564
+[6100/10000] At 3 dB, Loss: 0.0107074, Train BER (10 dB) : 0.0026550, Valid BER: 0.1772614, Tgt BER: 0.1772614, Noiseless BER 0.0000000, Valid BLER : 0.4848633
+[6200/10000] At 3 dB, Loss: 0.0081207, Train BER (10 dB) : 0.0019684, Valid BER: 0.1768341, Tgt BER: 0.1768341, Noiseless BER 0.0000000, Valid BLER : 0.4818115
+[6300/10000] At 3 dB, Loss: 0.0111989, Train BER (10 dB) : 0.0027618, Valid BER: 0.1773987, Tgt BER: 0.1773987, Noiseless BER 0.0000000, Valid BLER : 0.4860840
+[6400/10000] At 3 dB, Loss: 0.0099765, Train BER (10 dB) : 0.0024719, Valid BER: 0.1752472, Tgt BER: 0.1752472, Noiseless BER 0.0000000, Valid BLER : 0.4866943
+[6500/10000] At 3 dB, Loss: 0.0091155, Train BER (10 dB) : 0.0022583, Valid BER: 0.1764984, Tgt BER: 0.1764984, Noiseless BER 0.0000000, Valid BLER : 0.4812012
+[6600/10000] At 3 dB, Loss: 0.0104819, Train BER (10 dB) : 0.0025787, Valid BER: 0.1753998, Tgt BER: 0.1753998, Noiseless BER 0.0000000, Valid BLER : 0.4777832
+[6700/10000] At 3 dB, Loss: 0.0091728, Train BER (10 dB) : 0.0022430, Valid BER: 0.1771851, Tgt BER: 0.1771851, Noiseless BER 0.0000000, Valid BLER : 0.4793701
+[6800/10000] At 3 dB, Loss: 0.0083802, Train BER (10 dB) : 0.0020599, Valid BER: 0.1722565, Tgt BER: 0.1722565, Noiseless BER 0.0000000, Valid BLER : 0.4848633
+[6900/10000] At 3 dB, Loss: 0.0086124, Train BER (10 dB) : 0.0021210, Valid BER: 0.1774139, Tgt BER: 0.1774139, Noiseless BER 0.0000000, Valid BLER : 0.4851074
+[7000/10000] At 3 dB, Loss: 0.0089134, Train BER (10 dB) : 0.0021820, Valid BER: 0.1736298, Tgt BER: 0.1736298, Noiseless BER 0.0000000, Valid BLER : 0.4819336
+[7100/10000] At 3 dB, Loss: 0.0095142, Train BER (10 dB) : 0.0023651, Valid BER: 0.1725769, Tgt BER: 0.1725769, Noiseless BER 0.0000000, Valid BLER : 0.4727783
+[7200/10000] At 3 dB, Loss: 0.0092747, Train BER (10 dB) : 0.0022278, Valid BER: 0.1770172, Tgt BER: 0.1770172, Noiseless BER 0.0000000, Valid BLER : 0.4798584
+[7300/10000] At 3 dB, Loss: 0.0066790, Train BER (10 dB) : 0.0016174, Valid BER: 0.1732025, Tgt BER: 0.1732025, Noiseless BER 0.0000000, Valid BLER : 0.4775391
+[7400/10000] At 3 dB, Loss: 0.0079679, Train BER (10 dB) : 0.0019531, Valid BER: 0.1776428, Tgt BER: 0.1776428, Noiseless BER 0.0000000, Valid BLER : 0.4859619
+[7500/10000] At 3 dB, Loss: 0.0086720, Train BER (10 dB) : 0.0021057, Valid BER: 0.1787720, Tgt BER: 0.1787720, Noiseless BER 0.0000000, Valid BLER : 0.4859619
+[7600/10000] At 3 dB, Loss: 0.0078286, Train BER (10 dB) : 0.0019226, Valid BER: 0.1736755, Tgt BER: 0.1736755, Noiseless BER 0.0000000, Valid BLER : 0.4821777
+[7700/10000] At 3 dB, Loss: 0.0079781, Train BER (10 dB) : 0.0019836, Valid BER: 0.1797485, Tgt BER: 0.1797485, Noiseless BER 0.0000000, Valid BLER : 0.4930420
+[7800/10000] At 3 dB, Loss: 0.0090077, Train BER (10 dB) : 0.0021973, Valid BER: 0.1819305, Tgt BER: 0.1819305, Noiseless BER 0.0000000, Valid BLER : 0.4976807
+[7900/10000] At 3 dB, Loss: 0.0062969, Train BER (10 dB) : 0.0015717, Valid BER: 0.1756744, Tgt BER: 0.1756744, Noiseless BER 0.0000000, Valid BLER : 0.4777832
+[8000/10000] At 3 dB, Loss: 0.0096188, Train BER (10 dB) : 0.0023651, Valid BER: 0.1737518, Tgt BER: 0.1737518, Noiseless BER 0.0000000, Valid BLER : 0.4805908
+[8100/10000] At 3 dB, Loss: 0.0085716, Train BER (10 dB) : 0.0021057, Valid BER: 0.1746063, Tgt BER: 0.1746063, Noiseless BER 0.0000000, Valid BLER : 0.4764404
+[8200/10000] At 3 dB, Loss: 0.0088482, Train BER (10 dB) : 0.0021667, Valid BER: 0.1780243, Tgt BER: 0.1780243, Noiseless BER 0.0000000, Valid BLER : 0.4801025
+[8300/10000] At 3 dB, Loss: 0.0054494, Train BER (10 dB) : 0.0013275, Valid BER: 0.1717529, Tgt BER: 0.1717529, Noiseless BER 0.0000000, Valid BLER : 0.4741211
+[8400/10000] At 3 dB, Loss: 0.0084550, Train BER (10 dB) : 0.0020752, Valid BER: 0.1734161, Tgt BER: 0.1734161, Noiseless BER 0.0000000, Valid BLER : 0.4760742
+[8500/10000] At 3 dB, Loss: 0.0084480, Train BER (10 dB) : 0.0020905, Valid BER: 0.1742096, Tgt BER: 0.1742096, Noiseless BER 0.0000000, Valid BLER : 0.4851074
+[8600/10000] At 3 dB, Loss: 0.0129309, Train BER (10 dB) : 0.0032196, Valid BER: 0.1748810, Tgt BER: 0.1748810, Noiseless BER 0.0000000, Valid BLER : 0.4901123
+[8700/10000] At 3 dB, Loss: 0.0085222, Train BER (10 dB) : 0.0021210, Valid BER: 0.1742554, Tgt BER: 0.1742554, Noiseless BER 0.0000000, Valid BLER : 0.4833984
+[8800/10000] At 3 dB, Loss: 0.0079049, Train BER (10 dB) : 0.0019989, Valid BER: 0.1770020, Tgt BER: 0.1770020, Noiseless BER 0.0000000, Valid BLER : 0.4810791
+[8900/10000] At 3 dB, Loss: 0.0101627, Train BER (10 dB) : 0.0025024, Valid BER: 0.1755676, Tgt BER: 0.1755676, Noiseless BER 0.0000000, Valid BLER : 0.4809570
+[9000/10000] At 3 dB, Loss: 0.0084436, Train BER (10 dB) : 0.0020599, Valid BER: 0.1763916, Tgt BER: 0.1763916, Noiseless BER 0.0000000, Valid BLER : 0.4903564
+[9100/10000] At 3 dB, Loss: 0.0100103, Train BER (10 dB) : 0.0024872, Valid BER: 0.1778564, Tgt BER: 0.1778564, Noiseless BER 0.0000000, Valid BLER : 0.4893799
+[9200/10000] At 3 dB, Loss: 0.0094830, Train BER (10 dB) : 0.0023499, Valid BER: 0.1745605, Tgt BER: 0.1745605, Noiseless BER 0.0000000, Valid BLER : 0.4788818
+[9300/10000] At 3 dB, Loss: 0.0071133, Train BER (10 dB) : 0.0017548, Valid BER: 0.1797333, Tgt BER: 0.1797333, Noiseless BER 0.0000000, Valid BLER : 0.4792480
+[9400/10000] At 3 dB, Loss: 0.0083336, Train BER (10 dB) : 0.0020599, Valid BER: 0.1722412, Tgt BER: 0.1722412, Noiseless BER 0.0000000, Valid BLER : 0.4710693
+[9500/10000] At 3 dB, Loss: 0.0090293, Train BER (10 dB) : 0.0022278, Valid BER: 0.1807404, Tgt BER: 0.1807404, Noiseless BER 0.0000000, Valid BLER : 0.4908447
+[9600/10000] At 3 dB, Loss: 0.0093707, Train BER (10 dB) : 0.0023041, Valid BER: 0.1778564, Tgt BER: 0.1778564, Noiseless BER 0.0000000, Valid BLER : 0.4840088
+[9700/10000] At 3 dB, Loss: 0.0066726, Train BER (10 dB) : 0.0016632, Valid BER: 0.1730499, Tgt BER: 0.1730499, Noiseless BER 0.0000000, Valid BLER : 0.4761963
+[9800/10000] At 3 dB, Loss: 0.0093521, Train BER (10 dB) : 0.0023041, Valid BER: 0.1709290, Tgt BER: 0.1709290, Noiseless BER 0.0000000, Valid BLER : 0.4824219
+[9900/10000] At 3 dB, Loss: 0.0074232, Train BER (10 dB) : 0.0018463, Valid BER: 0.1759949, Tgt BER: 0.1759949, Noiseless BER 0.0000000, Valid BLER : 0.4864502
+Complete
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 1000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4666499972343445, 0.38987499773502354, 0.1610874995589256, 0.0035375000210478903, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4543749988079071, 0.29083749949932103, 0.01528750006109476, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.45407500267028805, 0.2910625040531159, 0.015300000086426735, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.45407500267028805, 0.2910625040531159, 0.015300000086426735, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9440000000000001, 0.6554, 0.037500000000000006, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4497375011444092, 0.28682500123977656, 0.015125000197440388, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9613, 0.6755, 0.0375, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9764999999999999, 0.8951999999999999, 0.4537, 0.0084, 0.0, 0.0, 0.0]
+Time taken = 12.692955732345581 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 2000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.46778749823570254, 0.3895999997854233, 0.16229999959468844, 0.002062499994644895, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4544500023126602, 0.30132499635219573, 0.015087500028312205, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.45405000150203706, 0.3020500004291534, 0.014999999944120646, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.45405000150203706, 0.3020500004291534, 0.014999999944120646, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9421999999999999, 0.6733000000000001, 0.0356, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.448199999332428, 0.2975500017404557, 0.014850000012665987, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9579999999999999, 0.693, 0.035899999999999994, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9742000000000001, 0.8971, 0.44040000000000007, 0.0065, 0.0, 0.0, 0.0]
+Time taken = 12.81695032119751 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 3000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.466100001335144, 0.3922875046730042, 0.16076250076293944, 0.0016374999831896275, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4543125003576278, 0.29063750207424166, 0.012700000125914813, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4542250007390976, 0.28947499990463255, 0.012650000024586917, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4542250007390976, 0.28947499990463255, 0.012650000024586917, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9416, 0.6505000000000001, 0.032, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4509999960660934, 0.28528749942779535, 0.012500000093132258, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9562, 0.6716000000000001, 0.0322, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9788000000000001, 0.8963, 0.44389999999999996, 0.0053, 0.0, 0.0, 0.0]
+Time taken = 12.823090076446533 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 4000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.46521249711513524, 0.3958875000476837, 0.16291249990463258, 0.0019750000312342307, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.45356249809265137, 0.2981749981641769, 0.015400000102818012, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.45326249897480014, 0.2976249992847443, 0.015350000094622373, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.45326249897480014, 0.2976249992847443, 0.015350000094622373, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9446999999999999, 0.6617000000000001, 0.0358, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.44711250364780425, 0.29446250200271606, 0.015274999942630528, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9584999999999999, 0.6819999999999999, 0.036000000000000004, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9736, 0.9047000000000001, 0.4482000000000001, 0.0054, 0.0, 0.0, 0.0]
+Time taken = 12.617950916290283 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 5000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.46853750050067905, 0.38943750560283663, 0.15913750082254413, 0.001775000017369166, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4561875015497207, 0.2949499964714051, 0.01197500005364418, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4567124962806702, 0.29521250128746035, 0.011937500070780517, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4567124962806702, 0.29521250128746035, 0.011937500070780517, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9450999999999999, 0.6610000000000001, 0.03, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4506749957799911, 0.2913750022649765, 0.011774999927729367, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9593999999999999, 0.6809999999999999, 0.030100000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9757, 0.8995, 0.4447, 0.0060999999999999995, 0.0, 0.0, 0.0]
+Time taken = 12.658319473266602 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 6000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4687874972820282, 0.39036249518394467, 0.16078750044107434, 0.0025749999796971677, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4545249998569488, 0.2961875021457672, 0.013825000077486039, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4540625005960464, 0.29680000245571136, 0.013812500052154064, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4540625005960464, 0.29680000245571136, 0.013812500052154064, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9432, 0.6617, 0.0341, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4507500022649765, 0.29158749580383303, 0.013762500043958424, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9590999999999998, 0.6818, 0.034499999999999996, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9778999999999999, 0.8906000000000001, 0.4417, 0.0062, 0.0, 0.0, 0.0]
+Time taken = 12.605213165283203 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 7000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4693250000476838, 0.390650001168251, 0.15811249911785125, 0.002037499996367842, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.45303750038146967, 0.29744999706745145, 0.014099999982863662, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.45270000100135804, 0.29677499532699586, 0.014087500143796203, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.45270000100135804, 0.29677499532699586, 0.014087500143796203, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9450000000000001, 0.6646, 0.0349, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.44905000627040864, 0.29179999828338626, 0.01391249978914857, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9570000000000001, 0.6838000000000001, 0.035, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9776, 0.8913000000000001, 0.44370000000000004, 0.007000000000000001, 0.0, 0.0, 0.0]
+Time taken = 12.836893796920776 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 8000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4702624976634979, 0.3935874998569489, 0.1640874996781349, 0.002637499989941716, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.45613750219345095, 0.2977375030517578, 0.014675000123679637, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4555624961853027, 0.29633750319480895, 0.0147125001065433, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4555624961853027, 0.29633750319480895, 0.0147125001065433, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9434, 0.6641, 0.0364, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.45061250030994415, 0.2916999965906143, 0.014625000115484, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9575999999999999, 0.6824999999999999, 0.0366, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9762999999999998, 0.8989, 0.44680000000000003, 0.0079, 0.0, 0.0, 0.0]
+Time taken = 12.862783193588257 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 9000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4679249972105026, 0.39308749437332147, 0.16337500065565108, 0.0023249999969266358, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.45105000138282775, 0.2988499939441681, 0.01367500005289912, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4509624987840652, 0.29864999651908875, 0.013637500070035457, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4509624987840652, 0.29864999651908875, 0.013637500070035457, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9395999999999999, 0.6666000000000001, 0.0345, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.447562500834465, 0.29393750131130225, 0.01362500013783574, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.958, 0.6859999999999999, 0.0349, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9772, 0.8983, 0.44419999999999993, 0.006500000000000001, 0.0, 0.0, 0.0]
+Time taken = 12.714749336242676 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Info positions : [ 7  9 10 11 12 13 14 15]
+Target Info positions : [ 7  9 10 11 12 13 14 15]
+Frozen positions : [0 1 2 3 4 5 6 8]
+Code : polar 
+embed dim : 64 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 3
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+64
+TESTING :
+Model loaded at step 10000
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4705999970436096, 0.39428749382495876, 0.15845000147819516, 0.0019624999840743835, 0.0, 0.0, 0.0]
+BERs of SC decoding: [0.4557875007390976, 0.3018374979496002, 0.013312500063329936, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4567249983549118, 0.3010125011205673, 0.013312499970197678, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4567249983549118, 0.3010125011205673, 0.013312499970197678, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.9460000000000002, 0.6680999999999999, 0.033, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4530625015497208, 0.2962749987840652, 0.013012500014156103, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.9593, 0.6865, 0.0331, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9788000000000001, 0.8967, 0.44489999999999996, 0.006500000000000001, 0.0, 0.0, 0.0]
+Time taken = 12.668594360351562 seconds
+tensor([[0., 0., 0., 0., 0., 0., 0., 0.]], device='cuda:0')

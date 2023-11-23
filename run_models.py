@@ -1,4 +1,5 @@
 import argparse
+import itertools
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -34,6 +35,83 @@ import sys
 import csv
 
 
+def code_table(args, polar, device, info_inds):
+    results_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}/{6}/'\
+                                               .format(K, N, args.rate_profile,  args.model, args.n_head,args.n_layers, args.run)
+
+
+
+    data_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
+                                    .format(args.K, args.N, args.rate_profile,  args.model)
+
+    training_data = np.load(data_save_path+"/trainData.npy")
+    test_data =     np.load(data_save_path+"/testData.npy")
+    checkpoint1 = torch.load(results_save_path+'/Models/model_{0}.pt'.format(args.model_iters), map_location=lambda storage, loc: storage)
+    loaded_step = checkpoint1['step']
+    xformer.load_state_dict(checkpoint1['xformer'])
+    xformer.to(device)
+    xformer.eval()
+    print("Model loaded at step {}".format(loaded_step))
+    print("------- training data , messages that are decoded wrongly -------")
+    msg_bits = torch.tensor(training_data[:], dtype=torch.float32, device=device) 
+    gt = torch.ones(len(training_data), args.N, device = device)
+    gt[:, info_inds] = msg_bits
+    polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
+    mask = torch.cat((torch.ones((len(training_data),args.N),device=device),torch.zeros((len(training_data),args.max_len-args.N),device=device)),1).long()
+    decoded_bits,out_mask,attn = xformer.decode(polar_code,polar.info_positions, mask,device)
+    
+    for idx in range(len(training_data)):
+        for l in range(len(attn)):
+            folder_path = results_save_path + '/figures/table-model{0}/L{1}'.format(args.model_iters, l+1)
+            if not os.path.exists(folder_path):
+                # If it doesn't exist, create the folder
+                os.makedirs(folder_path)
+            plt.figure(figsize=(len(info_inds),N))
+            plt.imshow(attn[l].cpu().detach().numpy()[idx][0][info_inds], cmap='viridis', interpolation='nearest', vmin=0, vmax = 1)
+            plt.colorbar(shrink=0.2)
+            plt.title("train" + str(idx) + "-iter-" + str(args.model_iters) + "-L" + str(l+1))
+            plt.yticks(range(len(info_inds)))
+            plt.xticks(range(N))
+            plt.savefig(folder_path + '/train{0}.png'.format(idx), format='png', bbox_inches='tight', pad_inches=0)
+            plt.close()  # Close the figure
+
+        if not np.array_equal(msg_bits[idx, :].cpu().numpy(),  decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds]):
+            # Print the original message bits and decoded bits side by side
+            print("Example:", idx)
+            print("Original Message Bits: ", msg_bits[idx, :].cpu().numpy())
+            print("Decoded Bits:          ", decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds])
+            print("")
+
+    print("------- test data , messages that are decoded wrongly ------- ")
+    msg_bits = torch.tensor(test_data[:], dtype=torch.float32, device=device) 
+    gt = torch.ones(len(test_data), args.N, device = device)
+    gt[:, info_inds] = msg_bits
+    polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
+    mask = torch.cat((torch.ones((len(test_data),args.N),device=device),torch.zeros((len(test_data),args.max_len-args.N),device=device)),1).long()
+    decoded_bits,out_mask,attn = xformer.decode(polar_code,polar.info_positions, mask,device)
+
+    for idx in range(len(test_data)):
+        for l in range(len(attn)):
+            folder_path = results_save_path + '/figures/table-model{0}/L{1}'.format(args.model_iters, l+1)
+            plt.figure(figsize=(len(info_inds),N))
+            plt.imshow(attn[l].cpu().detach().numpy()[idx][0][info_inds], cmap='viridis', interpolation='nearest', vmin=0, vmax = 1)
+            plt.colorbar(shrink=0.2)
+            plt.title("test" + str(idx) + "-iter-" + str(args.model_iters) + "-L" + str(l+1))
+            plt.yticks(range(len(info_inds)))
+            plt.xticks(range(N))
+            plt.savefig(folder_path + '/test{0}.png'.format(idx), format='png', bbox_inches='tight', pad_inches=0)
+            plt.close()  # Close the figure  # Close the figure
+        if not np.array_equal(msg_bits[idx, :].cpu().numpy(),  decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds]):
+            # Print the original message bits and decoded bits side by side
+            print("Example:", idx)
+            print("Original Message Bits: ", msg_bits[idx, :].cpu().numpy())
+            print("Decoded Bits:          ", decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds])
+            print("")
+
+    
+
+
+
 def str2bool(v):
     if isinstance(v, bool):
        return v
@@ -49,25 +127,37 @@ def get_args():
 
     parser = argparse.ArgumentParser(description='Polar/PAC code - decoder')
 
+    parser.add_argument('--code_table', default=False, action='store_true', help='code tabel?')
+
+    parser.add_argument('--load_training_data', default=False, action='store_true', help='training with a pre saved trainign data?')
+    
+    parser.add_argument('--comb_training_snr', default=False, action='store_true', help='training with a combination of snrs?')
+    
+    parser.add_argument('--train_snr_start', type=int, default=-2, help='training snr start')
+
+    parser.add_argument('--train_snr_end', type=int, default=5, help='training snr end')
+
+    parser.add_argument('--gradual_testing', default=False, action='store_true', help='gradual testing?')
+
     parser.add_argument('--val_one_sample', default=False, action='store_true', help='validating one specific sample?')
 
     parser.add_argument('--id', type=str, default=None, help='ID: optional, to run multiple runs of same hyperparameters') #Will make a folder like init_932 , etc.
     
     parser.add_argument('--previous_id', type=str, default=None, help='ID: optional, to run multiple runs of same hyperparameters') #Will make a folder like init_932 , etc.
 
-    parser.add_argument('--code', type=str, default='pac',choices=['pac', 'polar'], help='code to be tested/trained on')
+    parser.add_argument('--code', type=str, default='polar',choices=['pac', 'polar'], help='code to be tested/trained on')
     
     parser.add_argument('--previous_code', type=str, default=None,choices=[None,'pac', 'polar'], help='code to load model from')
 
     parser.add_argument('--N', type=int, default=32)#, choices=[4, 8, 16, 32, 64, 128], help='Polar code parameter N')
     
-    parser.add_argument('--previous_N', type=int, default=32)#, choices=[4, 8, 16, 32, 64, 128], help='Polar code parameter N')
+    parser.add_argument('--previous_N', type=int, default=None)#, choices=[4, 8, 16, 32, 64, 128], help='Polar code parameter N')
     
     parser.add_argument('--max_len', type=int, default=32)#, choices=[4, 8, 16, 32, 64, 128], help='Polar code parameter N')
 
     parser.add_argument('--K', type=int, default=8)#, choices= [3, 4, 8,  16, 32, 64], help='Polar code parameter K')
     
-    parser.add_argument('--previous_K', type=int, default=8)#, choices= [3, 4, 8,  16, 32, 64], help='Polar code parameter K')
+    parser.add_argument('--previous_K', type=int, default=None)#, choices= [3, 4, 8,  16, 32, 64], help='Polar code parameter K')
 
     parser.add_argument('--test', dest = 'test', default=False, action='store_true', help='Testing?')
     
@@ -75,11 +165,11 @@ def get_args():
     
     parser.add_argument('--do_range_training', dest = 'do_range_training', default=False, action='store_true', help="training on dec_train_snr + 1 and + 2 also?")
 
-    parser.add_argument('--rate_profile', type=str, default='RM', choices=['RM', 'polar', 'sorted', 'last', 'custom'], help='PAC rate profiling')
+    parser.add_argument('--rate_profile', type=str, default='polar', choices=['RM', 'polar', 'sorted', 'last', 'custom'], help='PAC rate profiling')
     
     parser.add_argument('--previous_rate_profile', type=str, default=None, choices=[None,'RM', 'polar', 'sorted', 'last', 'custom'], help='PAC rate profiling')
 
-    parser.add_argument('--embed_dim', type=int, default=64)# embedding size / hidden size of input vectors/hidden outputs between layers
+    parser.add_argument('--embed_dim', type=int, default=8)# embedding size / hidden size of input vectors/hidden outputs between layers
 
     parser.add_argument('--dropout', type=int, default=0.1)# dropout
 
@@ -128,7 +218,7 @@ def get_args():
     parser.add_argument('--target_K', type=int, default=16, help='target K while training a curriculum')
 
     # TRAINING parameters
-    parser.add_argument('--model', type=str, default='gpt', choices=['simple','conv','encoder', 'decoder', 'gpt','denoiser','bigConv','small','multConv','rnnAttn','bitConv'], help='model to be trained')
+    parser.add_argument('--model', type=str, default='encoder', choices=['simple','conv','encoder', 'decoder', 'gpt','denoiser','bigConv','small','multConv','rnnAttn','bitConv'], help='model to be trained')
 
     parser.add_argument('--initialization', type=str, default='Xavier', choices=['Dontknow', 'He', 'Xavier'], help='initialization')
 
@@ -167,9 +257,9 @@ def get_args():
 
     # TESTING parameters
 
-    parser.add_argument('--model_save_per', type=int, default=5000, help='num of episodes after which model is saved')
+    parser.add_argument('--model_save_per', type=int, default=500, help='num of episodes after which model is saved')
 
-    parser.add_argument('--snr_points', type=int, default=7, help='testing snr num points')
+    parser.add_argument('--snr_points', type=int, default=31, help='testing snr num points')
 
     parser.add_argument('--test_batch_size', type=int, default=1000, help='number of blocks')
 
@@ -267,6 +357,12 @@ def countSetBits(n):
 
     return count
 
+
+   
+       
+
+
+
 def get_cosine_with_hard_restarts_schedule_with_warmup(
     optimizer: Optimizer, num_warmup_steps: int, num_training_steps: int, num_cycles: int = 1, last_epoch: int = -1
 ):
@@ -331,12 +427,12 @@ def testXformer(net, polar, snr_range, Test_Data_Generator,device,Test_Data_Mask
             if Test_Data_Mask == None:
                 mask = torch.ones(noisy_code.size(),device=device).long()
             SC_llrs, decoded_SC_msg_bits = polar.sc_decode_new(noisy_code, snr)
-            if not run_ML:
-                SCL_llrs, decoded_SCL_msg_bits = polar.scl_decode(noisy_code.cpu(), snr, 4, use_CRC = False)
-                ber_SCL = errors_ber(msg_bits.cpu(), decoded_SCL_msg_bits.sign().cpu()).item()
-                bler_SCL = errors_bler(msg_bits.cpu(), decoded_SCL_msg_bits.sign().cpu()).item()
-                bers_SCL_test[snr_ind] += ber_SCL/num_test_batches
-                blers_SCL_test[snr_ind] += bler_SCL/num_test_batches
+            #if not run_ML:
+            SCL_llrs, decoded_SCL_msg_bits = polar.scl_decode(noisy_code.cpu(), snr, 4, use_CRC = False)
+            ber_SCL = errors_ber(msg_bits.cpu(), decoded_SCL_msg_bits.sign().cpu()).item()
+            bler_SCL = errors_bler(msg_bits.cpu(), decoded_SCL_msg_bits.sign().cpu()).item()
+            bers_SCL_test[snr_ind] += ber_SCL/num_test_batches
+            blers_SCL_test[snr_ind] += bler_SCL/num_test_batches
             
             ber_SC = errors_ber(msg_bits.cpu(), decoded_SC_msg_bits.sign().cpu()).item()
             bler_SC = errors_bler(msg_bits.cpu(), decoded_SC_msg_bits.sign().cpu()).item()            
@@ -345,10 +441,13 @@ def testXformer(net, polar, snr_range, Test_Data_Generator,device,Test_Data_Mask
             decoded_Xformer_msg_bits = decoded_bits[:, polar.info_positions].sign()
 
             ber_Xformer = errors_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).item()
-            if snr_ind==bitwise_snr_idx:
-                ber_bitwise_Xformer = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).squeeze()
-                bers_bitwise_Xformer_test += beFr_bitwise_Xformer/num_test_batches
-                print(ber_bitwise_Xformer)
+            #if snr < bitwise_snr_idx:
+                #ber_bitwise_Xformer = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits.sign(), mask = mask[:, polar.info_positions]).squeeze()
+                #bers_bitwise_Xformer_test += ber_bitwise_Xformer/num_test_batches
+                #ber_bitwise_SCL = errors_bitwise_ber(msg_bits.to(device), decoded_SCL_msg_bits.sign().to(device), mask = mask[:, polar.info_positions].to(device)).squeeze()
+                #bers_bitwise_SCL_test += ber_bitwise_SCL/num_test_batches
+            
+                #print("SCL bitwise error",ber_bitwise_SCL)
             bler_Xformer = errors_bler(msg_bits, decoded_Xformer_msg_bits.sign()).item()
             if run_ML:
                 b_noisy = noisy_code.unsqueeze(1).repeat(1, 2**args.K, 1)
@@ -561,6 +660,24 @@ def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
+def generate_data(K, results_save_path):
+    # Generate all possible K-bit messages for the alphabet {-1, 1}
+    alphabet = np.array([-1, 1])
+    all_messages = np.array(list(itertools.product(alphabet, repeat=K)))
+    
+    # Randomly select 20% of the messages as test data
+    test_size = int(0.2 * len(all_messages))
+    test_indices = np.random.choice(len(all_messages), test_size, replace=False)
+    test_data = all_messages[test_indices]
+    
+    # Use the remaining messages as training data
+    training_data = np.delete(all_messages, test_indices, axis=0)
+
+    # Save test data
+    np.save(results_save_path + "/testData.npy", test_data)
+    
+    return training_data, test_data
+
 if __name__ == '__main__':
     args = get_args()
     if args.anomaly:
@@ -575,6 +692,10 @@ if __name__ == '__main__':
     kwargs = {'num_workers': 4, 'pin_memory': False} if torch.cuda.is_available() else {}
     if args.previous_code is None:
         args.previous_code = args.code
+    if args.previous_N is None:
+        args.previous_N = args.N
+    if args.previous_K is None:
+        args.previous_K = args.K
     if args.previous_rate_profile is None:
         args.previous_rate_profile = args.rate_profile
     ID = '' if args.id is None else args.id
@@ -612,7 +733,7 @@ if __name__ == '__main__':
     if args.run is not None:
         results_save_path = results_save_path + '/' + '{0}'.format(args.run)
         final_save_path = final_save_path + '/' + '{0}'.format(args.run)
-        previous_save_path = previous_save_path + '/' + '{0}'.format(args.run)
+        #previous_save_path = previous_save_path + '/' + '{0}'.format(args.run)
     
     ############
     ## Polar Code parameters
@@ -711,19 +832,24 @@ if __name__ == '__main__':
     elif args.code == 'pac':
         target_info_inds = polarTarget.B
     target_info_inds.sort()
-    print("Info positions : {}".format(info_inds))
-    print("Target Info positions : {}".format(target_info_inds))
-    print("Frozen positions : {}".format(frozen_inds))
-    print("Code : {0} ".format(args.code))
-    #print("Type of training : {0}".format(args.curriculum))
-    print("Rate Profile : {0}".format(args.rate_profile))
-    print("Validation SNR : {0}".format(args.validation_snr))
-    print("Number of heads : {0}".format(args.n_head))
-    print("Number of layers: {0}".format(args.n_layers))
-    print("Positional encoding : static")
-    print("Layers : compelete")
-    print("Print frequency: {0}".format(args.print_freq))
-    print("Num of steps: {0}".format(args.num_steps))
+    # print("Info positions : {}".format(info_inds))
+    # print("Target Info positions : {}".format(target_info_inds))
+    # print("Frozen positions : {}".format(frozen_inds))
+    # #print("Code : {0} ".format(args.code))
+    # print("embed dim : {0} ".format(args.embed_dim))
+    # #print("Type of training : {0}".format(args.curriculum))
+    # #print("Rate Profile : {0}".format(args.rate_profile))
+    # print("Batch size : {0}".format(args.batch_size))
+    # print("Validation SNR : {0}".format(args.validation_snr))
+    # print("Train SNR : {0}".format(args.dec_train_snr))
+    # print("load training data? {0}".format(args.load_training_data))
+    # print("Number of heads : {0}".format(args.n_head))
+    # print("Number of layers: {0}".format(args.n_layers))
+    # print("Positional encoding : static")
+    # #print("Layers : compelete")
+    # print("Print frequency: {0}".format(args.print_freq))
+    # print("Num of steps: {0}".format(args.num_steps))
+    # print("combinational training snr: ", args.comb_training_snr)
 
     #___________________Model Definition___________________________________________________#
     
@@ -804,6 +930,8 @@ if __name__ == '__main__':
         slf_attn = []
         valid_bitwise_bers_no_noise = []
         valid_bitwise_bers= []
+        valid_bitwise_bers_no_noise_all = []
+        valid_bitwise_bers_all= []
         valid_tgt_bers = []
         valid_blers = []
         valid_tgt_blers = []
@@ -811,12 +939,26 @@ if __name__ == '__main__':
         slf_attn_list = []
         slf_attn_list_no_noise = []
         ## one example data
-        slf_attn_list_oe = [] 
-        slf_attn_list_no_noise_oe = [] 
-        valid_bers_oe = []
-        valid_tgt_bers_oe = []
-        valid_bitwise_bers_no_noise_oe = []
-        valid_bitwise_bers_oe= []
+        slf_attn_list_oe_train = [] 
+        slf_attn_list_no_noise_oe_train = [] 
+        slf_attn_list_oe_test = [] 
+        slf_attn_list_no_noise_oe_test = [] 
+        valid_bers_oe_train = []
+        valid_bers_oe_test = []
+        valid_tgt_bers_oe_train = []
+        valid_tgt_bers_oe_test = []
+        valid_bitwise_bers_no_noise_oe_train = []
+        valid_bitwise_bers_no_noise_oe_test = []
+        valid_bitwise_bers_oe_train = []
+        valid_bitwise_bers_oe_test = []
+
+        test_bers_noisy = []
+        test_bers_no_noise = []
+        test_bitwise_bers_no_noise = []
+        test_bitwise_bers_noisy= []
+        test_bitwise_bers_all_no_noise = []
+        test_bitwise_bers_all_noisy= []
+        
         
 
         ## I should use this later to load my own validation data
@@ -853,6 +995,25 @@ if __name__ == '__main__':
         counter = 0
         patience = 2
         best_validation_ber = 1
+        if args.load_training_data:
+            data_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
+                                    .format(args.K, args.N, args.rate_profile,  args.model)
+            training_data = np.load(data_save_path+"/trainData.npy")
+            test_data =     np.load(data_save_path+"/testData.npy")
+
+        else:
+            training_data , test_data = generate_data(args.K , results_save_path)
+        
+        first_msg_train = torch.tensor(training_data[0, :], dtype=torch.float32, device=device)
+        first_msg_train = first_msg_train.view(1, 8)
+        print(first_msg_train)
+        first_msg_test = torch.tensor(test_data[0, :], dtype=torch.float32, device=device)
+        first_msg_test = first_msg_test.view(1, 8)
+        print(first_msg_test)
+
+        if args.code_table:
+            code_table(args, polar, device, info_inds)
+            sys.exit()
         ####################################################### Training loop ######################################################
         try:
             for i_step in range(args.num_steps):  ## Each episode is like a sample now until memory size is reached.
@@ -869,16 +1030,43 @@ if __name__ == '__main__':
                     train_snr = args.dec_train_snr
                 start_time = time.time()
                 #torch.cuda.empty_cache()
-                msg_bits = 1 - 2 * (torch.rand(args.batch_size, args.K, device=device) < 0.5).float()
+                #msg_bits = 1 - 2 * (torch.rand(args.batch_size, args.K, device=device) < 0.5).float()
+                batch_indices = np.random.choice(len(training_data), args.batch_size, replace=True)
+                msg_bits = torch.tensor(training_data[batch_indices], dtype=torch.float32, device=device)
+                
                 gt = torch.ones(args.batch_size, args.N, device = device)
                 gt[:, info_inds] = msg_bits
+                
                 gt_valid = gt.clone()
                 if args.code == 'polar':
                     polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
-                    corrupted_codewords = polar.channel(polar_code, train_snr)#args.dec_train_snr)
+                    if args.comb_training_snr == False:
+                        corrupted_codewords = polar.channel(polar_code, train_snr)#args.dec_train_snr)
+                    ############################## comb_training_snr    
+                    elif args.comb_training_snr:
+                        snr_range = torch.arange(args.train_snr_start, args.train_snr_end + 1, 1)
+
+                        # Split the batch into smaller sets
+                        smaller_batches = torch.chunk(polar_code, len(snr_range), dim=1)
+
+                        # Apply different SNR values to each smaller batch
+                        corrupted_codewords = []
+                        for i in range(len(snr_range)):
+                            snr = snr_range[i]
+                            smaller_batch = smaller_batches[i]
+                            corrupted_codeword = polar.channel(smaller_batch, snr)
+                            corrupted_codewords.append(corrupted_codeword)
+
+                        # Concatenate the results to get the final corrupted_codewords tensor
+                        corrupted_codewords = torch.cat(corrupted_codewords, dim=1)
+
+
+
                 elif args.code == 'pac':
                     polar_code = polar.pac_encode(msg_bits, scheme = args.rate_profile,custom_info_positions = info_inds)
                     corrupted_codewords = polar.channel(polar_code, train_snr)#args.dec_train_snr)
+                    
+
                 mask = torch.cat((torch.ones((args.batch_size,args.N),device=device),torch.zeros((args.batch_size,args.max_len-args.N),device=device)),1).long()
                 
                 if args.include_previous_block_errors and i_step%100 not in [0,1,2,3,4,5,6,7,8]:
@@ -909,6 +1097,7 @@ if __name__ == '__main__':
                 elif args.loss == 'MSE':
                     #out_mask[:,0]=100
                     loss = loss_fn(out_mask[:,info_inds]*logits[:,info_inds,0],out_mask[:,info_inds]*gt[:, info_inds])#+0.5*loss_fn(layersint(int_layer).squeeze(),polar_code)#*args.N
+                    #loss = loss_fn(out_mask[:,:]*logits[:,:,0],out_mask[:,:]*gt[:, :])
                     #print(logits.size())
                     #loss = loss_fn(out_mask[:,first]*logits[:,first,0],out_mask[:,first]*gt[:, first])#*args.N
                     #out_mask[:,0]=1
@@ -952,32 +1141,98 @@ if __name__ == '__main__':
                 training_losses.append(round(loss.item(),5))
                 training_bers.append(round(ber, 5))
                 
-
+                
 
 
 		        ############################################## The validtion loop ##############################################
                 if args.val_one_sample:
-                    if args.N == 8:
-                        values = [-1., 1., -1., -1., 1., -1., -1., 1.]
-                    elif args.N == 4:
-                        values = [-1., 1., -1., -1.]
+
+                    #msg_bits = torch.tensor(training_data[batch_indices], dtype=torch.float32, device=device)
+                
+                    
+                    # Extract the first message bit from training_data and test_data
+                    
+                    #print("=========one sample train====", first_msg_train)
+                    #print("=========one sample test======", first_msg_test)
+                    gt_oe_train = torch.ones(1, args.N, device = device)
+                    gt_oe_train[0, info_inds] = first_msg_train
+                    gt_oe_test = torch.ones(1, args.N, device = device)
+                    gt_oe_test[0, info_inds] = first_msg_test
+                    polar_code_oe_train = polar.encode_plotkin(first_msg_train,custom_info_positions = info_inds)
+                    polar_code_oe_test = polar.encode_plotkin(first_msg_test,custom_info_positions = info_inds)
+                    corrupted_codewords_oe_train = polar.channel(polar_code_oe_train, train_snr)
+                    corrupted_codewords_oe_test = polar.channel(polar_code_oe_test, train_snr)#args.dec_train_snr)
                     mask_oe = torch.cat((torch.ones((1,args.N),device=device),torch.zeros((1,args.max_len-args.N),device=device)),1).long()
-                    one_example = torch.FloatTensor([values]).to(device)
-                    polar_code_oe = polar.encode_plotkin(one_example,custom_info_positions = info_inds)
-                    corrupted_codewords_oe= polar.channel(polar_code_oe, valid_snr)#args.dec_train_snr)
+                    #print("first msg shape", first_msg_train.shape)
+                    #print("gt shape", gt_oe_train.shape)
+                    #print("gt shape train", gt_oe_train.shape)
+                    #print("polar code train", polar_code_oe_train.shape)
+                    
+                    # # Create tensors of size (1, N)
+                    # gt_train = torch.ones(1, N, device=device)
+                    # gt_train[:, 0] = first_msg_train
+
+                    # gt_test = torch.ones(1, N, device=device)
+                    # gt_test[:, 0] = first_msg_test
+                    # if args.N == 8:
+                    #     values = [-1., 1., -1., -1., 1., -1., -1., 1.]
+                    # elif args.N == 4:
+                    #     values = [-1., 1., 1., 1.]
+                    #mask_oe = torch.cat((torch.ones((1,args.N),device=device),torch.zeros((1,args.max_len-args.N),device=device)),1).long()
+                    #one_example = torch.FloatTensor([values]).to(device)
+                    #polar_code_oe = polar.encode_plotkin(one_example,custom_info_positions = info_inds)
+                    #corrupted_codewords_oe= polar.channel(polar_code_oe, valid_snr)#args.dec_train_snr)
                 
 
                 if i_step % args.print_freq == 0:
                     xformer.eval()
+
+                    
                     with torch.no_grad():
+                        ## gradual testing 
+                        if args.gradual_testing:
+                            mask_test = torch.cat((torch.ones((args.test_batch_size,args.N),device=device),torch.zeros((args.test_batch_size,args.max_len-args.N),device=device)),1).long()
+                
+                     
+                            # Randomly select a subset of test data
+                            test_indices = np.random.choice(len(test_data), args.test_batch_size, replace=True)
+                            test_msg_bits = torch.tensor(test_data[test_indices], dtype=torch.float32, device=device)
+                            gt_test = torch.ones(args.test_batch_size, args.N, device = device)
+                            gt_test[:, info_inds] = test_msg_bits
+
+                            polar_code_test = polar.encode_plotkin(test_msg_bits,custom_info_positions = info_inds)
+                            corrupted_codewords_test = polar.channel(polar_code_test, valid_snr)
+                            #decoded_no_noise,_,slf_attn_no_noise = xformer.decode(polar_code,info_inds,mask,device)
+                            decoded_bits_test_noisy,out_mask_test,slf_attn = xformer.decode(corrupted_codewords_test,info_inds,mask_test,device)
+                            decoded_msg_bits_test_noisy = decoded_bits_test_noisy[:, info_inds]
+                            decoded_bits_test_no_noise,out_mask_test,slf_attn = xformer.decode(polar_code_test ,info_inds,mask_test,device)
+                            decoded_msg_bits_test_no_noise= decoded_bits_test_no_noise[:, info_inds]
+
+                            test_bers_noisy.append(errors_ber(test_msg_bits, decoded_msg_bits_test_noisy.sign(), mask = mask_test[:, polar.info_positions]).item())
+                            test_bers_no_noise.append(errors_ber(test_msg_bits, decoded_msg_bits_test_no_noise.sign(), mask = mask_test[:, polar.info_positions]).item())
+                            test_bitwise_bers_noisy.append(errors_bitwise_ber(test_msg_bits, decoded_msg_bits_test_noisy, mask = out_mask_test[:,target_info_inds]).squeeze().cpu().tolist())
+                            test_bitwise_bers_all_noisy.append(errors_bitwise_ber(gt_test, decoded_bits_test_noisy).squeeze().cpu().tolist())
+                            test_bitwise_bers_no_noise.append(errors_bitwise_ber(test_msg_bits, decoded_msg_bits_test_no_noise, mask = out_mask_test[:,target_info_inds]).squeeze().cpu().tolist())
+                            test_bitwise_bers_all_no_noise.append(errors_bitwise_ber(gt_test, decoded_bits_test_no_noise).squeeze().cpu().tolist())
+
+
+
+
+
                         corrupted_codewords_valid = polar.channel(polar_code, valid_snr)
                         decoded_no_noise,_,slf_attn_no_noise = xformer.decode(polar_code,info_inds,mask,device)
                         decoded_bits,out_mask,slf_attn = xformer.decode(corrupted_codewords_valid,info_inds,mask,device)
-
+                        #print("Shape of attn:", slf_attn[0].shape)
                         if args.val_one_sample:
-                            decoded_no_noise_oe,_,slf_attn_no_noise_oe = xformer.decode(polar_code_oe,info_inds,mask_oe,device)
-                            decoded_bits_oe,out_mask_oe,slf_attn_oe = xformer.decode(corrupted_codewords_oe,info_inds,mask_oe,device)
-                        
+                            decoded_no_noise_oe_train,_,slf_attn_no_noise_oe_train = xformer.decode(polar_code_oe_train,info_inds,mask_oe,device,printt=False)
+                            decoded_bits_oe_train,out_mask_oe_train,slf_attn_oe_train = xformer.decode(corrupted_codewords_oe_train,info_inds,mask_oe,device, printt=False)
+                            decoded_no_noise_oe_test,_,slf_attn_no_noise_oe_test = xformer.decode(polar_code_oe_test,info_inds,mask_oe,device,printt=False)
+                            decoded_bits_oe_test,out_mask_oe_test,slf_attn_oe_test = xformer.decode(corrupted_codewords_oe_test,info_inds,mask_oe,device, printt=False)
+                            #print("Shape of attn for special data:", slf_attn_no_noise_oe_train[0].shape)
+                            slf_attn_oe_train = [tensor.squeeze(0) for tensor in slf_attn_oe_train]
+                            slf_attn_no_noise_oe_train = [tensor.squeeze(0) for tensor in slf_attn_no_noise_oe_train]
+                            slf_attn_no_noise_oe_test = [tensor.squeeze(0) for tensor in slf_attn_no_noise_oe_test]
+                            slf_attn_oe_test = [tensor.squeeze(0) for tensor in slf_attn_oe_test]
                         
                         # slf_attn is of size layers * batchsize * heads * N * N
                         # print("Type of attn:", type(slf_attn_list[0]))
@@ -1018,8 +1273,10 @@ if __name__ == '__main__':
                         decoded_Xformer_msg_bits_no_noise = decoded_no_noise[:, info_inds]
 
                         if args.val_one_sample:
-                            decoded_Xformer_msg_bits_oe = decoded_bits_oe[:, info_inds]
-                            decoded_Xformer_msg_bits_no_noise_oe = decoded_no_noise_oe[:, info_inds]
+                            decoded_Xformer_msg_bits_oe_train = decoded_bits_oe_train[:, info_inds]
+                            decoded_Xformer_msg_bits_oe_test =  decoded_bits_oe_test[:, info_inds]
+                            decoded_Xformer_msg_bits_no_noise_oe_train = decoded_no_noise_oe_train[:, info_inds]
+                            decoded_Xformer_msg_bits_no_noise_oe_test  = decoded_no_noise_oe_test[:, info_inds]
 
 
                         if args.model == 'denoiser':
@@ -1030,9 +1287,12 @@ if __name__ == '__main__':
                             bler_Xformer = errors_bler(gt_valid[:,info_inds], decoded_Xformer_msg_bits).item()
                             bler_Xformer_noiseless = errors_bler(gt_valid[:,info_inds], decoded_Xformer_msg_bits_no_noise).item()
                             if args.val_one_sample:
-                                ber_Xformer_oe = errors_ber(one_example, decoded_Xformer_msg_bits_oe, mask = out_mask_oe[:,info_inds]).item()
-                                ber_Xformer_noiseless_oe = errors_ber(one_example, decoded_Xformer_msg_bits_no_noise_oe, mask = out_mask_oe[:,info_inds]).item()
-                            #ber_Xformer = errors_ber(gt[:,first], decoded_bits[:,first], mask = out_mask[:,first]).item()
+                                ber_Xformer_oe_train = errors_ber(first_msg_train, decoded_Xformer_msg_bits_oe_train, mask = out_mask_oe_train[:,info_inds]).item()
+                                ber_Xformer_noiseless_oe_train = errors_ber(first_msg_train, decoded_Xformer_msg_bits_no_noise_oe_train, mask = out_mask_oe_train[:,info_inds]).item()
+
+                                ber_Xformer_oe_test = errors_ber(first_msg_test, decoded_Xformer_msg_bits_oe_test, mask = out_mask_oe_test[:,info_inds]).item()
+                                ber_Xformer_noiseless_oe_test = errors_ber(first_msg_test, decoded_Xformer_msg_bits_no_noise_oe_test, mask = out_mask_oe_test[:,info_inds]).item()
+            
                         if args.K < args.target_K:
                             msg_bits = 1 - 2 * (torch.rand(args.batch_size, args.target_K, device=device) < 0.5).float()
                             gt = torch.ones(args.batch_size, args.N, device = device)
@@ -1052,21 +1312,33 @@ if __name__ == '__main__':
                         else:
                             bitwise_ber_Xformer_tgt_no_noise = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits_no_noise, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
                             bitwise_ber_Xformer_tgt = errors_bitwise_ber(msg_bits, decoded_Xformer_msg_bits, mask = out_mask[:,target_info_inds]).squeeze().cpu().tolist()
+                            bitwise_ber_Xformer_no_noise_all = errors_bitwise_ber(gt_valid, decoded_no_noise).squeeze().cpu().tolist()
+                            bitwise_ber_Xformer_all = errors_bitwise_ber(gt_valid, decoded_bits).squeeze().cpu().tolist()
+
                             bler_Xformer_tgt = errors_bler(msg_bits, decoded_Xformer_msg_bits).item()
+                            if args.val_one_sample:
+                                bitwise_ber_Xformer_tgt_no_noise_oe_train = errors_bitwise_ber(first_msg_train, decoded_Xformer_msg_bits_no_noise_oe_train, mask = out_mask_oe_train[:,target_info_inds]).squeeze().cpu().tolist()
+                                bitwise_ber_Xformer_tgt_oe_train = errors_bitwise_ber(first_msg_train, decoded_Xformer_msg_bits_oe_train, mask = out_mask_oe_train[:,target_info_inds]).squeeze().cpu().tolist()
+                                bitwise_ber_Xformer_tgt_no_noise_oe_test = errors_bitwise_ber(first_msg_test, decoded_Xformer_msg_bits_no_noise_oe_test, mask = out_mask_oe_test[:,target_info_inds]).squeeze().cpu().tolist()
+                                bitwise_ber_Xformer_tgt_oe_test = errors_bitwise_ber(first_msg_test, decoded_Xformer_msg_bits_oe_test, mask = out_mask_oe_test[:,target_info_inds]).squeeze().cpu().tolist()
                             
-                    #         bitwise_ber_Xformer_tgt_no_noise_oe = errors_bitwise_ber(one_example, decoded_Xformer_msg_bits_no_noise_oe, mask = out_mask_oe[:,target_info_inds]).squeeze().cpu().tolist()
-                    #         bitwise_ber_Xformer_tgt_oe = errors_bitwise_ber(one_example, decoded_Xformer_msg_bits_oe, mask = out_mask_oe[:,target_info_inds]).squeeze().cpu().tolist()
-                    # #print(bitwise_ber_Xformer_tgt)
+
                     
                     # slf_attn[0] is batch_size*num_head*N*N
                     # For each iteration we add the corresponding attention list which is of size layers * head * N * N
                     slf_attn_list_no_noise.append(slf_attn_no_noise_avg)
                     slf_attn_list.append(slf_attn_avg)
 
-                    # slf_attn_list_no_noise_oe.append(slf_attn_no_noise_avg_oe)
-                    # slf_attn_list_oe.append(slf_attn_avg_oe)
+                    if args.val_one_sample:
+         
+                        slf_attn_list_no_noise_oe_train.append(slf_attn_no_noise_oe_train)
+                        slf_attn_list_oe_train.append(slf_attn_oe_train)
+                        slf_attn_list_no_noise_oe_test.append(slf_attn_no_noise_oe_test)
+                        slf_attn_list_oe_test.append(slf_attn_oe_test)
+                        valid_bers_oe_train.append(round(ber_Xformer_oe_train, 5))
+                        valid_bers_oe_test.append(round(ber_Xformer_oe_test, 5))
 
-                    # valid_bers_oe.append(round(ber_Xformer_oe, 5))
+                    # 
 
                     valid_bers.append(round(ber_Xformer, 5))
                     valid_blers.append(round(bler_Xformer, 5))
@@ -1080,9 +1352,15 @@ if __name__ == '__main__':
                     valid_steps.append(i_step)
                     valid_bitwise_bers.append(bitwise_ber_Xformer_tgt)
                     valid_bitwise_bers_no_noise.append(bitwise_ber_Xformer_tgt_no_noise)
+                    valid_bitwise_bers_all.append(bitwise_ber_Xformer_all)
+                    valid_bitwise_bers_no_noise_all.append(bitwise_ber_Xformer_no_noise_all)
 
-                    # valid_bitwise_bers_oe.append(bitwise_ber_Xformer_tgt_oe)
-                    # valid_bitwise_bers_no_noise_oe.append(bitwise_ber_Xformer_tgt_no_noise_oe)
+                    if args.val_one_sample:
+                        valid_bitwise_bers_oe_train.append(bitwise_ber_Xformer_tgt_oe_train)
+                        valid_bitwise_bers_no_noise_oe_train.append(bitwise_ber_Xformer_tgt_no_noise_oe_train)
+                        valid_bitwise_bers_oe_test.append(bitwise_ber_Xformer_tgt_oe_test)
+                        valid_bitwise_bers_no_noise_oe_test.append(bitwise_ber_Xformer_tgt_no_noise_oe_test)
+
                     xformer.train()
                     try:
                         print('[%d/%d] At %d dB, Loss: %.7f, Train BER (%d dB) : %.7f, Valid BER: %.7f, Tgt BER: %.7f, Noiseless BER %.7f, Valid BLER : %.7f'
@@ -1150,18 +1428,19 @@ if __name__ == '__main__':
                     plt.savefig(results_save_path +'/training_bers_log.png')
                     plt.close()
                     # early stoopping condition
-                    if round(ber_Xformer, 5) < best_validation_ber:
-                        best_validation_ber = round(ber_Xformer, 5)
-                        counter = 0  # Reset the patience counter
+                    # if round(ber_Xformer, 5) < best_validation_ber:
+                    #     best_validation_ber = round(ber_Xformer, 5)
+                    #     counter = 0  # Reset the patience counter
         
-                    else:
-                        counter += 1  # Increment the patience counter
+                    # else:
+                    #     counter += 1  # Increment the patience counter
     
-                    # Check for early stopping
-                    if counter >= patience:
-                        print(f"Early stopping after {i_step} steps.")
-                        break
+                    # # Check for early stopping
+                    # if counter >= patience:
+                    #     print(f"Early stopping after {i_step} steps.")
+                    #     break
 
+                    
 
             with open(os.path.join(results_save_path, 'values_training.csv'), 'w') as f:
 
@@ -1180,43 +1459,124 @@ if __name__ == '__main__':
                 write.writerow(valid_steps)
                 write.writerow(valid_bers)
                 write.writerow(valid_tgt_bers)
-                
+
+               
+
                 for i in range(target_K):
                     write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers])
                 for i in range(target_K):
                     write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise])
+
+                for i in range(N):
+                    write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_all])
+                for i in range(N):
+                    write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise_all])
                     
                 write.writerow(valid_blers)
                 write.writerow(valid_tgt_blers)
 
-            # with open(os.path.join(results_save_path, 'values_validation_oe.csv'), 'w') as f:
-
-            #     # using csv.writer method from CSV package
-            #     write = csv.writer(f)
-
-            #     write.writerow(valid_steps)
-            #     write.writerow(valid_bers_oe)
-            #     write.writerow(valid_tgt_bers_oe)
+                attn_file_path_no_noise = results_save_path + '/attention_validation_no_noise.pth'
+                attn_file_path = results_save_path + '/attention_validation.pth'
                 
-            #     for i in range(target_K):
-            #         write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_oe])
-            #     for i in range(target_K):
-            #         write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise_oe])
+                # df.to_csv(csv_file_path,index=False) #save to file
+
+                # Convert the PyTorch tensor to a NumPy array
+                #numpy_array = slf_attn_list[0].cpu().detach().numpy()
+
+                torch.save(slf_attn_list_no_noise, attn_file_path_no_noise)
+                torch.save(slf_attn_list, attn_file_path)
+
+
+            if args.gradual_testing:
+                with open(os.path.join(results_save_path, 'values_test.csv'), 'w') as f:
+
+                    # using csv.writer method from CSV package
+                    write = csv.writer(f)
+
+                    write.writerow(valid_steps)
+                    write.writerow(test_bers_noisy)
+                    write.writerow(test_bers_no_noise)
+
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in test_bitwise_bers_noisy])
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in test_bitwise_bers_no_noise])
                     
-            #     #write.writerow(valid_blers)
-            #     #write.writerow(valid_tgt_blers)
+                    for i in range(N):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in test_bitwise_bers_all_noisy])
+                    for i in range(N):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in test_bitwise_bers_all_no_noise])
+                    
+
+                    
 
 
-            # attn_file_path_no_noise_oe = results_save_path + '/attention_validation_no_noise_oe.pth'
-            # attn_file_path_oe = results_save_path + '/attention_validation_oe.pth'
-            
-            # # df.to_csv(csv_file_path,index=False) #save to file
 
-            # # Convert the PyTorch tensor to a NumPy array
-            # #numpy_array = slf_attn_list[0].cpu().detach().numpy()
 
-            # torch.save(slf_attn_list_no_noise_oe, attn_file_path_no_noise_oe)
-            # torch.save(slf_attn_list_oe, attn_file_path_oe)
+
+            if args.val_one_sample:
+
+                with open(os.path.join(results_save_path, 'values_validation_oe.csv'), 'w') as f:
+
+                    # using csv.writer method from CSV package
+                    write = csv.writer(f)
+
+                    write.writerow(valid_steps)
+                    write.writerow(valid_bers_oe_train)
+                    write.writerow(valid_tgt_bers_oe_train)
+                    
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_oe_train])
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise_oe_train])
+                        
+                    #write.writerow(valid_blers)
+                    #write.writerow(valid_tgt_blers)
+
+
+                attn_file_path_no_noise_oe = results_save_path + '/attention_validation_no_noise_oe.pth'
+                attn_file_path_oe = results_save_path + '/attention_validation_oe.pth'
+                
+                # df.to_csv(csv_file_path,index=False) #save to file
+
+                # Convert the PyTorch tensor to a NumPy array
+                #numpy_array = slf_attn_list[0].cpu().detach().numpy()
+                # print("attn list dim 0", len(slf_attn_list_oe_train))
+                # print("attn list dim 1 , ", len(slf_attn_list_oe_train[0]))
+                # print("attn list dim 2 , ", len(slf_attn_list_oe_train[0][0]))
+                # print("attn list dim 3 , ", len(slf_attn_list_oe_train[0][0][0]))
+                # print("attn list dim 4 , ", len(slf_attn_list_oe_train[0][0][0][0]))
+
+                torch.save(slf_attn_list_no_noise_oe_train, attn_file_path_no_noise_oe)
+                torch.save(slf_attn_list_oe_train, attn_file_path_oe)
+
+                with open(os.path.join(results_save_path, 'values_test_oe.csv'), 'w') as f:
+
+                    # using csv.writer method from CSV package
+                    write = csv.writer(f)
+
+                    write.writerow(valid_steps)
+                    write.writerow(valid_bers_oe_test)
+                    write.writerow(valid_tgt_bers_oe_test)
+                    
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_oe_test])
+                    for i in range(target_K):
+                        write.writerow([bitwise_bers[i] for bitwise_bers in valid_bitwise_bers_no_noise_oe_test])
+                        
+                    #write.writerow(valid_blers)
+                    #write.writerow(valid_tgt_blers)
+
+                attn_file_path_no_noise_oe = results_save_path + '/attention_test_no_noise_oe.pth'
+                attn_file_path_oe = results_save_path + '/attention_test_oe.pth'
+                
+                # df.to_csv(csv_file_path,index=False) #save to file
+
+                # Convert the PyTorch tensor to a NumPy array
+                #numpy_array = slf_attn_list[0].cpu().detach().numpy()
+
+                torch.save(slf_attn_list_no_noise_oe_test, attn_file_path_no_noise_oe)
+                torch.save(slf_attn_list_oe_test, attn_file_path_oe)
             
 
 
@@ -1355,7 +1715,7 @@ if __name__ == '__main__':
                 k += 1
             k-=1
             net_iters = net_iters[1:]
-            print(len(net_iters))
+            #print(len(net_iters))
             plt.semilogy(net_iters,ber_tgt, label='{0},{1} prog'.format(k,args.N))
             
             try:
@@ -1500,17 +1860,22 @@ if __name__ == '__main__':
         #print(results_load_path)
         ## I don't need this
         if args.model_iters is not None:
-            checkpoint1 = torch.load(results_save_path +'/Models/model_{0}.pt'.format(args.model_iters), map_location=lambda storage, loc: storage)
+        
+            checkpoint1 = torch.load(results_save_path+'/Models/model_{0}.pt'.format(args.model_iters), map_location=lambda storage, loc: storage)
         # I don't need this, I can load the default model
-        elif args.test_load_path is not None:
-            checkpoint1 = torch.load(args.test_load_path , map_location=lambda storage, loc: storage)
+        #elif args.test_load_path is not None:
+        # elif args.model_iters is not None:
+        #     test_load_path = results_save_path = './Supervised_Xformer_decoder_PAC_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}/{6}/Models/model_{7}.pt'\
+        #                             .format(args.K, args.N, args.rate_profile,  args.model, args.n_head,args.n_layers, args.run, args.model_iters)
+        #     checkpoint1 = torch.load(test_load_path  , map_location=lambda storage, loc: storage)
         # I should change the name of the final model to use this branch
         else:
+            print(results_load_path)
             checkpoint1 = torch.load(results_load_path +'/Models/model_final.pt', map_location=lambda storage, loc: storage)
-            try:
-                args.model_iters = i_step + 1
-            except:
-                pass
+            # try:
+            #     args.model_iters = i_step + 1
+            # except:
+            #     pass
     
         #print(checkpoint1)
         loaded_step = checkpoint1['step']
@@ -1526,7 +1891,14 @@ if __name__ == '__main__':
             snrs_interval = (args.test_snr_end - args.test_snr_start)* 1.0 /  (args.snr_points-1)
             snr_range = [snrs_interval* item + args.test_snr_start for item in range(args.snr_points)]
     
-        Test_msg_bits = 2 * (torch.rand(args.test_size, args.K) < 0.5).float() - 1
+        #Test_msg_bits = 2 * (torch.rand(args.test_size, args.K) < 0.5).float() - 1
+
+        # Load test data
+        loaded_test_data = np.load(results_save_path+"/testData.npy")
+        
+        # Randomly select a subset of test data
+        test_indices = np.random.choice(len(loaded_test_data), args.test_size, replace=True)
+        Test_msg_bits = torch.tensor(loaded_test_data[test_indices], dtype=torch.float32, device=device).cpu()
         Test_Data_Mask = torch.ones(Test_msg_bits.size(),device=device).long()
     
         Test_Data_Generator = torch.utils.data.DataLoader(Test_msg_bits, batch_size=args.test_batch_size , shuffle=False, **kwargs)
@@ -1569,6 +1941,7 @@ if __name__ == '__main__':
             print("Test SNRs : ", snr_range)
             print("BERs of Xformer: {0}".format(bers_Xformer_test))
             print("BERs of SC decoding: {0}".format(bers_SC_test))
+            print("BERs of SCL decoding: {0}".format(bers_SCL_test))
             print("BERs of ML: {0}".format(bers_ML_test))
             print("BLERs of ML: {0}".format(blers_ML_test))
             print("BERs of bitML: {0}".format(bers_bitwise_MAP_test))
@@ -1580,12 +1953,16 @@ if __name__ == '__main__':
             print(bers_bitwise_Xformer_test)
             ok = 0
             plt.semilogy(snr_range, bers_Xformer_test, label="Xformer decoder", marker='*', linewidth=4.5)
-            plt.semilogy(snr_range, bers_SC_test, label="SC decoder", marker='^', linewidth=1.5)
-            plt.semilogy(snr_range, bers_SCL_test, label="SCL decoder", marker='^', linewidth=1.5)
+            #plt.semilogy(snr_range, bers_SC_test, label="SC decoder", marker='*', linewidth=4.5)
+            plt.semilogy(snr_range, bers_SCL_test, label="SCL decoder", marker='^', linewidth=3)
     
-            #if args.are_we_doing_ML:
-                #plt.semilogy(snr_range, bers_ML_test, label="ML decoder", marker='o', linewidth=1.5)
-                #plt.semilogy(snr_range, bers_bitwise_MAP_test, label="Bitwise ML decoder", marker='o', linewidth=1.5)
+
+            # Save the results to a NumPy archive file
+            np.savez(results_save_path +'/test_results.npz', snr_range=snr_range, bers_SCL_test=bers_SCL_test, bers_Xformer_test=bers_Xformer_test)
+
+            if args.are_we_doing_ML:
+                plt.semilogy(snr_range, bers_ML_test, label="ML decoder", marker='o', linewidth=1.5)
+                plt.semilogy(snr_range, bers_bitwise_MAP_test, label="Bitwise ML decoder", marker='o', linewidth=1.5)
             # if args.run_fano:
             ## BLER
             #plt.semilogy(snr_range, blers_Xformer_test, label="Xformer decoder (BLER)", marker='o', linewidth=4.5, linestyle='dashed')
@@ -1606,11 +1983,11 @@ if __name__ == '__main__':
                 plt.title("RM({1}, {2}): Xformer trained at Dec_SNR = {0} dB".format(args.dec_train_snr, args.K,args.N))
     
             plt.legend(prop={'size': 15})
-            if args.test_load_path is not None:
-                os.makedirs('Xformer_Polar_Results/figures', exist_ok=True)
-                fig_save_path = 'Xformer_Polar_Results/figures/new_plot.pdf'
-            else:
-                fig_save_path = results_load_path + "/step_{}.pdf".format(args.model_iters if args.model_iters is not None else '_final')
+            # if args.test_load_path is not None:
+            #     os.makedirs('Xformer_Polar_Results/figures', exist_ok=True)
+            #     fig_save_path = 'Xformer_Polar_Results/figures/new_plot.pdf'
+            #else:
+            fig_save_path = results_load_path + "/step_{}.pdf".format(args.model_iters if args.model_iters is not None else '_final')
             plt.savefig(fig_save_path)
     
             plt.close()

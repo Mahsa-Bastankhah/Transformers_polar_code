@@ -92,6 +92,7 @@ class MultiHeadAttention(nn.Module):
         self.d_v = d_v
 
         self.w_qs = nn.Linear(d_model, n_head * d_k, bias=False)
+        # input dim * outoput dim
         self.w_ks = nn.Linear(d_model, n_head * d_k, bias=False)
         self.w_vs = nn.Linear(d_model, n_head * d_v, bias=False)
         self.fc = nn.Linear(n_head * d_v, d_model, bias=False)
@@ -103,7 +104,7 @@ class MultiHeadAttention(nn.Module):
         self.scalar = ScalarMult()
 
 
-    def forward(self, q, k, v, mask=None,causal=False):
+    def forward(self, q, k, v, mask=None,causal=False, printt=False):
 
         d_k, d_v, n_head = self.d_k, self.d_v, self.n_head
         sz_b, len_q, len_k, len_v = q.size(0), q.size(1), k.size(1), v.size(1)
@@ -123,6 +124,16 @@ class MultiHeadAttention(nn.Module):
             mask = mask.unsqueeze(1)   # For head axis broadcasting.
 
         q, attn = self.attention(q, k, v, mask=mask)
+        
+            
+        if printt:
+            print("attn dimensions:", attn.shape)
+            print(attn)
+            print("q dimensions:", q.shape)
+            print(q)
+            print("v dimensions:", v.shape)
+            print(v)
+
         # if len(list(q.size()))==4:
         #     q = q.view(q.size(0)*sz_b,q.size(2),q.size(3),q.size(4)).transpose(1, 2).contiguous().view(sz_b, len_q, -1)
         # else:
@@ -130,6 +141,13 @@ class MultiHeadAttention(nn.Module):
         # Combine the last two dimensions to concatenate all the heads together: b x lq x (n*dv)
         q = q.transpose(1, 2).contiguous().view(sz_b, len_q, -1)
         q = self.dropout(self.fc(q))
+
+        if printt:
+            print("after fc layer of attention map:")
+            print(q)
+
+
+
         #q = self.scalar(q)
         q += residual
         q = self.layer_norm(q)
@@ -149,12 +167,17 @@ class PositionwiseFeedForward(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.scalar = ScalarMult()
 
-    def forward(self, x):
+    def forward(self, x, printt=False):
 
         residual = x
+        
 
         x = self.w_2(F.gelu(self.w_1(x))) #F.gelu
         #x = self.w_2(self.w_1(x)) #F.gelu
+        if printt:
+            #print("d_in , d_out"+ str(d_in) + ",  " + str(d_out))
+            print("x size", x.shape)
+            print(x)
         x = self.dropout(x)
         #x = self.scalar(x)
         x += residual
@@ -172,10 +195,11 @@ class EncoderLayer(nn.Module):
         self.slf_attn = MultiHeadAttention(n_head, d_model, d_k, d_v, dropout=dropout)
         self.pos_ffn = PositionwiseFeedForward(d_model, d_inner, dropout=dropout)
 
-    def forward(self, enc_input, slf_attn_mask=None):
+    def forward(self, enc_input, slf_attn_mask=None, printt=False):
         enc_output, enc_slf_attn = self.slf_attn(
-            enc_input, enc_input, enc_input, mask=slf_attn_mask)
-        enc_output = self.pos_ffn(enc_output)
+            enc_input, enc_input, enc_input, mask=slf_attn_mask, printt=printt)
+        enc_output = self.pos_ffn(enc_output, printt=printt)
+
         return enc_output, enc_slf_attn
 
 
@@ -235,9 +259,10 @@ class XFormerEncoder(nn.Module):
         self.layer_stack = nn.ModuleList([
             EncoderLayer(config.embed_dim, config.embed_dim*4, config.n_head, config.embed_dim//config.n_head, config.embed_dim//config.n_head, dropout=config.dropout)
             for _ in range(config.n_layers)])
+        print(config.embed_dim)
         self.layer_norm = nn.LayerNorm(config.embed_dim, eps=1e-6)
 
-    def forward(self,noisy_enc,src_mask,device,return_attns=True):
+    def forward(self,noisy_enc,src_mask,device,return_attns=True, printt=False):
         position_indices = torch.arange(1,self.block_len+1, device=device)
         pos_enc = self.pos_emb(position_indices)
         #enc_output = noisy_enc*pos_enc   #<---- addition instead of multiplication?
@@ -248,7 +273,7 @@ class XFormerEncoder(nn.Module):
         enc_output = self.layer_norm(enc_output)
         enc_slf_attn_list = []
         for enc_layer in self.layer_stack:
-            enc_output, enc_slf_attn = enc_layer(enc_output, slf_attn_mask=src_mask)
+            enc_output, enc_slf_attn = enc_layer(enc_output, slf_attn_mask=src_mask,printt=printt)
             enc_slf_attn_list += [enc_slf_attn] if return_attns else []
         if return_attns:
             return enc_output, enc_slf_attn_list
@@ -673,20 +698,22 @@ class XFormerEndToEndEncoder(nn.Module):
         MODEL = config.model
         self.Lin_Decoder = nn.Linear(config.embed_dim,1)
 
-    def forward(self,noisy_enc,mask,trg_seq,device):
+    def forward(self,noisy_enc,mask,trg_seq,device, printt=False):
         #noisy_enc : [b_size, block_len]
         output = torch.ones(self.embed_dim,device=device)*noisy_enc.unsqueeze(-1)
         #noisy_enc : [b_size,block_len,embed_dim]
-        output, slf_attn_list = self.Encoder(output,mask,device)
+        output, slf_attn_list = self.Encoder(output,mask,device,printt=printt)
         logits = self.Lin_Decoder(output)
+        if printt:
+            print("logits, final output", logits)
         decoded_msg_bits = logits.sign()
         output = torch.sigmoid(logits)
         output = torch.cat((1-output,output),-1)
         out_mask = mask
         return output,decoded_msg_bits,out_mask,logits,slf_attn_list # [b_size,block_len,2]
 
-    def decode(self,noisy_enc,info_positions,mask,device,trg_seq=None):
-        _,decoded_msg_bits,out_mask,_ , slf_attn_list= self.forward(noisy_enc,mask,trg_seq,device)
+    def decode(self,noisy_enc,info_positions,mask,device,trg_seq=None, printt=False):
+        _,decoded_msg_bits,out_mask,_ , slf_attn_list= self.forward(noisy_enc,mask,trg_seq,device,printt)
         #decoded_msg_bits = (decoded_msg_bits==1).long()
         return decoded_msg_bits,out_mask,slf_attn_list
 

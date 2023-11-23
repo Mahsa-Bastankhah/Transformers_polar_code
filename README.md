@@ -16,3 +16,5 @@ The required Python packages can be installed by using:
 ```
 pip install -r requirements.txt
 ```
+
+#SBATCH --partition=mig

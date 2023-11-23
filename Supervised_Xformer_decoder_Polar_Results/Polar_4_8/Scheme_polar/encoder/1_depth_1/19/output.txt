@@ -1,0 +1,1875 @@
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 256
+Validation SNR : -2.0
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 5000
+8
+Training Model for 4,8 anew
+Number of parameters : 939
+Did not find standard validation data
+Need to save for: 100
+[0/5000] At -2 dB, Loss: 1.5697902, Train BER (-2 dB) : 0.5009766, Valid BER: 0.5000000, Tgt BER: 0.5000000, Noiseless BER 0.4736328, Valid BLER : 0.9765625
+Time for one step is 0.0001 minutes
+[100/5000] At -2 dB, Loss: 0.9338740, Train BER (-2 dB) : 0.4160156, Valid BER: 0.3916016, Tgt BER: 0.3916016, Noiseless BER 0.3486328, Valid BLER : 0.8632812
+[200/5000] At -2 dB, Loss: 0.8965769, Train BER (-2 dB) : 0.3837891, Valid BER: 0.3828125, Tgt BER: 0.3828125, Noiseless BER 0.3046875, Valid BLER : 0.8593750
+[300/5000] At -2 dB, Loss: 0.9246870, Train BER (-2 dB) : 0.4023438, Valid BER: 0.3974609, Tgt BER: 0.3974609, Noiseless BER 0.3017578, Valid BLER : 0.8554688
+[400/5000] At -2 dB, Loss: 0.9030953, Train BER (-2 dB) : 0.4052734, Valid BER: 0.3828125, Tgt BER: 0.3828125, Noiseless BER 0.3369141, Valid BLER : 0.8671875
+[500/5000] At -2 dB, Loss: 0.9290770, Train BER (-2 dB) : 0.3857422, Valid BER: 0.3955078, Tgt BER: 0.3955078, Noiseless BER 0.2919922, Valid BLER : 0.8632812
+[600/5000] At -2 dB, Loss: 0.9039716, Train BER (-2 dB) : 0.3945312, Valid BER: 0.3544922, Tgt BER: 0.3544922, Noiseless BER 0.2382812, Valid BLER : 0.8476562
+[700/5000] At -2 dB, Loss: 0.8878414, Train BER (-2 dB) : 0.3710938, Valid BER: 0.3085938, Tgt BER: 0.3085938, Noiseless BER 0.1757812, Valid BLER : 0.7460938
+[800/5000] At -2 dB, Loss: 0.8857064, Train BER (-2 dB) : 0.3544922, Valid BER: 0.2753906, Tgt BER: 0.2753906, Noiseless BER 0.0195312, Valid BLER : 0.5898438
+[900/5000] At -2 dB, Loss: 0.9002567, Train BER (-2 dB) : 0.3632812, Valid BER: 0.2802734, Tgt BER: 0.2802734, Noiseless BER 0.0166016, Valid BLER : 0.6562500
+[1000/5000] At -2 dB, Loss: 0.9277326, Train BER (-2 dB) : 0.3681641, Valid BER: 0.3125000, Tgt BER: 0.3125000, Noiseless BER 0.0000000, Valid BLER : 0.6289062
+[1100/5000] At -2 dB, Loss: 0.8644577, Train BER (-2 dB) : 0.3417969, Valid BER: 0.3271484, Tgt BER: 0.3271484, Noiseless BER 0.0000000, Valid BLER : 0.6132812
+[1200/5000] At -2 dB, Loss: 0.8660716, Train BER (-2 dB) : 0.3583984, Valid BER: 0.3183594, Tgt BER: 0.3183594, Noiseless BER 0.0000000, Valid BLER : 0.5937500
+[1300/5000] At -2 dB, Loss: 0.8650747, Train BER (-2 dB) : 0.3398438, Valid BER: 0.2695312, Tgt BER: 0.2695312, Noiseless BER 0.0000000, Valid BLER : 0.5507812
+[1400/5000] At -2 dB, Loss: 0.8293186, Train BER (-2 dB) : 0.3164062, Valid BER: 0.3017578, Tgt BER: 0.3017578, Noiseless BER 0.0000000, Valid BLER : 0.6367188
+[1500/5000] At -2 dB, Loss: 0.8726072, Train BER (-2 dB) : 0.3359375, Valid BER: 0.3115234, Tgt BER: 0.3115234, Noiseless BER 0.0000000, Valid BLER : 0.6093750
+[1600/5000] At -2 dB, Loss: 0.9010776, Train BER (-2 dB) : 0.3613281, Valid BER: 0.3320312, Tgt BER: 0.3320312, Noiseless BER 0.0000000, Valid BLER : 0.6132812
+[1700/5000] At -2 dB, Loss: 0.8680398, Train BER (-2 dB) : 0.3437500, Valid BER: 0.2861328, Tgt BER: 0.2861328, Noiseless BER 0.0000000, Valid BLER : 0.6250000
+[1800/5000] At -2 dB, Loss: 0.8519770, Train BER (-2 dB) : 0.3232422, Valid BER: 0.2714844, Tgt BER: 0.2714844, Noiseless BER 0.0000000, Valid BLER : 0.5312500
+[1900/5000] At -2 dB, Loss: 0.8404375, Train BER (-2 dB) : 0.3076172, Valid BER: 0.2773438, Tgt BER: 0.2773438, Noiseless BER 0.0000000, Valid BLER : 0.6015625
+[2000/5000] At -2 dB, Loss: 0.8581870, Train BER (-2 dB) : 0.3242188, Valid BER: 0.2958984, Tgt BER: 0.2958984, Noiseless BER 0.0000000, Valid BLER : 0.6015625
+[2100/5000] At -2 dB, Loss: 0.8824087, Train BER (-2 dB) : 0.3388672, Valid BER: 0.3105469, Tgt BER: 0.3105469, Noiseless BER 0.0000000, Valid BLER : 0.6601562
+[2200/5000] At -2 dB, Loss: 0.8972852, Train BER (-2 dB) : 0.3515625, Valid BER: 0.2773438, Tgt BER: 0.2773438, Noiseless BER 0.0000000, Valid BLER : 0.5664062
+[2300/5000] At -2 dB, Loss: 0.8381085, Train BER (-2 dB) : 0.3164062, Valid BER: 0.2802734, Tgt BER: 0.2802734, Noiseless BER 0.0000000, Valid BLER : 0.6054688
+[2400/5000] At -2 dB, Loss: 0.8462086, Train BER (-2 dB) : 0.3261719, Valid BER: 0.2861328, Tgt BER: 0.2861328, Noiseless BER 0.0000000, Valid BLER : 0.5820312
+[2500/5000] At -2 dB, Loss: 0.8426743, Train BER (-2 dB) : 0.3164062, Valid BER: 0.2890625, Tgt BER: 0.2890625, Noiseless BER 0.0000000, Valid BLER : 0.5742188
+[2600/5000] At -2 dB, Loss: 0.8802074, Train BER (-2 dB) : 0.3388672, Valid BER: 0.3066406, Tgt BER: 0.3066406, Noiseless BER 0.0000000, Valid BLER : 0.6367188
+[2700/5000] At -2 dB, Loss: 0.8521766, Train BER (-2 dB) : 0.3173828, Valid BER: 0.3046875, Tgt BER: 0.3046875, Noiseless BER 0.0000000, Valid BLER : 0.6250000
+[2800/5000] At -2 dB, Loss: 0.8251913, Train BER (-2 dB) : 0.2968750, Valid BER: 0.2626953, Tgt BER: 0.2626953, Noiseless BER 0.0000000, Valid BLER : 0.5820312
+[2900/5000] At -2 dB, Loss: 0.8322608, Train BER (-2 dB) : 0.3066406, Valid BER: 0.2968750, Tgt BER: 0.2968750, Noiseless BER 0.0000000, Valid BLER : 0.5937500
+[3000/5000] At -2 dB, Loss: 0.8528587, Train BER (-2 dB) : 0.3281250, Valid BER: 0.2753906, Tgt BER: 0.2753906, Noiseless BER 0.0000000, Valid BLER : 0.5625000
+[3100/5000] At -2 dB, Loss: 0.8403674, Train BER (-2 dB) : 0.3212891, Valid BER: 0.2861328, Tgt BER: 0.2861328, Noiseless BER 0.0000000, Valid BLER : 0.5820312
+[3200/5000] At -2 dB, Loss: 0.8402997, Train BER (-2 dB) : 0.3281250, Valid BER: 0.2646484, Tgt BER: 0.2646484, Noiseless BER 0.0000000, Valid BLER : 0.5703125
+[3300/5000] At -2 dB, Loss: 0.8706871, Train BER (-2 dB) : 0.3408203, Valid BER: 0.3281250, Tgt BER: 0.3281250, Noiseless BER 0.0000000, Valid BLER : 0.6367188
+[3400/5000] At -2 dB, Loss: 0.8582321, Train BER (-2 dB) : 0.3330078, Valid BER: 0.2822266, Tgt BER: 0.2822266, Noiseless BER 0.0000000, Valid BLER : 0.5625000
+[3500/5000] At -2 dB, Loss: 0.8393426, Train BER (-2 dB) : 0.3281250, Valid BER: 0.3183594, Tgt BER: 0.3183594, Noiseless BER 0.0000000, Valid BLER : 0.6093750
+[3600/5000] At -2 dB, Loss: 0.8179843, Train BER (-2 dB) : 0.3144531, Valid BER: 0.2763672, Tgt BER: 0.2763672, Noiseless BER 0.0000000, Valid BLER : 0.6132812
+[3700/5000] At -2 dB, Loss: 0.7824394, Train BER (-2 dB) : 0.2861328, Valid BER: 0.3144531, Tgt BER: 0.3144531, Noiseless BER 0.0000000, Valid BLER : 0.6054688
+[3800/5000] At -2 dB, Loss: 0.8508568, Train BER (-2 dB) : 0.3173828, Valid BER: 0.2919922, Tgt BER: 0.2919922, Noiseless BER 0.0000000, Valid BLER : 0.6171875
+[3900/5000] At -2 dB, Loss: 0.8464404, Train BER (-2 dB) : 0.3164062, Valid BER: 0.2832031, Tgt BER: 0.2832031, Noiseless BER 0.0000000, Valid BLER : 0.5820312
+[4000/5000] At -2 dB, Loss: 0.8670042, Train BER (-2 dB) : 0.3447266, Valid BER: 0.3222656, Tgt BER: 0.3222656, Noiseless BER 0.0000000, Valid BLER : 0.7109375
+[4100/5000] At -2 dB, Loss: 0.8538175, Train BER (-2 dB) : 0.3525391, Valid BER: 0.2656250, Tgt BER: 0.2656250, Noiseless BER 0.0000000, Valid BLER : 0.5859375
+[4200/5000] At -2 dB, Loss: 0.8218173, Train BER (-2 dB) : 0.3095703, Valid BER: 0.3046875, Tgt BER: 0.3046875, Noiseless BER 0.0000000, Valid BLER : 0.6445312
+[4300/5000] At -2 dB, Loss: 0.8239000, Train BER (-2 dB) : 0.3154297, Valid BER: 0.2832031, Tgt BER: 0.2832031, Noiseless BER 0.0000000, Valid BLER : 0.6250000
+[4400/5000] At -2 dB, Loss: 0.8623904, Train BER (-2 dB) : 0.3349609, Valid BER: 0.2929688, Tgt BER: 0.2929688, Noiseless BER 0.0000000, Valid BLER : 0.6601562
+[4500/5000] At -2 dB, Loss: 0.8503990, Train BER (-2 dB) : 0.3203125, Valid BER: 0.2500000, Tgt BER: 0.2500000, Noiseless BER 0.0000000, Valid BLER : 0.5546875
+[4600/5000] At -2 dB, Loss: 0.7942585, Train BER (-2 dB) : 0.3027344, Valid BER: 0.3085938, Tgt BER: 0.3085938, Noiseless BER 0.0000000, Valid BLER : 0.6210938
+[4700/5000] At -2 dB, Loss: 0.8852257, Train BER (-2 dB) : 0.3544922, Valid BER: 0.3056641, Tgt BER: 0.3056641, Noiseless BER 0.0000000, Valid BLER : 0.6367188
+[4800/5000] At -2 dB, Loss: 0.8135625, Train BER (-2 dB) : 0.2890625, Valid BER: 0.3017578, Tgt BER: 0.3017578, Noiseless BER 0.0000000, Valid BLER : 0.5937500
+[4900/5000] At -2 dB, Loss: 0.8305548, Train BER (-2 dB) : 0.3203125, Valid BER: 0.2851562, Tgt BER: 0.2851562, Noiseless BER 0.0000000, Valid BLER : 0.5781250
+=========  valid_bitwise_bers ========= 4
+=========  valid_bitwise_bers_no_noise ========= 4
+=========  valid_bitwise_bers all bits ========= 8
+=========  valid_bitwise_bers_no_noise all bits ========= 8
+Complete
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 100
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.543449991941452, 0.5374500036239623, 0.5148750007152557, 0.5003249883651734, 0.49999999999999994, 0.49999999999999994, 0.49999999999999994]
+BERs of SC decoding: [0.42532499730587003, 0.23797499984502793, 0.013200000021606683, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4250749975442887, 0.2353999987244606, 0.01105000004172325, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4250749975442887, 0.2353999987244606, 0.01105000004172325, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7686999999999999, 0.4251, 0.0196, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4190250009298324, 0.2318249985575676, 0.011024999991059303, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7893, 0.4356, 0.019700000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9863, 0.9897, 0.9987, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 6.006430387496948 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 200
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5745750129222871, 0.5816250085830689, 0.5863499999046325, 0.5842249929904937, 0.5841000020503998, 0.5841000020503998, 0.5841000020503998]
+BERs of SC decoding: [0.41960000097751615, 0.24182499945163724, 0.010399999981746077, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41712500154972076, 0.2366000011563301, 0.008774999994784594, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41712500154972076, 0.2366000011563301, 0.008774999994784594, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7664000000000001, 0.4318, 0.016200000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4090000033378601, 0.23402499854564665, 0.008799999952316284, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7901, 0.4403000000000001, 0.016300000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9959, 0.9984, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 5.999748706817627 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 300
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5741499960422515, 0.5809749960899353, 0.580474990606308, 0.5848249852657318, 0.5848249971866607, 0.5848249971866607, 0.5848249971866607]
+BERs of SC decoding: [0.4212999999523163, 0.24022499918937684, 0.011200000066310166, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4170749992132187, 0.23542499989271165, 0.009125000052154062, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4170749992132187, 0.23542499989271165, 0.009125000052154062, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7650999999999999, 0.42269999999999996, 0.017, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41082499921321874, 0.23309999853372576, 0.009100000048056243, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7888000000000001, 0.43290000000000006, 0.017, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9945000000000002, 0.9973000000000001, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 6.07498025894165 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 400
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5590749979019165, 0.5597500026226043, 0.5291000008583069, 0.49864999949932093, 0.4983750015497208, 0.4983750015497208, 0.4983750015497208]
+BERs of SC decoding: [0.4145999997854233, 0.24087500274181367, 0.009899999946355818, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4166749984025955, 0.2363750025629997, 0.007849999982863665, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4166749984025955, 0.2363750025629997, 0.007849999982863665, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7611000000000001, 0.42760000000000004, 0.014600000000000002, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4102999985218048, 0.23332499861717224, 0.007824999978765845, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7854000000000001, 0.4374, 0.014699999999999998, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9878, 0.9905, 0.9983, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 6.009394884109497 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 500
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5813750028610228, 0.5866999924182892, 0.58960000872612, 0.581849992275238, 0.5818999946117401, 0.5818999946117401, 0.5818999946117401]
+BERs of SC decoding: [0.4225500047206879, 0.2378500014543533, 0.010475000087171794, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42082499861717226, 0.23314999788999557, 0.009274999983608721, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42082499861717226, 0.23314999788999557, 0.009274999983608721, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7655000000000001, 0.42579999999999996, 0.017499999999999998, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41647500395774845, 0.2308249995112419, 0.00925000002607703, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7902000000000001, 0.43820000000000003, 0.0178, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9959, 0.999, 0.9998999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 6.034795522689819 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 600
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5571749985218049, 0.5457499980926513, 0.5192250072956085, 0.5000750035047531, 0.5, 0.5, 0.5]
+BERs of SC decoding: [0.4216999977827072, 0.23912499994039535, 0.012124999938532709, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42139999866485595, 0.23477500081062316, 0.010575000103563072, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42139999866485595, 0.23477500081062316, 0.010575000103563072, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7664, 0.4289, 0.018099999999999998, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4176999986171723, 0.23285000175237658, 0.010575000010430812, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7857000000000002, 0.43909999999999993, 0.0182, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9736999999999999, 0.9774, 0.9960000000000001, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999, 0.9999999999999999]
+Time taken = 6.064356803894043 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 700
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5210000038146974, 0.47837500274181366, 0.39217500388622284, 0.3366249978542328, 0.3349499970674515, 0.3349499970674515, 0.3349499970674515]
+BERs of SC decoding: [0.41560000479221343, 0.24064999818801883, 0.011474999878555537, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4157749950885773, 0.23782500177621843, 0.011024999991059305, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4157749950885773, 0.23782500177621843, 0.011024999991059305, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7604, 0.4258, 0.020200000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4103500038385391, 0.23509999960660938, 0.010950000025331974, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7819, 0.4376, 0.0204, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9072, 0.8538000000000001, 0.7554, 0.6735, 0.6699, 0.6699, 0.6699]
+Time taken = 6.073406457901001 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 800
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5031500041484833, 0.4567250013351441, 0.3661249995231628, 0.3371500074863434, 0.3368499994277954, 0.3368499994277954, 0.3368499994277954]
+BERs of SC decoding: [0.4229750007390976, 0.24287499934434892, 0.01057500010356307, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4219500005245209, 0.23612499833106995, 0.010425000032410025, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4219500005245209, 0.23612499833106995, 0.010425000032410025, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7688, 0.42529999999999996, 0.017799999999999996, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41754999458789827, 0.2349500000476837, 0.010325000109151005, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7904, 0.4369, 0.0178, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9122, 0.8516999999999999, 0.7191, 0.6745000000000001, 0.6737, 0.6737, 0.6737]
+Time taken = 6.106050729751587 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 900
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5086000025272369, 0.455375000834465, 0.37192500531673434, 0.33280000388622283, 0.33225000202655797, 0.33225000202655797, 0.33225000202655797]
+BERs of SC decoding: [0.41989999711513515, 0.23742499947547913, 0.010999999986961485, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41792500019073486, 0.23417499810457226, 0.01027499996125698, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41792500019073486, 0.23417499810457226, 0.01027499996125698, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7674999999999998, 0.4251000000000001, 0.0184, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41555000245571133, 0.23069999963045118, 0.010350000113248825, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7917000000000001, 0.4354, 0.018600000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9117000000000002, 0.8479, 0.7283999999999999, 0.6653000000000001, 0.6645, 0.6645, 0.6645]
+Time taken = 6.012704849243164 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1000
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.48464999794960023, 0.42402499616146083, 0.3076250016689301, 0.24807500392198562, 0.2470000013709068, 0.2470000013709068, 0.2470000013709068]
+BERs of SC decoding: [0.42005000114440916, 0.2413750022649765, 0.010924999928101899, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41682499945163737, 0.23667500168085098, 0.01007499983534217, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41682499945163737, 0.23667500168085098, 0.01007499983534217, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7618999999999999, 0.42489999999999994, 0.019000000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41382499933242795, 0.23337499797344205, 0.009974999818950891, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7883000000000001, 0.43370000000000003, 0.019100000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9094000000000001, 0.8533, 0.7417, 0.6614000000000001, 0.6601999999999999, 0.6601999999999999, 0.6601999999999999]
+Time taken = 6.104254484176636 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1100
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5023250043392182, 0.43937499821186066, 0.3170999974012375, 0.252224999666214, 0.2511250004172325, 0.2511250004172325, 0.2511250004172325]
+BERs of SC decoding: [0.4244500041007995, 0.24255000203847882, 0.011300000082701444, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4254500031471252, 0.23655000030994414, 0.010724999941885471, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4254500031471252, 0.23655000030994414, 0.010724999941885471, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7689999999999999, 0.42810000000000004, 0.0182, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4186750024557114, 0.23399999886751172, 0.010600000061094761, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7923000000000001, 0.4413999999999999, 0.0183, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9196, 0.8618999999999999, 0.7415, 0.6677, 0.6666, 0.6666, 0.6666]
+Time taken = 6.1272947788238525 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1200
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.490924996137619, 0.43804999887943263, 0.3162000030279159, 0.24962500333786006, 0.24837500154972075, 0.24837500154972075, 0.24837500154972075]
+BERs of SC decoding: [0.42247500121593473, 0.24437499791383743, 0.012500000186264515, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42237499952316276, 0.23897500038146974, 0.010174999898299574, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42237499952316276, 0.23897500038146974, 0.010174999898299574, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7705, 0.43220000000000003, 0.018000000000000002, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4144499987363816, 0.23647500127553936, 0.010174999898299574, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7908000000000002, 0.4427000000000001, 0.0181, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9172000000000002, 0.8556, 0.7426999999999999, 0.6624000000000001, 0.6616000000000002, 0.6616000000000002, 0.6616000000000002]
+Time taken = 6.058958053588867 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1300
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.48792500495910646, 0.42759999930858617, 0.31575000286102295, 0.250075002014637, 0.24940000176429747, 0.24940000176429747, 0.24940000176429747]
+BERs of SC decoding: [0.42190000116825105, 0.2433249965310097, 0.012375000026077032, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4207499980926514, 0.23657499849796296, 0.01045000022277236, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4207499980926514, 0.23657499849796296, 0.01045000022277236, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7701, 0.42680000000000007, 0.0186, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4177749991416931, 0.23487499952316285, 0.010375000070780517, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7903, 0.43890000000000007, 0.0187, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9128000000000002, 0.8458, 0.736, 0.6646, 0.6635, 0.6635, 0.6635]
+Time taken = 6.013329267501831 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1400
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49449999928474425, 0.44569999575614927, 0.32562499940395356, 0.2545000001788139, 0.2535249993205071, 0.2535249993205071, 0.2535249993205071]
+BERs of SC decoding: [0.4248749971389771, 0.24622499942779544, 0.010925000021234156, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42182500064373013, 0.24222500026226043, 0.009250000119209291, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42182500064373013, 0.24222500026226043, 0.009250000119209291, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7670999999999999, 0.43019999999999997, 0.017, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4139750033617019, 0.23877499848604203, 0.009200000017881394, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7867, 0.44120000000000004, 0.017, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9169999999999999, 0.8644999999999999, 0.7462, 0.6731999999999999, 0.6721, 0.6721, 0.6721]
+Time taken = 6.045721530914307 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1500
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49259999394416815, 0.43842499852180483, 0.31412499248981474, 0.2505249962210655, 0.2498249992728233, 0.2498249992728233, 0.2498249992728233]
+BERs of SC decoding: [0.42174999415874476, 0.24505000263452528, 0.012500000186264515, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4192749977111817, 0.24232499897480012, 0.010749999992549419, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4192749977111817, 0.24232499897480012, 0.010749999992549419, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7646000000000001, 0.43470000000000003, 0.0188, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41527500450611116, 0.2395499989390373, 0.010800000000745059, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7889000000000002, 0.4459, 0.0191, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9257000000000001, 0.867, 0.7444, 0.6661000000000001, 0.6655, 0.6655, 0.6655]
+Time taken = 6.098489284515381 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1600
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4907250046730041, 0.43747500181198123, 0.31637499630451205, 0.2510999992489815, 0.2501500010490418, 0.2501500010490418, 0.2501500010490418]
+BERs of SC decoding: [0.41602499783039093, 0.23844999969005584, 0.00947499992325902, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4165750026702881, 0.23317500054836274, 0.007500000111758709, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4165750026702881, 0.23317500054836274, 0.007500000111758709, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7615999999999999, 0.4225, 0.0146, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41087500154972073, 0.2305500000715256, 0.007425000052899122, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7837, 0.4336, 0.014600000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9195, 0.8658, 0.7456000000000002, 0.6645, 0.6628999999999999, 0.6628999999999999, 0.6628999999999999]
+Time taken = 6.129664659500122 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1700
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4850500017404556, 0.4370000034570694, 0.31867499649524683, 0.25064999908208846, 0.25007500201463695, 0.25007500201463695, 0.25007500201463695]
+BERs of SC decoding: [0.4175749987363815, 0.23922500163316726, 0.010974999982863665, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4154750019311905, 0.23474999964237211, 0.00937499995343387, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4154750019311905, 0.23474999964237211, 0.00937499995343387, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7604, 0.42179999999999995, 0.0177, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4101250022649765, 0.2327500000596046, 0.009324999945238232, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7831, 0.4346, 0.0179, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9177000000000001, 0.8604, 0.745, 0.6656000000000001, 0.6648000000000001, 0.6648000000000001, 0.6648000000000001]
+Time taken = 6.1263041496276855 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1800
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49762500524520875, 0.4383499979972839, 0.3220999985933304, 0.25164999812841415, 0.2504749983549118, 0.2504749983549118, 0.2504749983549118]
+BERs of SC decoding: [0.4169999986886978, 0.24432499706745145, 0.012750000134110453, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4170999974012375, 0.23972499966621397, 0.010499999998137355, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4170999974012375, 0.23972499966621397, 0.010499999998137355, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7568999999999999, 0.4317, 0.018299999999999997, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4119749993085861, 0.23707499951124192, 0.010525000002235172, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7819, 0.44289999999999996, 0.0186, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9211, 0.865, 0.7459, 0.6683, 0.6672, 0.6672, 0.6672]
+Time taken = 6.018758535385132 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 1900
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4906750023365021, 0.4389250040054321, 0.31872500479221344, 0.25152500122785565, 0.2504749968647957, 0.2504749968647957, 0.2504749968647957]
+BERs of SC decoding: [0.4235500037670135, 0.24252500087022782, 0.01057500010356307, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4201500028371811, 0.23760000169277196, 0.008300000010058284, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4201500028371811, 0.23760000169277196, 0.008300000010058284, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7638, 0.4335, 0.0153, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41500000059604647, 0.2354500040411949, 0.008400000026449563, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7881, 0.4451, 0.015499999999999998, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9238000000000001, 0.8719, 0.7488999999999999, 0.6704, 0.6689, 0.6689, 0.6689]
+Time taken = 6.068033933639526 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2000
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49792499840259546, 0.43959999978542325, 0.321875, 0.2551499977707863, 0.254374997317791, 0.254374997317791, 0.254374997317791]
+BERs of SC decoding: [0.418925005197525, 0.2415499985218048, 0.012075000163167714, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42002500295639034, 0.23550000041723254, 0.010625000204890964, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42002500295639034, 0.23550000041723254, 0.010625000204890964, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7631, 0.4235, 0.02, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41444999873638155, 0.2328249990940094, 0.01052500018849969, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7860999999999999, 0.4356, 0.02, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9215, 0.8663999999999998, 0.7573000000000001, 0.6828, 0.6817, 0.6817, 0.6817]
+Time taken = 6.033002138137817 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2100
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4955250054597855, 0.4387749969959259, 0.3180500000715256, 0.25332499891519544, 0.25242500156164166, 0.25242500156164166, 0.25242500156164166]
+BERs of SC decoding: [0.42392499744892115, 0.23822499960660928, 0.01105000013485551, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4234499961137772, 0.23507499843835833, 0.008825000096112489, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4234499961137772, 0.23507499843835833, 0.008825000096112489, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7693, 0.4227, 0.016, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41852499842643737, 0.23149999976158142, 0.008800000138580798, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7916000000000001, 0.4326, 0.0161, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9187000000000001, 0.8619, 0.7444000000000001, 0.6712000000000001, 0.6705000000000001, 0.6705000000000001, 0.6705000000000001]
+Time taken = 6.177156925201416 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2200
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4850499957799912, 0.43632499575614925, 0.31884999573230743, 0.25187499821186066, 0.2511500000953674, 0.2511500000953674, 0.2511500000953674]
+BERs of SC decoding: [0.4178250014781952, 0.241899998486042, 0.011949999909847974, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41667499840259553, 0.23742500096559524, 0.009800000069662928, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41667499840259553, 0.23742500096559524, 0.009800000069662928, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7611000000000001, 0.43170000000000003, 0.0177, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41110000014305115, 0.2348499998450279, 0.009825000166893005, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7859999999999999, 0.44250000000000006, 0.0178, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9124000000000001, 0.8602, 0.743, 0.6668999999999999, 0.6654, 0.6654, 0.6654]
+Time taken = 6.064471244812012 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2300
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.48819999992847446, 0.4437000036239624, 0.3190500020980835, 0.2529500007629395, 0.2522499978542328, 0.2522499978542328, 0.2522499978542328]
+BERs of SC decoding: [0.41952500045299534, 0.24077499806880953, 0.011875000083819032, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4159499943256378, 0.23882500082254407, 0.009274999937042594, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4159499943256378, 0.23882500082254407, 0.009274999937042594, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7612, 0.4321, 0.016300000000000002, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41134999990463256, 0.23512499928474426, 0.00930000003427267, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7877000000000001, 0.4426, 0.0167, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9184, 0.8711, 0.7481, 0.6704000000000001, 0.6698, 0.6698, 0.6698]
+Time taken = 6.129619836807251 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2400
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4915000021457673, 0.4306749999523163, 0.3163499981164932, 0.25150000005960466, 0.25062500089406964, 0.25062500089406964, 0.25062500089406964]
+BERs of SC decoding: [0.4231000036001205, 0.23882499933242798, 0.010949999932199717, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4224750012159348, 0.23489999920129778, 0.00877500008791685, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4224750012159348, 0.23489999920129778, 0.00877500008791685, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7715, 0.4262, 0.0161, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4159000009298325, 0.23142499923706053, 0.008824999909847973, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7904, 0.43579999999999997, 0.016399999999999998, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.922, 0.8602, 0.747, 0.6694, 0.6684, 0.6684, 0.6684]
+Time taken = 6.061257839202881 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2500
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4990249991416931, 0.4439500033855438, 0.31964999437332153, 0.25045000165700915, 0.2493750020861626, 0.2493750020861626, 0.2493750020861626]
+BERs of SC decoding: [0.42350000143051153, 0.23445000052452086, 0.009600000083446502, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4224500000476837, 0.22999999821186068, 0.008775000041350721, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4224500000476837, 0.22999999821186068, 0.008775000041350721, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7717, 0.41559999999999997, 0.015600000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41837500333786015, 0.22772500067949294, 0.008800000092014669, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7948999999999999, 0.4269, 0.0159, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9213000000000002, 0.8624, 0.7477000000000001, 0.6692, 0.6680000000000001, 0.6680000000000001, 0.6680000000000001]
+Time taken = 6.015324115753174 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2600
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49385000169277193, 0.44177499711513524, 0.3195249974727631, 0.2516999989748001, 0.2506000027060509, 0.2506000027060509, 0.2506000027060509]
+BERs of SC decoding: [0.4192499995231629, 0.23847499936819075, 0.010925000254064798, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4191249996423721, 0.23492500185966492, 0.008700000075623392, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4191249996423721, 0.23492500185966492, 0.008700000075623392, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7601, 0.42610000000000003, 0.015300000000000001, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4110999971628189, 0.23157500326633454, 0.00877500008791685, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7841, 0.4365, 0.015500000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9215, 0.8616, 0.7460999999999999, 0.671, 0.6698, 0.6698, 0.6698]
+Time taken = 6.083914756774902 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2700
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49344999492168423, 0.43469999730587006, 0.3141249984502792, 0.2513250008225441, 0.2506249964237213, 0.2506249964237213, 0.2506249964237213]
+BERs of SC decoding: [0.4226500004529952, 0.23957500010728836, 0.01120000001974404, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4211749970912933, 0.2341500014066696, 0.009925000090152025, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4211749970912933, 0.2341500014066696, 0.009925000090152025, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7680999999999999, 0.42580000000000007, 0.0185, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41627500355243685, 0.23154999762773515, 0.009749999968335032, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7911, 0.4357, 0.0186, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9142000000000001, 0.8464999999999999, 0.7284, 0.6671, 0.6662000000000001, 0.6662000000000001, 0.6662000000000001]
+Time taken = 6.024826526641846 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2800
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4916500002145768, 0.43297500312328335, 0.32272499799728394, 0.25137499868869784, 0.25052500218152995, 0.25052500218152995, 0.25052500218152995]
+BERs of SC decoding: [0.4258500039577484, 0.2360250011086464, 0.010974999982863665, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42637499570846554, 0.2329249992966652, 0.009474999969825149, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42637499570846554, 0.2329249992966652, 0.009474999969825149, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7808000000000002, 0.42550000000000004, 0.0166, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.42360000014305116, 0.23012499809265138, 0.009324999945238234, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.8048000000000001, 0.43749999999999994, 0.016800000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9184, 0.8569, 0.7441000000000001, 0.6709, 0.6698, 0.6698, 0.6698]
+Time taken = 6.03089165687561 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 2900
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4996499985456467, 0.43594999611377716, 0.32067500054836273, 0.25269999951124195, 0.2516500011086464, 0.2516500011086464, 0.2516500011086464]
+BERs of SC decoding: [0.4193500012159348, 0.23784999996423725, 0.011749999970197678, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41874999999999996, 0.23209999948740004, 0.010000000102445485, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41874999999999996, 0.23209999948740004, 0.010000000102445485, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7654, 0.4223, 0.017499999999999998, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41507499814033505, 0.22979999929666522, 0.009925000043585899, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7885, 0.4338, 0.0175, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9252, 0.866, 0.7457, 0.6708999999999999, 0.6696, 0.6696, 0.6696]
+Time taken = 6.021487474441528 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3000
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4951500028371811, 0.436899995803833, 0.3201500058174134, 0.2516000002622605, 0.2504749968647957, 0.2504749968647957, 0.2504749968647957]
+BERs of SC decoding: [0.42332499623298653, 0.2440750002861023, 0.011700000055134297, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4208499997854233, 0.23930000215768812, 0.009625000040978193, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4208499997854233, 0.23930000215768812, 0.009625000040978193, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7699, 0.42760000000000004, 0.017200000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41777499914169314, 0.23422499895095827, 0.00972500005736947, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7956, 0.43629999999999997, 0.0176, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9208000000000002, 0.8629000000000001, 0.7535999999999999, 0.6729, 0.6712, 0.6712, 0.6712]
+Time taken = 6.050681114196777 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3100
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4968250036239624, 0.438950002193451, 0.32007500529289246, 0.2502250030636787, 0.24962500035762786, 0.24962500035762786, 0.24962500035762786]
+BERs of SC decoding: [0.42667500078678133, 0.24067499935626985, 0.011799999978393316, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4255750000476837, 0.23699999898672103, 0.010325000109151005, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4255750000476837, 0.23699999898672103, 0.010325000109151005, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7751999999999999, 0.4305, 0.018000000000000002, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4203500002622604, 0.23324999809265137, 0.0102999999653548, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7951999999999999, 0.44150000000000006, 0.018300000000000004, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9167000000000001, 0.8654999999999999, 0.7474, 0.6689, 0.6681000000000001, 0.6681000000000001, 0.6681000000000001]
+Time taken = 6.0380542278289795 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3200
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49787500202655793, 0.4458000004291534, 0.3204750001430512, 0.24919999986886976, 0.24857500046491623, 0.24857500046491623, 0.24857500046491623]
+BERs of SC decoding: [0.42279999852180483, 0.24022500067949298, 0.010625000111758709, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4202750027179718, 0.2362999990582466, 0.008950000070035458, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4202750027179718, 0.2362999990582466, 0.008950000070035458, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7653, 0.42380000000000007, 0.0152, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4159500002861023, 0.23329999893903733, 0.008724999986588955, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7929, 0.43360000000000004, 0.0152, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9235, 0.8633, 0.7427999999999999, 0.6669, 0.6657000000000001, 0.6657000000000001, 0.6657000000000001]
+Time taken = 6.010753154754639 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3300
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.501525005698204, 0.43782500326633456, 0.31959999799728395, 0.24852499961853028, 0.24705000221729279, 0.24705000221729279, 0.24705000221729279]
+BERs of SC decoding: [0.4271999984979629, 0.23277499675750732, 0.009874999895691872, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4239499986171723, 0.22909999936819075, 0.00862500004004687, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4239499986171723, 0.22909999936819075, 0.00862500004004687, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.766, 0.41690000000000005, 0.0161, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4206500023603439, 0.22602500170469284, 0.008475000062026082, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7909999999999999, 0.4275, 0.015899999999999997, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9273, 0.8665, 0.7419, 0.6621, 0.6604999999999999, 0.6604999999999999, 0.6604999999999999]
+Time taken = 6.094263553619385 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3400
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49864999651908876, 0.43732500076293945, 0.3207749962806702, 0.25509999990463256, 0.2546250015497208, 0.2546250015497208, 0.2546250015497208]
+BERs of SC decoding: [0.42452499866485593, 0.23935000002384188, 0.01245000008493662, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42372499704360955, 0.2348499998450279, 0.010825000144541262, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42372499704360955, 0.2348499998450279, 0.010825000144541262, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7707999999999999, 0.4233, 0.019600000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.42025000154972086, 0.23190000057220458, 0.010824999958276748, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7966000000000001, 0.4346, 0.019700000000000002, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9210000000000002, 0.8667, 0.7489, 0.6754, 0.6740999999999999, 0.6740999999999999, 0.6740999999999999]
+Time taken = 6.141931772232056 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3500
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49267499744892124, 0.4390249967575073, 0.3158249944448471, 0.24902500212192535, 0.24812500476837157, 0.24812500476837157, 0.24812500476837157]
+BERs of SC decoding: [0.41947500109672553, 0.23722500056028362, 0.012225000187754631, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.418775001168251, 0.23250000327825543, 0.01097500007599592, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.418775001168251, 0.23250000327825543, 0.01097500007599592, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7662, 0.4224, 0.0199, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4126249939203263, 0.23007500022649766, 0.010900000017136334, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7882, 0.43460000000000004, 0.019799999999999998, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9172999999999999, 0.8626, 0.7425999999999999, 0.6644000000000001, 0.6633, 0.6633, 0.6633]
+Time taken = 5.992208003997803 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3600
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5011250048875808, 0.4415250033140183, 0.3209000021219254, 0.25109999924898146, 0.24974999874830242, 0.24974999874830242, 0.24974999874830242]
+BERs of SC decoding: [0.42552499771118163, 0.23725000023841858, 0.011349999997764827, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42432500422000885, 0.23400000333786009, 0.009950000047683715, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42432500422000885, 0.23400000333786009, 0.009950000047683715, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7697999999999999, 0.4216, 0.0188, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41875, 0.23142499923706053, 0.010049999924376607, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7927000000000001, 0.4322, 0.0193, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9217000000000001, 0.8648, 0.744, 0.6657000000000001, 0.6648000000000001, 0.6648000000000001, 0.6648000000000001]
+Time taken = 6.036766290664673 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3700
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.496824997663498, 0.43782500028610233, 0.31647500395774847, 0.2495250001549721, 0.24867500066757206, 0.24867500066757206, 0.24867500066757206]
+BERs of SC decoding: [0.4194499999284744, 0.2374000012874603, 0.009999999962747096, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4173750042915344, 0.23217500001192093, 0.008550000097602607, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4173750042915344, 0.23217500001192093, 0.008550000097602607, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7561, 0.4212, 0.0145, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41412499248981477, 0.23037499934434888, 0.008475000131875278, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7814000000000001, 0.43529999999999996, 0.0145, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9236, 0.8633, 0.744, 0.6640000000000001, 0.6627, 0.6627, 0.6627]
+Time taken = 6.0179643630981445 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3800
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49942499697208403, 0.4402750015258789, 0.3166749984025956, 0.24749999940395356, 0.24667499810457233, 0.24667499810457233, 0.24667499810457233]
+BERs of SC decoding: [0.42569999396800995, 0.24929999709129333, 0.013024999946355817, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42562500238418577, 0.24469999969005585, 0.011150000058114527, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42562500238418577, 0.24469999969005585, 0.011150000058114527, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7725000000000001, 0.4402, 0.019600000000000003, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4224000036716461, 0.24102499932050703, 0.011100000049918889, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7959, 0.4516, 0.0197, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9230999999999999, 0.8644000000000001, 0.7413, 0.6586000000000001, 0.6578, 0.6578, 0.6578]
+Time taken = 6.073923110961914 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 3900
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5037249863147736, 0.447000002861023, 0.3227000027894974, 0.24937499761581422, 0.24829999804496766, 0.24829999804496766, 0.24829999804496766]
+BERs of SC decoding: [0.42622500061988833, 0.241899998486042, 0.011275000032037496, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4257750004529954, 0.23922500163316726, 0.009900000039488079, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4257750004529954, 0.23922500163316726, 0.009900000039488079, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7664000000000001, 0.432, 0.0175, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4197750061750412, 0.2359499976038933, 0.00982500007376075, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7886000000000001, 0.4417, 0.0177, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9241999999999999, 0.8662000000000001, 0.7409000000000001, 0.6626000000000001, 0.6615, 0.6615, 0.6615]
+Time taken = 6.01944637298584 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4000
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5007500022649766, 0.44997499585151673, 0.325125002861023, 0.2504749983549118, 0.2496249988675117, 0.2496249988675117, 0.2496249988675117]
+BERs of SC decoding: [0.4226500004529952, 0.24072500169277194, 0.011074999999254941, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42077499926090245, 0.23719999939203265, 0.010099999932572245, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42077499926090245, 0.23719999939203265, 0.010099999932572245, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7696, 0.4261999999999999, 0.0176, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4163499981164932, 0.23445000052452086, 0.010025000106543303, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7962, 0.43639999999999995, 0.0179, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9246, 0.8719999999999999, 0.752, 0.6695000000000001, 0.6686000000000002, 0.6686000000000002, 0.6686000000000002]
+Time taken = 6.011421203613281 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4100
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5113250017166138, 0.44765000045299524, 0.32872500121593473, 0.253049997985363, 0.2522749990224838, 0.2522749990224838, 0.2522749990224838]
+BERs of SC decoding: [0.4309249997138977, 0.2371249988675117, 0.011574999988079069, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.43130000531673424, 0.23352499902248383, 0.010525000048801303, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.43130000531673424, 0.23352499902248383, 0.010525000048801303, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7729, 0.4266000000000001, 0.0186, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4262000024318696, 0.2309000000357628, 0.010449999989941717, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7952, 0.4375, 0.0185, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9233000000000001, 0.8680000000000001, 0.75, 0.6721, 0.671, 0.671, 0.671]
+Time taken = 6.152469158172607 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4200
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5008500039577485, 0.4385000020265579, 0.31559999883174894, 0.24905000180006026, 0.2483250007033348, 0.2483250007033348, 0.2483250007033348]
+BERs of SC decoding: [0.4291249990463257, 0.23507499992847442, 0.010399999981746077, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4275000005960464, 0.2292249992489815, 0.008675000071525574, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4275000005960464, 0.2292249992489815, 0.008675000071525574, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7672000000000001, 0.41509999999999997, 0.016399999999999998, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.42100000083446504, 0.22657500058412555, 0.008750000037252903, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7947000000000001, 0.4265999999999999, 0.0167, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9209, 0.8631, 0.7425999999999999, 0.668, 0.6671, 0.6671, 0.6671]
+Time taken = 6.084530353546143 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4300
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49639999866485596, 0.4382250040769577, 0.3170250028371811, 0.2498750016093254, 0.24932499974966052, 0.24932499974966052, 0.24932499974966052]
+BERs of SC decoding: [0.41994999945163736, 0.23732500076293944, 0.012350000021979212, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.41910000145435333, 0.2342749997973442, 0.010474999994039535, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.41910000145435333, 0.2342749997973442, 0.010474999994039535, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7634000000000001, 0.42669999999999997, 0.018099999999999998, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41744999885559075, 0.231700000166893, 0.010424999985843899, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7861000000000001, 0.4358, 0.018199999999999997, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9135000000000001, 0.8596999999999999, 0.7429000000000001, 0.6644, 0.6635000000000001, 0.6635000000000001, 0.6635000000000001]
+Time taken = 6.025080680847168 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4400
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4955499976873398, 0.4425500005483628, 0.3343499958515167, 0.2521999940276146, 0.25067500174045565, 0.25067500174045565, 0.25067500174045565]
+BERs of SC decoding: [0.4200500011444091, 0.2390749990940094, 0.010150000033900142, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4200500011444092, 0.2349500000476837, 0.008649999974295497, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4200500011444092, 0.2349500000476837, 0.008649999974295497, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7637, 0.42299999999999993, 0.016, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41427500247955323, 0.23154999911785126, 0.008825000049546361, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7901000000000001, 0.43209999999999993, 0.0166, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9242000000000001, 0.8723000000000001, 0.7467000000000001, 0.6653, 0.6642, 0.6642, 0.6642]
+Time taken = 6.209860801696777 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4500
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1., -1., -1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49805000424385065, 0.45134999454021457, 0.32889999449253077, 0.2512999951839447, 0.2502250000834465, 0.2502250000834465, 0.2502250000834465]
+BERs of SC decoding: [0.4184999972581864, 0.2395749986171722, 0.012924999836832285, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4149749994277955, 0.23484999984502794, 0.012224999908357856, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4149749994277955, 0.23484999984502794, 0.012224999908357856, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7581, 0.42319999999999997, 0.0212, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4099000006914139, 0.23127500116825106, 0.012024999875575303, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7808, 0.4336, 0.0213, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9197000000000001, 0.8663, 0.7456, 0.6697, 0.6685000000000001, 0.6685000000000001, 0.6685000000000001]
+Time taken = 6.059384822845459 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4600
+test msg bit 2 tensor([[ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49587500691413877, 0.4380499958992004, 0.31744999885559083, 0.2520249977707863, 0.2511750042438507, 0.2511750042438507, 0.2511750042438507]
+BERs of SC decoding: [0.42102499902248386, 0.23939999639987944, 0.010400000074878336, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4195500016212463, 0.23587500154972074, 0.009199999971315265, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4195500016212463, 0.23587500154972074, 0.009199999971315265, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7664999999999998, 0.4246000000000001, 0.0176, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41557500064373015, 0.23279999941587448, 0.009100000001490116, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7909000000000002, 0.43749999999999994, 0.017600000000000005, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9207000000000002, 0.8687, 0.7449999999999999, 0.6707, 0.6693, 0.6693, 0.6693]
+Time taken = 6.11361289024353 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4700
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1., -1., -1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.5005749970674516, 0.44560000002384187, 0.3199249982833863, 0.25009999722242354, 0.24905000180006023, 0.24905000180006023, 0.24905000180006023]
+BERs of SC decoding: [0.4254249989986419, 0.2421999961137772, 0.010325000062584876, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4250499993562698, 0.2376000016927719, 0.009000000054948033, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4250499993562698, 0.2376000016927719, 0.009000000054948033, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7678000000000001, 0.4283, 0.0165, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41794999539852146, 0.23500000089406964, 0.008925000065937638, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7886000000000001, 0.43889999999999996, 0.0164, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9192, 0.8632, 0.7406000000000001, 0.6678000000000001, 0.6672000000000001, 0.6672000000000001, 0.6672000000000001]
+Time taken = 6.066399812698364 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4800
+test msg bit 2 tensor([[-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.49977499842643747, 0.4477500051259995, 0.32092500329017637, 0.25362499952316286, 0.2524250000715256, 0.2524250000715256, 0.2524250000715256]
+BERs of SC decoding: [0.4168999999761581, 0.24564999788999556, 0.012325000017881392, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.415599998831749, 0.23960000127553938, 0.010275000054389239, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.415599998831749, 0.23960000127553938, 0.010275000054389239, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7598, 0.4285, 0.0185, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.41272499859333034, 0.2379999995231628, 0.010325000062584877, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7848, 0.44170000000000004, 0.018799999999999997, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9268999999999998, 0.8672, 0.7473000000000001, 0.6726, 0.6719, 0.6719, 0.6719]
+Time taken = 6.066983699798584 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 4900
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [-1., -1., -1., -1.],
+        [-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.495275005698204, 0.43917499780654906, 0.3209999978542328, 0.2528750002384186, 0.2524999976158142, 0.2524999976158142, 0.2524999976158142]
+BERs of SC decoding: [0.42630000114440925, 0.2417249977588654, 0.010574999870732425, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.4248499989509582, 0.23690000027418137, 0.009800000116229057, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.4248499989509582, 0.23690000027418137, 0.009800000116229057, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7696000000000001, 0.4262000000000001, 0.018500000000000006, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.42017500102519995, 0.23390000164508817, 0.00975000001490116, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7946000000000001, 0.4376, 0.018500000000000006, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9234000000000002, 0.8695999999999999, 0.7497, 0.6721, 0.6718000000000001, 0.6718000000000001, 0.6718000000000001]
+Time taken = 6.0808165073394775 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Info positions : [3 5 6 7]
+Target Info positions : [3 5 6 7]
+Frozen positions : [0 1 2 4]
+Code : polar 
+embed dim : 8 
+Rate Profile : polar
+Batch size : 128
+Validation SNR : None
+Number of heads : 1
+Number of layers: 1
+Positional encoding : static
+Layers : compelete
+Print frequency: 100
+Num of steps: 400000
+8
+TESTING :
+Model loaded at step 5000
+test msg bit 2 tensor([[-1., -1.,  1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        [ 1.,  1., -1.,  1.],
+        ...,
+        [ 1.,  1., -1.,  1.],
+        [-1., -1.,  1.,  1.],
+        [-1., -1.,  1.,  1.]])
+tensor([[0., 0., 0., 0.]], device='cuda:0')
+Test SNRs :  [-10.0, -3.333333333333333, 3.333333333333334, 10.0, 16.666666666666668, 23.333333333333336, 30.0]
+BERs of Xformer: [0.4965250074863434, 0.43517500162124634, 0.31697500348091123, 0.24862499982118608, 0.24827500134706498, 0.24827500134706498, 0.24827500134706498]
+BERs of SC decoding: [0.4229750007390976, 0.2413249999284744, 0.010725000128149987, 0.0, 0.0, 0.0, 0.0]
+BERs of SCL decoding: [0.42207500040531154, 0.2369499996304512, 0.009900000132620334, 0.0, 0.0, 0.0, 0.0]
+BERs of ML: [0.42207500040531154, 0.2369499996304512, 0.009900000132620334, 0.0, 0.0, 0.0, 0.0]
+BLERs of ML: [0.7677, 0.4307, 0.0183, 0.0, 0.0, 0.0, 0.0]
+BERs of bitML: [0.4178749948740006, 0.23377499878406524, 0.009799999836832286, 0.0, 0.0, 0.0, 0.0]
+BLERs of bitML: [0.7915000000000001, 0.4419, 0.0182, 0.0, 0.0, 0.0, 0.0]
+BLERs of Xformer: [0.9185, 0.8535999999999999, 0.7432000000000001, 0.6636, 0.6627, 0.6627, 0.6627]
+Time taken = 6.030233144760132 seconds
+tensor([[0., 0., 0., 0.]], device='cuda:0')

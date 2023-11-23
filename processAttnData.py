@@ -35,6 +35,7 @@ import numpy as np
 from collections import namedtuple
 import sys
 import csv
+img_freq = 10
 
 
 parser = argparse.ArgumentParser(description='Your script description here')
@@ -49,40 +50,39 @@ parser = argparse.ArgumentParser(description='Your script description here')
 
 
 
-def generate_attention_maps(N, K, snr, run, print_freq, n_head, n_layers, model, rate_profile, compositional,oe):
+def generate_attention_maps(N, K, snr, run, print_freq, n_head, n_layers, model, rate_profile, compositional,oe_train, oe_test, rng):
 
     results_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}'\
                                         .format(K, N, rate_profile,  model, n_head,n_layers)
 
     results_save_path = results_save_path + '/' + '{0}'.format(run)
     
-    if oe:
+    if oe_train:
         slf_attn_no_noise  = torch.load(results_save_path + "/attention_validation_no_noise_oe.pth")
         slf_attn = torch.load(results_save_path + "/attention_validation_oe.pth")
+    elif oe_test:
+        slf_attn_no_noise  = torch.load(results_save_path + "/attention_test_no_noise_oe.pth")
+        slf_attn = torch.load(results_save_path + "/attention_test_oe.pth")
     else:
         slf_attn_no_noise  = torch.load(results_save_path + "/attention_validation_no_noise.pth")
         slf_attn = torch.load(results_save_path + "/attention_validation.pth")
     
-
-
     
-    slf_attn_list = [[[[[0.0] * N for _ in range(N)] for _ in range(n_head)] for _ in range(n_layers)] for _ in range(len(slf_attn))]
-    slf_attn_list_no_noise = [[[[[0.0] * N for _ in range(N)] for _ in range(n_head)] for _ in range(n_layers)] for _ in range(len(slf_attn))]
+
+    if rng == None:
+        rng = len(slf_attn)
+    slf_attn_list = [[[[[0.0] * N for _ in range(N)] for _ in range(n_head)] for _ in range(n_layers)] for _ in range(rng)]
+    slf_attn_list_no_noise = [[[[[0.0] * N for _ in range(N)] for _ in range(n_head)] for _ in range(n_layers)] for _ in range(rng)]
 
 
     # convert the data to a list
-    for iter in range(len(slf_attn)):  
+    for iter in range(rng):  
         for layer in range(len(slf_attn[0])):
             for head in range(len(slf_attn[0][0])):
                 slf_attn_list[iter][layer][head] = slf_attn[iter][layer][head].cpu().tolist()
                 slf_attn_list_no_noise[iter][layer][head] = slf_attn_no_noise[iter][layer][head].cpu().tolist()
     
-    # print(len(slf_attn_list_no_noise)) # number of iterations
-    # print(len(slf_attn_list[0])) # num of layers
-    # print(len(slf_attn_list[0][0])) # num of heads
-    # print(len(slf_attn_list[0][0][0])) # N
-    # print(len(slf_attn_list[0][0][0][0])) # N
-    #print(slf_attn_list[0][0][0].type())
+
     
     if compositional:
        # multiply attention maps across layers to find the compositional map     
@@ -100,17 +100,45 @@ def generate_attention_maps(N, K, snr, run, print_freq, n_head, n_layers, model,
         # print(len(slf_attn_list[0][0][0])) # N
         # print(len(slf_attn_list[0][0][0][0])) # N
 
+    info_inds = [7, 9, 10, 11, 12, 13, 14, 15]
 
+    ## only keeping the info rows
+    slf_attn_list = [
+        [
+            [
+                [slf_attn_list[i][j][k][l][:] for l in info_inds]
+                for k in range(len(slf_attn_list[i][j]))
+            ]
+            for j in range(len(slf_attn_list[i]))
+        ]
+        for i in range(rng)
+    ]
+    
 
-
-
+    ## only keeping the info rows
+    slf_attn_list_no_noise = [
+        [
+            [
+                [slf_attn_list_no_noise[i][j][k][l][:] for l in info_inds]
+                for k in range(len(slf_attn_list_no_noise[i][j]))
+            ]
+            for j in range(len(slf_attn_list_no_noise[i]))
+        ]
+        for i in range(rng)
+    ]
+    
+    print(rng) # number of iterations
+    print(len(slf_attn_list[0])) # num of layers
+    print(len(slf_attn_list[0][0])) # num of heads
+    print(len(slf_attn_list[0][0][0])) # N
+    print(len(slf_attn_list[0][0][0][0])) # N
 
     # Finding the appropriate range for drawing the maps
     global_max = -float('inf')
     global_min = float('inf')
 
     # Iterate over slf_attn_list_no_noise and slf_attn_list
-    for iter in range(len(slf_attn_list)):
+    for iter in range(rng):
         for layer in range(len(slf_attn_list_no_noise[0])):
             tensor1 = slf_attn_list_no_noise[iter][layer]
             tensor2 = slf_attn_list[iter][layer]
@@ -126,56 +154,76 @@ def generate_attention_maps(N, K, snr, run, print_freq, n_head, n_layers, model,
             global_min = min(global_min, local_min1, local_min2)
 
 
-    for iter in range(len(slf_attn_list_no_noise)):  
+    for iter in range(rng):  
         #print(iter)
         for layer in range(len(slf_attn_list_no_noise[0])):
             for head in range(len(slf_attn_list_no_noise[0][0])):
-                #tensor_on_cpu = slf_attn_list_no_noise[iter][layer][head].cpu()
-                plt.figure(figsize=(N, N))
-                plt.imshow(slf_attn_list_no_noise[iter][layer][head], cmap='viridis', interpolation='nearest', vmin=global_min, vmax = global_max)
-                plt.title('Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
-                plt.colorbar()
-                if compositional == False:
-                    folder_path = results_save_path + '/figures/Attention-' + str(oe)+ '/Noiseless/L' + str(layer+1) + 'H' + str(head+1)
-                else:
-                    folder_path = results_save_path + '/figures/AttentionCompos/Noiseless/H' + str(head+1)
-                if not os.path.exists(folder_path):
-                    # If it doesn't exist, create the folder
-                    os.makedirs(folder_path)
-        
-                plt.savefig(folder_path + '/Step_{0}.png'.format(iter * print_freq), format='png', bbox_inches='tight', pad_inches=0)
-                # tight margin
-                # pdf_pages = PdfPages(folder_path + '/Step_{0}.pdf'.format(iter * print_freq))
-                # pdf_pages.savefig(fig, bbox_inches='tight', pad_inches=0)
-                # pdf_pages.close()
+                if iter % img_freq == 0:
+                    #tensor_on_cpu = slf_attn_list_no_noise[iter][layer][head].cpu()
+                    plt.figure(figsize=(len(info_inds), N))
+                    plt.imshow(slf_attn_list_no_noise[iter][layer][head], cmap='viridis', interpolation='nearest', vmin=global_min, vmax = global_max)
+                    plt.title('Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                    plt.colorbar(shrink=0.2)
+                    if compositional == False and oe_train:
+                        plt.title('TrainData, Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention-train' + '/Noiseless/L' + str(layer+1) + 'H' + str(head+1)
+                    elif compositional == False and oe_test:
+                        plt.title('TestData, Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention-test' + '/Noiseless/L' + str(layer+1) + 'H' + str(head+1)
+                    elif compositional == False:
+                        plt.title('Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention' + '/Noiseless/L' + str(layer+1) + 'H' + str(head+1)
+                    else:
+                        plt.title('Noiseless-S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/AttentionCompos/Noiseless/H' + str(head+1)
+                    if not os.path.exists(folder_path):
+                        # If it doesn't exist, create the folder
+                        os.makedirs(folder_path)
+            
+                    plt.savefig(folder_path + '/Step_{0}.png'.format(iter * print_freq), format='png', bbox_inches='tight', pad_inches=0)
+                    # tight margin
+                    # pdf_pages = PdfPages(folder_path + '/Step_{0}.pdf'.format(iter * print_freq))
+                    # pdf_pages.savefig(fig, bbox_inches='tight', pad_inches=0)
+                    # pdf_pages.close()
 
-                plt.close()  # Close the figure
+                    plt.close()  # Close the figure
 
 
 
-    for iter in range(len(slf_attn_list)):  
+    for iter in range(rng):  
         #print(iter)
         for layer in range(len(slf_attn_list[0])):
             for head in range(len(slf_attn_list[0][0])):
-                #tensor_on_cpu = slf_attn_list[iter][layer][head].cpu()
-                plt.figure(figsize=(N,N))
-                plt.imshow(slf_attn_list[iter][layer][head], cmap='viridis', interpolation='nearest', vmin=global_min, vmax = global_max)
-                plt.title('Noisy-snr' + str(snr) + 'S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
-                plt.colorbar()
-                if compositional==False:
-                    folder_path = results_save_path + '/figures/Attention-' +  str(oe)+ '/Noisy-SNR'+ str(snr)+'/L' + str(layer+1) + 'H' + str(head+1)
-                else:
-                    folder_path = results_save_path + '/figures/AttentionCompos/Noisy-SNR'+ str(snr)+ '/H' + str(head+1)
-                if not os.path.exists(folder_path):
-                    # If it doesn't exist, create the folder
-                    os.makedirs(folder_path)
-        
-                plt.savefig(folder_path + '/Step_{0}.png'.format(iter * print_freq), format='png', bbox_inches='tight', pad_inches=0)
-                # pdf_pages = PdfPages(folder_path + '/Step_{0}.pdf'.format(iter * print_freq))
-                # pdf_pages.savefig(fig, bbox_inches='tight', pad_inches=0)
-                # pdf_pages.close()
+                if iter % img_freq == 0:
+                    #tensor_on_cpu = slf_attn_list[iter][layer][head].cpu()
+                    plt.figure(figsize=(len(info_inds),N))
+                    plt.imshow(slf_attn_list[iter][layer][head], cmap='viridis', interpolation='nearest', vmin=global_min, vmax = global_max)
+                    
+                    plt.colorbar(shrink=0.2)
 
-                plt.close()  # Close the figure
+                    if compositional == False and oe_train:
+                        plt.title('TrainData, Noisy-snr' + str(snr) + 'S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention-train' + '/Noisy-SNR'+ str(snr)+'/L' + str(layer+1) + 'H' + str(head+1)
+                    elif compositional == False and oe_test:
+                        plt.title('TestData, Noisy-snr' + str(snr) + 'S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention-test' + '/Noisy-SNR'+ str(snr)+'/L' + str(layer+1) + 'H' + str(head+1)
+                    elif compositional == False:
+                        plt.title('Noisy-snr' + str(snr) + 'S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/Attention' + '/Noisy-SNR'+ str(snr)+'/L' + str(layer+1) + 'H' + str(head+1)
+                    else:
+                        plt.title('Noisy-snr' + str(snr) + 'S' + str(iter * print_freq) + 'L' + str(layer+1) + 'H' + str(head+1), fontname='sans-serif')
+                        folder_path = results_save_path + '/figures/AttentionCompos/Noisy-SNR'+ str(snr)+'/H' + str(head+1)
+                    
+                    if not os.path.exists(folder_path):
+                        # If it doesn't exist, create the folder
+                        os.makedirs(folder_path)
+            
+                    plt.savefig(folder_path + '/Step_{0}.png'.format(iter * print_freq), format='png', bbox_inches='tight', pad_inches=0)
+                    # pdf_pages = PdfPages(folder_path + '/Step_{0}.pdf'.format(iter * print_freq))
+                    # pdf_pages.savefig(fig, bbox_inches='tight', pad_inches=0)
+                    # pdf_pages.close()
+
+                    plt.close()  # Close the figure
 
 
 
@@ -188,7 +236,8 @@ if __name__ == "__main__":
     #  attention tensor list = [n_layer * (batchsize * heads * N * N)] each () is a tensor
     # Define mandatory arguments
     parser.add_argument('--compos', action="store_true", help='do you want compositional attention map or normal ones?')
-    parser.add_argument('--oe', action="store_true", help='one example')
+    parser.add_argument('--oe_train', action="store_true", help='one example')
+    parser.add_argument('--oe_test', action="store_true", help='one example')
     parser.add_argument('N', type=int, help='Value for N')
     parser.add_argument('K', type=int, help='Value for K')
     parser.add_argument('snr', type=float, help='Value for snr')
@@ -197,6 +246,7 @@ if __name__ == "__main__":
 
 
     # Define optional arguments
+    parser.add_argument('--rng', type=int, default=None,help='printing range')
     parser.add_argument('--n_head', type=int, default=1,help='Value for n_head')
     parser.add_argument('--n_layers', type=int, default=6, help='Value for n_layers')
     parser.add_argument('--model', type=str, default='encoder', help='Value for model')
@@ -213,9 +263,9 @@ if __name__ == "__main__":
     model = args.model
     rate_profile = args.rate_profile
     compos = args.compos
-    oe = args.oe
 
-    generate_attention_maps(N,K,snr,run,print_freq,n_head,n_layers,model,rate_profile,compos,oe)
+
+    generate_attention_maps(N,K,snr,run,print_freq,n_head,n_layers,model,rate_profile,compos,args.oe_train, args.oe_test, int(args.rng/print_freq))
     
 
 
