@@ -33,84 +33,141 @@ from tqdm import tqdm
 from collections import namedtuple
 import sys
 import csv
+'''
 
-
-def code_table(args, polar, device, info_inds):
+def code_table(args, polar, device, info_inds, noisy = True):
     results_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}/{6}/'\
                                                .format(K, N, args.rate_profile,  args.model, args.n_head,args.n_layers, args.run)
-
-
 
     data_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
                                     .format(args.K, args.N, args.rate_profile,  args.model)
 
     training_data = np.load(data_save_path+"/trainData.npy")
     test_data =     np.load(data_save_path+"/testData.npy")
+
+    # Create a DataFrame to store the results
+    results_df_train = pd.DataFrame(columns=['Example', 'Original_Message', 'Decoded_Bits', 'Polar_code'])
+    results_df_test =  pd.DataFrame(columns=['Example', 'Original_Message', 'Decoded_Bits', 'Polar_code'])
+    
     checkpoint1 = torch.load(results_save_path+'/Models/model_{0}.pt'.format(args.model_iters), map_location=lambda storage, loc: storage)
     loaded_step = checkpoint1['step']
     xformer.load_state_dict(checkpoint1['xformer'])
     xformer.to(device)
     xformer.eval()
     print("Model loaded at step {}".format(loaded_step))
-    print("------- training data , messages that are decoded wrongly -------")
+    #print("------- training data , messages that are decoded wrongly -------")
     msg_bits = torch.tensor(training_data[:], dtype=torch.float32, device=device) 
     gt = torch.ones(len(training_data), args.N, device = device)
     gt[:, info_inds] = msg_bits
     polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
+    if noisy:
+        polar_code = polar.channel(polar_code, args.dec_train_snr)
     mask = torch.cat((torch.ones((len(training_data),args.N),device=device),torch.zeros((len(training_data),args.max_len-args.N),device=device)),1).long()
-    decoded_bits,out_mask,attn = xformer.decode(polar_code,polar.info_positions, mask,device)
+    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
     
     for idx in range(len(training_data)):
-        for l in range(len(attn)):
-            folder_path = results_save_path + '/figures/table-model{0}/L{1}'.format(args.model_iters, l+1)
-            if not os.path.exists(folder_path):
-                # If it doesn't exist, create the folder
-                os.makedirs(folder_path)
-            plt.figure(figsize=(len(info_inds),N))
-            plt.imshow(attn[l].cpu().detach().numpy()[idx][0][info_inds], cmap='viridis', interpolation='nearest', vmin=0, vmax = 1)
-            plt.colorbar(shrink=0.2)
-            plt.title("train" + str(idx) + "-iter-" + str(args.model_iters) + "-L" + str(l+1))
-            plt.yticks(range(len(info_inds)))
-            plt.xticks(range(N))
-            plt.savefig(folder_path + '/train{0}.png'.format(idx), format='png', bbox_inches='tight', pad_inches=0)
-            plt.close()  # Close the figure
+        if noisy:
+            results_df_train = results_df_train._append({'Example': idx,
+                                            'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
+                                            'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
+                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Corrupted_codeword': [round(x,5) for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Output' : [round(x,5) for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
+                                            ignore_index=True)
+        else: 
+            results_df_train = results_df_train._append({'Example': idx,
+                                            'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
+                                            'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
+                                            'Polar_code': [0 if bit == 1 else 1 for bit in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Output' : [x for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
+                                            ignore_index=True)
 
-        if not np.array_equal(msg_bits[idx, :].cpu().numpy(),  decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds]):
-            # Print the original message bits and decoded bits side by side
-            print("Example:", idx)
-            print("Original Message Bits: ", msg_bits[idx, :].cpu().numpy())
-            print("Decoded Bits:          ", decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds])
-            print("")
 
-    print("------- test data , messages that are decoded wrongly ------- ")
+
+
+    # Save the DataFrame to a CSV file
+    if noisy:
+        results_df_train.to_csv(results_save_path + 'code_tables/noisy/train_' + str(args.model_iters) + '.csv', index=False)
+    else:
+        results_df_train.to_csv(results_save_path + 'code_tables/train_' + str(args.model_iters) + '.csv', index=False)
+    
+    #print("------- test data , messages that are decoded wrongly ------- ")
     msg_bits = torch.tensor(test_data[:], dtype=torch.float32, device=device) 
     gt = torch.ones(len(test_data), args.N, device = device)
     gt[:, info_inds] = msg_bits
     polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
+    if noisy:
+        polar_code = polar.channel(polar_code, args.dec_train_snr)
     mask = torch.cat((torch.ones((len(test_data),args.N),device=device),torch.zeros((len(test_data),args.max_len-args.N),device=device)),1).long()
-    decoded_bits,out_mask,attn = xformer.decode(polar_code,polar.info_positions, mask,device)
+    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
+   
 
     for idx in range(len(test_data)):
-        for l in range(len(attn)):
-            folder_path = results_save_path + '/figures/table-model{0}/L{1}'.format(args.model_iters, l+1)
-            plt.figure(figsize=(len(info_inds),N))
-            plt.imshow(attn[l].cpu().detach().numpy()[idx][0][info_inds], cmap='viridis', interpolation='nearest', vmin=0, vmax = 1)
-            plt.colorbar(shrink=0.2)
-            plt.title("test" + str(idx) + "-iter-" + str(args.model_iters) + "-L" + str(l+1))
-            plt.yticks(range(len(info_inds)))
-            plt.xticks(range(N))
-            plt.savefig(folder_path + '/test{0}.png'.format(idx), format='png', bbox_inches='tight', pad_inches=0)
-            plt.close()  # Close the figure  # Close the figure
-        if not np.array_equal(msg_bits[idx, :].cpu().numpy(),  decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds]):
-            # Print the original message bits and decoded bits side by side
-            print("Example:", idx)
-            print("Original Message Bits: ", msg_bits[idx, :].cpu().numpy())
-            print("Decoded Bits:          ", decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds])
-            print("")
+        
+        if noisy:
+            results_df_test = results_df_test._append({'Example': idx,
+                                            'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
+                                            'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
+                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Corrupted_codeword': [round(x,5) for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Output' : [round(x,5) for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
+                                            ignore_index=True)
+        else: 
+            results_df_test = results_df_test._append({'Example': idx,
+                                            'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
+                                            'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
+                                            'Polar_code': [0 if bit == 1 else 1 for bit in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Output' : [x for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
+                                            ignore_index=True)
+        
+    
+    if noisy:
 
+        results_df_test.to_csv(results_save_path + 'code_tables/noisy/test_' + str(args.model_iters) + '.csv', index=False)
+    else:
+        results_df_test.to_csv(results_save_path + 'code_tables/test_' + str(args.model_iters) + '.csv', index=False)
+
+''' 
+
+def code_table(args, polar, device, info_inds, noisy = False):
+     # Generate all possible K-bit messages for the alphabet {-1, 1}
+    alphabet = np.array([-1, 1])
+    polar_code = np.array(list(itertools.product(alphabet, repeat=args.N)))
+    polar_code = torch.tensor(polar_code, device=device)
+    results_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}/{6}/'\
+                                               .format(K, N, args.rate_profile,  args.model, args.n_head,args.n_layers, args.run)
+
+    data_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
+                                    .format(args.K, args.N, args.rate_profile,  args.model)
+
+
+    #polar_code = polar.channel(polar_code, args.dec_train_snr)
+    
+    checkpoint1 = torch.load(results_save_path+'/Models/model_{0}.pt'.format(args.model_iters), map_location=lambda storage, loc: storage)
+    loaded_step = checkpoint1['step']
+    xformer.load_state_dict(checkpoint1['xformer'])
+    xformer.to(device)
+    xformer.eval()
+    print("Model loaded at step {}".format(loaded_step))
+    mask = torch.cat((torch.ones((len(polar_code),args.N),device=device),torch.zeros((len(polar_code),args.max_len-args.N),device=device)),1).long()
+    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
+    df = pd.DataFrame(columns=['Example', 'Original_Message', 'Decoded_Bits', 'Polar_code'])
+
+    
+    for idx in range(len(polar_code)):
+        
+        df = df._append({'Example': idx,
+                        'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
+                        'Polar_code': [0 if bit == 1 else 1 for bit in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                        'Output' : [x for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
+                        ignore_index=True)
+
+
+    df.to_csv(results_save_path + 'code_tables/16bits_noiseless' + str(args.model_iters) + '.csv', index=False)
     
 
 
+    
 
 def str2bool(v):
     if isinstance(v, bool):
@@ -832,24 +889,24 @@ if __name__ == '__main__':
     elif args.code == 'pac':
         target_info_inds = polarTarget.B
     target_info_inds.sort()
-    # print("Info positions : {}".format(info_inds))
-    # print("Target Info positions : {}".format(target_info_inds))
-    # print("Frozen positions : {}".format(frozen_inds))
-    # #print("Code : {0} ".format(args.code))
-    # print("embed dim : {0} ".format(args.embed_dim))
-    # #print("Type of training : {0}".format(args.curriculum))
-    # #print("Rate Profile : {0}".format(args.rate_profile))
-    # print("Batch size : {0}".format(args.batch_size))
-    # print("Validation SNR : {0}".format(args.validation_snr))
-    # print("Train SNR : {0}".format(args.dec_train_snr))
-    # print("load training data? {0}".format(args.load_training_data))
-    # print("Number of heads : {0}".format(args.n_head))
-    # print("Number of layers: {0}".format(args.n_layers))
-    # print("Positional encoding : static")
-    # #print("Layers : compelete")
-    # print("Print frequency: {0}".format(args.print_freq))
-    # print("Num of steps: {0}".format(args.num_steps))
-    # print("combinational training snr: ", args.comb_training_snr)
+    print("Info positions : {}".format(info_inds))
+    print("Target Info positions : {}".format(target_info_inds))
+    print("Frozen positions : {}".format(frozen_inds))
+    #print("Code : {0} ".format(args.code))
+    print("embed dim : {0} ".format(args.embed_dim))
+    #print("Type of training : {0}".format(args.curriculum))
+    #print("Rate Profile : {0}".format(args.rate_profile))
+    print("Batch size : {0}".format(args.batch_size))
+    print("Validation SNR : {0}".format(args.validation_snr))
+    print("Train SNR : {0}".format(args.dec_train_snr))
+    print("load training data? {0}".format(args.load_training_data))
+    print("Number of heads : {0}".format(args.n_head))
+    print("Number of layers: {0}".format(args.n_layers))
+    print("Positional encoding : static")
+    #print("Layers : compelete")
+    print("Print frequency: {0}".format(args.print_freq))
+    print("Num of steps: {0}".format(args.num_steps))
+    print("combinational training snr: ", args.comb_training_snr)
 
     #___________________Model Definition___________________________________________________#
     
@@ -880,6 +937,7 @@ if __name__ == '__main__':
             print("Training Model for {0},{1} loaded at step {2} from previous model {3},{4}".format(args.K,args.N,loaded_step,args.previous_K,args.previous_N))
         else:
             print("Training Model for {0},{1} anew".format(args.K,args.N))
+            #x = 1
         device_ids = range(args.num_devices)
         if args.parallel:
             xformer = torch.nn.DataParallel(xformer, device_ids=device_ids)
@@ -970,6 +1028,7 @@ if __name__ == '__main__':
             print(valid_received.size())
         except:
             print("Did not find standard validation data")
+            #x = 1
         
         
         mavg_steps = 25
@@ -998,18 +1057,18 @@ if __name__ == '__main__':
         if args.load_training_data:
             data_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
                                     .format(args.K, args.N, args.rate_profile,  args.model)
-            training_data = np.load(data_save_path+"/trainData.npy")
-            test_data =     np.load(data_save_path+"/testData.npy")
+            training_data = np.load(data_save_path+"trainData.npy")
+            test_data =     np.load(data_save_path+"testData.npy")
 
         else:
             training_data , test_data = generate_data(args.K , results_save_path)
         
         first_msg_train = torch.tensor(training_data[0, :], dtype=torch.float32, device=device)
         first_msg_train = first_msg_train.view(1, 8)
-        print(first_msg_train)
+
         first_msg_test = torch.tensor(test_data[0, :], dtype=torch.float32, device=device)
         first_msg_test = first_msg_test.view(1, 8)
-        print(first_msg_test)
+   
 
         if args.code_table:
             code_table(args, polar, device, info_inds)
@@ -1894,7 +1953,10 @@ if __name__ == '__main__':
         #Test_msg_bits = 2 * (torch.rand(args.test_size, args.K) < 0.5).float() - 1
 
         # Load test data
-        loaded_test_data = np.load(results_save_path+"/testData.npy")
+        data_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/data/'\
+                                               .format(K, N, args.rate_profile,  args.model)
+
+        loaded_test_data = np.load(data_path+"testData.npy")
         
         # Randomly select a subset of test data
         test_indices = np.random.choice(len(loaded_test_data), args.test_size, replace=True)

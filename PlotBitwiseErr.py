@@ -14,7 +14,7 @@ parser.add_argument('snr', type=float, help='Value for snr')
 parser.add_argument('run', type=int, help='Value for run')
 parser.add_argument('print_freq', type=int, help='Value for print_freq')
 parser.add_argument('--oe', action="store_true", help='one example')
-
+parser.add_argument('--linErr', action="store_true", help='plot the trnsf to lin error too?')
 
 
 
@@ -74,11 +74,23 @@ with open(results_save_path +'/values_validation.csv', 'r') as f:
         filename_noisy= '/bitwise_error_plot_noisy_all.pdf'
         filename_noiseless= '/bitwise_error_plot_noisless_all.pdf'
         colors = plt.cm.RdBu(np.linspace(0, 1, N))
+    
 
     plt.figure()
+    if args.linErr:
+        # Load the data from the .npz file
+        loaded_data = np.load(results_save_path + '/code_tables/noisy/meanTrtoLinErr.npz')
+        # Access the individual arrays
+        loaded_iters = loaded_data['iters']
+        loaded_best_error = loaded_data['best_error']
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
+
+    
     # Plot the bitwise errors
     for i, errors in enumerate(bitwise_errors_noisy):
         plt.plot(valid_steps[0:rng], errors[0:rng], label=f'Bit {i}', color=colors[i])
+    
+
 
     plt.xlabel('Number of Steps')
     plt.ylabel('Bitwise Error')
@@ -89,6 +101,9 @@ with open(results_save_path +'/values_validation.csv', 'r') as f:
     plt.show()
 
     plt.figure()
+    if args.linErr:
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
+
     for i, errors in enumerate(bitwise_errors_no_noise):
         plt.plot(valid_steps[0:rng], errors[0:rng], label=f'Bit {i}', color=colors[i])
 
@@ -100,27 +115,6 @@ with open(results_save_path +'/values_validation.csv', 'r') as f:
     plt.savefig(results_save_path + "/plots" + filename_noiseless)
     plt.show()
 
-
-# converge_step_no_noise = []
-# for errors in bitwise_errors_no_noise:
-#     try:
-#         index = next(i for i, value in enumerate(errors) if abs(value-errors[i+1])<= 0.01 and value <= min(errors) + 0.01 )
-#         converge_step_no_noise.append(args.print_freq * index)
-#         #print(f"The first index with a value of zero is {index}")
-#     except StopIteration:
-#         print("No zero values found in the list")
-# print("the convergence index for noiseless validation" , converge_step_no_noise)
-
-
-# converge_step = []
-# for errors in bitwise_errors_noisy:
-#     try:
-#         index = next(i for i, value in enumerate(errors) if abs(value-errors[i+1])<= 0.01 and value <= min(errors) + 0.01 )
-#         converge_step.append(args.print_freq * index)
-#         #print(f"The first index with a value of zero is {index}")
-#     except StopIteration:
-#         print("No zero values found in the list")
-# print("the convergence index for noisy validation    " , converge_step)
 
 
 ########################### Test data, noisy ###########################
@@ -149,8 +143,9 @@ with open(results_save_path +'/values_test.csv', 'r') as f:
 
     plt.figure()
     
-
-    plt.plot(valid_steps[0:rng], test_ber[0:rng])
+    if args.linErr:
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
+    plt.plot(valid_steps[0:rng], test_ber[0:rng], label='BER')
 
     plt.xlabel('Number of Steps')
     plt.ylabel('Bit Error Rate')
@@ -163,6 +158,8 @@ with open(results_save_path +'/values_test.csv', 'r') as f:
 
 
     plt.figure()
+    if args.linErr:
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
     # Plot the bitwise errors
     for i, errors in enumerate(test_bitwise_errors_noisy):
         plt.plot(valid_steps[0:rng], errors[0:rng], label=f'Bit {i}', color=colors[i])
@@ -191,8 +188,10 @@ with open(results_save_path +'/values_test.csv', 'r') as f:
         colors = plt.cm.RdBu(np.linspace(0, 1, N))
     plt.figure()
     # Plot the bitwise errors
+    if args.linErr:
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
 
-    plt.plot(valid_steps[0:rng], test_ber_noiseless[0:rng])
+    plt.plot(valid_steps[0:rng], test_ber_noiseless[0:rng], label="BER")
 
     plt.xlabel('Number of Steps')
     plt.ylabel('Bit Error Rate')
@@ -205,6 +204,8 @@ with open(results_save_path +'/values_test.csv', 'r') as f:
 
 
     plt.figure()
+    if args.linErr:
+        plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
     # Plot the bitwise errors
     for i, errors in enumerate(test_bitwise_errors_noiseless):
         plt.plot(valid_steps[0:rng], errors[0:rng], label=f'Bit {i}', color=colors[i])

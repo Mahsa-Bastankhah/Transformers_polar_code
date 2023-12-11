@@ -710,7 +710,7 @@ class XFormerEndToEndEncoder(nn.Module):
         output = torch.sigmoid(logits)
         output = torch.cat((1-output,output),-1)
         out_mask = mask
-        return output,decoded_msg_bits,out_mask,logits,slf_attn_list # [b_size,block_len,2]
+        return logits,decoded_msg_bits,out_mask,logits,slf_attn_list # [b_size,block_len,2]
 
     def decode(self,noisy_enc,info_positions,mask,device,trg_seq=None, printt=False):
         _,decoded_msg_bits,out_mask,_ , slf_attn_list= self.forward(noisy_enc,mask,trg_seq,device,printt)
