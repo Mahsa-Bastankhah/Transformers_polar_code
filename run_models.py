@@ -33,9 +33,9 @@ from tqdm import tqdm
 from collections import namedtuple
 import sys
 import csv
-'''
 
-def code_table(args, polar, device, info_inds, noisy = True):
+
+def code_table(args, polar, device, info_inds, noisy = True, large_batch = True):
     results_save_path = './Supervised_Xformer_decoder_Polar_Results/Polar_{0}_{1}/Scheme_{2}/{3}/{4}_depth_{5}/{6}/'\
                                                .format(K, N, args.rate_profile,  args.model, args.n_head,args.n_layers, args.run)
 
@@ -60,18 +60,35 @@ def code_table(args, polar, device, info_inds, noisy = True):
     gt = torch.ones(len(training_data), args.N, device = device)
     gt[:, info_inds] = msg_bits
     polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
-    if noisy:
-        polar_code = polar.channel(polar_code, args.dec_train_snr)
     mask = torch.cat((torch.ones((len(training_data),args.N),device=device),torch.zeros((len(training_data),args.max_len-args.N),device=device)),1).long()
-    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
+    if large_batch:
+        # Number of copies
+        num_copies = 100
+
+        # Make copies
+        copies = [polar_code.clone() for _ in range(num_copies)]
+
+        # Concatenate along a specified dimension (axis)
+        polar_code = torch.cat(copies, dim=0)
+        # Make copies
+        copies = [msg_bits.clone() for _ in range(num_copies)]
+
+        # Concatenate along a specified dimension (axis)
+        msg_bits = torch.cat(copies, dim=0)
+        mask = torch.cat((torch.ones((len(training_data) * num_copies,args.N),device=device),torch.zeros((len(training_data) * num_copies, args.max_len-args.N),device=device)),1).long()
+    if noisy:
+        corrupted_polar_code = polar.channel(polar_code, args.dec_train_snr)
     
-    for idx in range(len(training_data)):
+    output,decoded_bits,out_mask,_,attn = xformer.forward(corrupted_polar_code, mask,polar.info_positions,device)
+    
+    for idx in range(len(polar_code)):
         if noisy:
             results_df_train = results_df_train._append({'Example': idx,
                                             'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
                                             'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
-                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
-                                            'Corrupted_codeword': [round(x,5) for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Polar_code' : [0 if bit == 1 else 1 for bit in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in corrupted_polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Corrupted_codeword': [round(x,5) for x in corrupted_polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
                                             'Output' : [round(x,5) for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
                                             ignore_index=True)
         else: 
@@ -86,9 +103,11 @@ def code_table(args, polar, device, info_inds, noisy = True):
 
 
     # Save the DataFrame to a CSV file
-    if noisy:
+    if noisy and large_batch:
+        results_df_train.to_csv(results_save_path + 'code_tables/noisy/Ltrain_' + str(args.model_iters) + '.csv', index=False)
+    elif noisy and large_batch==False:
         results_df_train.to_csv(results_save_path + 'code_tables/noisy/train_' + str(args.model_iters) + '.csv', index=False)
-    else:
+    elif not noisy:
         results_df_train.to_csv(results_save_path + 'code_tables/train_' + str(args.model_iters) + '.csv', index=False)
     
     #print("------- test data , messages that are decoded wrongly ------- ")
@@ -96,20 +115,39 @@ def code_table(args, polar, device, info_inds, noisy = True):
     gt = torch.ones(len(test_data), args.N, device = device)
     gt[:, info_inds] = msg_bits
     polar_code = polar.encode_plotkin(msg_bits,custom_info_positions = info_inds)
-    if noisy:
-        polar_code = polar.channel(polar_code, args.dec_train_snr)
     mask = torch.cat((torch.ones((len(test_data),args.N),device=device),torch.zeros((len(test_data),args.max_len-args.N),device=device)),1).long()
-    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
-   
+    if large_batch:
+        # Number of copies
+        num_copies = 100
 
-    for idx in range(len(test_data)):
+        # Make copies
+        copies = [polar_code.clone() for _ in range(num_copies)]
+
+        # Concatenate along a specified dimension (axis)
+        polar_code = torch.cat(copies, dim=0)
+         # Make copies
+        copies = [msg_bits.clone() for _ in range(num_copies)]
+
+        # Concatenate along a specified dimension (axis)
+        msg_bits = torch.cat(copies, dim=0)
+        mask = torch.cat((torch.ones((len(test_data) * num_copies,args.N),device=device),torch.zeros((len(test_data) * num_copies,args.max_len-args.N),device=device)),1).long()
+
+    if noisy:
+        corrupted_polar_code = polar.channel(polar_code, args.dec_train_snr)
+
+    
+    output,decoded_bits,out_mask,_,attn = xformer.forward(corrupted_polar_code, mask,polar.info_positions,device)
+    print(decoded_bits.shape)
+
+    for idx in range(len(polar_code)):
         
         if noisy:
             results_df_test = results_df_test._append({'Example': idx,
                                             'Original_Message': [0 if bit == 1 else 1 for bit in msg_bits[idx, :].cpu().numpy().tolist()],
                                             'Decoded_Bits': [0 if bit == 1 else 1 for bit in decoded_bits[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()],
-                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
-                                            'Corrupted_codeword': [round(x,5) for x in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Polar_code' : [0 if bit == 1 else 1 for bit in polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Binary_Corrupted_codeword': [0 if math.copysign(1,x)==1 else 1 for x in corrupted_polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
+                                            'Corrupted_codeword': [round(x,5) for x in corrupted_polar_code[idx, :].cpu().detach().numpy().flatten().tolist()],
                                             'Output' : [round(x,5) for x in output[idx, :].cpu().detach().numpy().flatten()[info_inds].tolist()]},
                                             ignore_index=True)
         else: 
@@ -121,10 +159,11 @@ def code_table(args, polar, device, info_inds, noisy = True):
                                             ignore_index=True)
         
     
-    if noisy:
-
+    if noisy and large_batch:
+        results_df_test.to_csv(results_save_path + 'code_tables/noisy/Ltest_' + str(args.model_iters) + '.csv', index=False)
+    elif noisy and large_batch==False:
         results_df_test.to_csv(results_save_path + 'code_tables/noisy/test_' + str(args.model_iters) + '.csv', index=False)
-    else:
+    elif not noisy:
         results_df_test.to_csv(results_save_path + 'code_tables/test_' + str(args.model_iters) + '.csv', index=False)
 
 ''' 
@@ -150,8 +189,8 @@ def code_table(args, polar, device, info_inds, noisy = False):
     xformer.eval()
     print("Model loaded at step {}".format(loaded_step))
     mask = torch.cat((torch.ones((len(polar_code),args.N),device=device),torch.zeros((len(polar_code),args.max_len-args.N),device=device)),1).long()
-    output,decoded_bits,out_mask,_,attn = xformer.forward(polar_code, mask,polar.info_positions,device)
-    df = pd.DataFrame(columns=['Example', 'Original_Message', 'Decoded_Bits', 'Polar_code'])
+    output,decoded_bits,out_mask,_,_ = xformer.forward(polar_code, mask,polar.info_positions,device)
+    df = pd.DataFrame(columns=['Example', 'Decoded_Bits', 'Polar_code'])
 
     
     for idx in range(len(polar_code)):
@@ -166,7 +205,7 @@ def code_table(args, polar, device, info_inds, noisy = False):
     df.to_csv(results_save_path + 'code_tables/16bits_noiseless' + str(args.model_iters) + '.csv', index=False)
     
 
-
+'''
     
 
 def str2bool(v):

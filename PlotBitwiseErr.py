@@ -79,7 +79,7 @@ with open(results_save_path +'/values_validation.csv', 'r') as f:
     plt.figure()
     if args.linErr:
         # Load the data from the .npz file
-        loaded_data = np.load(results_save_path + '/code_tables/noisy/meanTrtoLinErr.npz')
+        loaded_data = np.load(results_save_path + '/code_tables/meanTrtoLinErr16bitNoiseless.npz')
         # Access the individual arrays
         loaded_iters = loaded_data['iters']
         loaded_best_error = loaded_data['best_error']
@@ -160,6 +160,7 @@ with open(results_save_path +'/values_test.csv', 'r') as f:
     plt.figure()
     if args.linErr:
         plt.plot(loaded_iters, loaded_best_error, label='LinErr', color='green')
+        print(loaded_iters, loaded_best_error)
     # Plot the bitwise errors
     for i, errors in enumerate(test_bitwise_errors_noisy):
         plt.plot(valid_steps[0:rng], errors[0:rng], label=f'Bit {i}', color=colors[i])

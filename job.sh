@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem-per-cpu=8G         # memory per cpu-core (4G is default)
 #SBATCH --gres=gpu:1             # number of gpus per node
-#SBATCH --time=30:00:00          # total run time limit (HH:MM:SS)
+#SBATCH --time=1:00:00          # total run time limit (HH:MM:SS)
 
 #SBATCH --partition=mig
 #SBATCH --mail-type=fail        # send email when job fails
@@ -15,17 +15,17 @@ module purge
 module load anaconda3/2023.3
 source activate mlenv
 
-run=3
+run=19
 n_head=1                                 
-n_layers=2
-num_steps=20000
+n_layers=3
+num_steps=12000
 print_freq=100
 N=16
 K=8
 snr=3
 batch_size=8192
 embed_dim=64
-model_save_per=500
+model_save_per=100
 
 
 # mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}
@@ -39,21 +39,27 @@ model_save_per=500
 # mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/code_tables/noisy
 
 #Define an array of model iteration values
-model_iters=(1000 2000 3000 4000 5000 6000 7000 8000 9000 10000)
+#model_iters=(1000 2000 3000 4000 5000 6000 7000 8000 9000 10000)
 # model_iters=(70000 90000 100000 110000 120000 150000 170000 200000 210000 220000 230000 250000 260000 270000 280000 290000 300000)
-# model_iters=(20000 30000 40000 45000 50000 55000 60000 65000 70000 75000 80000 85000 90000 95000 100000 105000 110000 115000 120000)
+#model_iters=(20000 30000 40000 45000 50000 55000 60000 65000 70000 75000 80000 85000 90000 95000 100000 105000 110000 115000 120000)
+# model_iters=(6000 7000 8000 9000 10000)
+# model_iters=(100)
+# for model_iter in "${model_iters[@]}"; do
+#     python -u run_models.py --code_table --model_iters $model_iter --embed_dim $embed_dim --N $N --K $K --max_len $N --dec_train_snr $snr --n_head $n_head --n_layers $n_layers --target_K $K --run $run
+# done
 
-for model_iter in "${model_iters[@]}"; do
-    python -u run_models.py --code_table --model_iters $model_iter --embed_dim $embed_dim --N $N --K $K --max_len $N --dec_train_snr $snr --n_head $n_head --n_layers $n_layers --target_K $K --run $run
-done
-
-# start=500
-# end=20000
-# step=500
+# start=20000
+# end=160000
+# step=20000
 
 # for ((i=start; i<=end; i+=step)); do
 #     python -u run_models.py --code_table --model_iters $i --embed_dim $embed_dim --N $N --K $K --max_len $N --dec_train_snr $snr --n_head $n_head --n_layers $n_layers --target_K $K --run $run
 # done
+
+
+# python -u test.py ${N} ${K} ${run} 2000 --n_head ${n_head} --n_layers ${n_layers} 
+# python -u test.py ${N} ${K} ${run} 3000 --n_head ${n_head} --n_layers ${n_layers} 
+
 
 ## --load_training_data
 #python -u run_models.py --load_training_data --test_batch_size 10000  --val_one_sample --validation_snr ${snr} --gradual_testing --model_save_per ${model_save_per} --embed_dim ${embed_dim} --N ${N} --K ${K} --max_len ${N} --dec_train_snr ${snr}  --n_head ${n_head} --n_layers ${n_layers} --num_steps ${num_steps} --batch_size ${batch_size}  --print_freq ${print_freq}  --target_K ${K} --run ${run} > ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
@@ -71,7 +77,7 @@ done
 #python run_models.py --test --model_iters 15000 --n_head ${n_head} --n_layers ${n_layers} --embed_dim ${embed_dim} --model encoder --dec_train_snr ${snr} --run ${run} --N ${N} --K ${K} --max_len ${N}  --print_freq 100 --code polar --rate_profile polar --target_K ${K} --test_snr_start -10 --test_snr_end 30 --test_batch_size 1000 --test_size 10000 >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
 
 # mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/plots
-#python PlotBitwiseErr.py ${N} ${K} ${snr} ${run} ${print_freq} --linErr --n_head ${n_head} --n_layers ${n_layers}  --rng 50 >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
+#python PlotBitwiseErr.py ${N} ${K} ${snr} ${run} ${print_freq} --n_head ${n_head} --n_layers ${n_layers}  --rng 120 >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
 
 
 # for model_iter in $(seq $model_save_per $model_save_per $num_steps); do
@@ -86,20 +92,16 @@ done
 #python processAttnData.py --compos ${N} ${K} ${snr} ${run} ${print_freq} --n_head ${n_head} --n_layers ${n_layers} 
 
 
-#python -u Find_expr.py ${N} ${K} ${run} --n_head ${n_head} --n_layers ${n_layers} 
+
+python -u Find_expr.py ${N} ${K} ${run} --n_head ${n_head} --n_layers ${n_layers} 
+
 #python -u Find_expr.py ${N} ${K} ${run} --snr ${snr} --n_head ${n_head} --n_layers ${n_layers}
 #python -u Find_expr.py ${N} ${K} ${run} --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-# python -u Find_expr.py ${N} ${K} ${run} 2500 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-# python -u Find_expr.py ${N} ${K} ${run} 3000 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-# python -u Find_expr.py ${N} ${K} ${run} 5000 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-# python -u Find_expr.py ${N} ${K} ${run} 7000 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
-# python -u Find_expr.py ${N} ${K} ${run} 10000 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
 
-#python -u Bool_expr.py ${N} ${K} ${run} 10000 --n_head ${n_head} --n_layers ${n_layers} >> ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/output.txt
 
 
 #mkdir ./Supervised_Xformer_decoder_Polar_Results/Polar_${K}_${N}/Scheme_polar/encoder/${n_head}_depth_${n_layers}/${run}/plots
-#python PlotBitwiseErr.py ${N} ${K} ${snr} ${run} ${print_freq} --linErr --n_head ${n_head} --n_layers ${n_layers}  --rng 200 
+#python PlotBitwiseErr.py ${N} ${K} ${snr} ${run} ${print_freq} --linErr --n_head ${n_head} --n_layers ${n_layers}  --rng 2000
 
 ## (16,8), (8,4) >> SNR = 1.2, 15000 steps needed
 ## (8,8) , (4,4) >> SNR = 5.5, 5000 steps is enough
